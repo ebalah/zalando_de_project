@@ -93,7 +93,7 @@ class Scrapper():
         # wait th new page to load, and return True.
         if next_btn.is_enabled():
             # Click the btn
-            next_btn.click()
+            self._sa._move_mouse_to_and_click(next_btn)
             # Wait the page to load
             self._sa._wait_to_load()
             # Return the enablity of the next page.

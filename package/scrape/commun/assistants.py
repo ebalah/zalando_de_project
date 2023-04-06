@@ -90,18 +90,13 @@ class ScrappingAssistant():
         self.driver.execute_script("window.scrollTo(0, {})"
                                    "".format(scroll_to))
 
-
-    def _sleep_and_scroll(self, current_y_location: float,
-                          scroll_to: float = 'randomly'):
+    def _sleep_and_scroll(self, scroll_to: float, _coef: float = .3):
         """
         Sleep and scroll to mimic the human behavior.
 
         """
-        if scroll_to == 'randomly':
-            # Randomize the pixels to scroll
-            scroll_to = current_y_location + np.random.randint(25, 50)
         # randomize the time to sleep.
-        t = 0.05 * np.random.ranf()
+        t = _coef * np.random.ranf()
         # Sleep for t seconds
         self._sleep_t_sec(t)
         # Scroll down to scroll_to_1 point.
@@ -110,32 +105,54 @@ class ScrappingAssistant():
         
     def sleep_and_scroll(self, scroll_to: float | WEB_ELEMENT = 'randomly'):
         """
-        Sleep and scroll to mimic the human behavior n times.
-
-        for each n scroll 25px
+        Sleep and scroll to mimic the human behavior.
 
         """
+        # The default times to scroll
         _n = 1
+        # The interval of time to sleep for each scroll : (0, _coef]
+        # an the maximum of time to scroll in.
+        # NOTE: To minimize the time of scrolling, _n * _coef must
+        # be less than 4 seconds.
+        _coef = .3
+        _max_time = 4
+        # The random value to substract from scrool_to. This must
+        # help to avoit placing the pointer to the top of the screen. 
+        _rand = 80
+        # The random pixels to substract from scroll_to.
+        _s_rand = np.random.randint(40, _rand)
+        # The maximum value to scroll each time
+        _max_unit = 800
         # Get the current y position.
         current_y_location = self.driver.execute_script('return window.scrollY;')
+        # If scroll_to == 'randomly', use the current location asthe
+        # next value to scroll to. (adding _s_rand ensure the scrolling)
+        if isinstance(scroll_to, str):
+            scroll_to = current_y_location + _s_rand
         # If scroll to is a web element, then get the y location of
         # the element to scroll to.
-        if not isinstance(scroll_to, (float, int, str)):
+        if not isinstance(scroll_to, (float, int)):
             scroll_to = scroll_to.location['y']
-        # Overwrite _n if scrolling is not random
-        if scroll_to != 'randomly':
-            scroll_times = (current_y_location - scroll_to) // 100
-            if abs(scroll_times) > _n:
-                _n = abs(scroll_times)
+        # Substract _s_rand from scroll_to.
+        scroll_to = (scroll_to - _s_rand
+                     if scroll_to - _s_rand > 0
+                     else scroll_to * 0.6)
+        # Calculate the difference between current location and
+        # the location to scroll to.
+        scroll_by: float = abs(current_y_location - scroll_to)
+        # Overwrite _n if this difference is too large.
+        _n = max(_n, int(scroll_by // _max_unit))
+        # Ensure that _n * _coef is less than 4 seconds.
+        if _n * _coef > _max_time:
+            _coef = _max_time / _n
         # define the scroll units : the positions to scroll to
         # each time untill we reach scroll_to in the nth time.
         scroll_to_unit = (np.linspace(current_y_location, scroll_to, _n + 1)
                           if scroll_to != 'randomly'
-                          else ['randomly'] * (_n + 1))
+                          else ['randomly', 'randomly'])
         # Sleep and scroll for n times.
-        for stu in scroll_to_unit[1:]:
-            self._sleep_and_scroll(current_y_location, scroll_to=stu)
-            current_y_location = stu 
+        for _scroll_to in scroll_to_unit[1:]:
+            self._sleep_and_scroll(_scroll_to, _coef=_coef)
 
     def _move_mouse_to(self, element: WEB_ELEMENT):
         """
@@ -143,7 +160,7 @@ class ScrappingAssistant():
 
         """
         # Scroll to the element.
-        self._scroll_to(element)
+        self.sleep_and_scroll(element)
         # Move the cursur to focus the element.
         ActionChains(self.driver).move_to_element(element).perform()
         # Sleep for half second.
