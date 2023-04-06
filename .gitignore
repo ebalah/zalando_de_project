@@ -1,0 +1,16 @@
+# Package infos
+*.egg-info/
+
+# Notebooks
+*.ipynb
+
+# python cache
+__pycache__/
+*.pyo
+*.pyc
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache

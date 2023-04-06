@@ -1,0 +1,318 @@
+{
+   "1": {
+      "1": {
+         "link": "https://en.zalando.de/denim-culture-hugo-shirt-beige-dev22d026-b11.html",
+         "details": {
+            "link": "https://en.zalando.de/denim-culture-hugo-shirt-beige-dev22d026-b11.html",
+            "brand_name": "Denim Culture",
+            "article_name": "HUGO - Shirt",
+            "price_label": "49,95 € |  | VAT included",
+            "available_sizes": {
+               "S": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "M": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "L": {
+                  "count": "",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "Only 1 left",
+                  "price": ""
+               },
+               "3XL": {
+                  "count": "Notify Me",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "beige",
+               "blau",
+               "grün",
+               "navy",
+               "pink",
+               "weiss"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton"
+               },
+               "Details": {
+                  "Collar": "Button down",
+                  "Fastening": "Button",
+                  "Pattern": "Marl",
+                  "Article number": "DEV22D026-B11"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "Long"
+               }
+            }
+         }
+      },
+      "2": {}
+   },
+   "2": {
+      "1": {
+         "link": "https://en.zalando.de/tom-tailor-denim-mini-structure-shirt-shirt-navy-small-dobby-to722d0ng-k12.html",
+         "details": {
+            "link": "https://en.zalando.de/tom-tailor-denim-mini-structure-shirt-shirt-navy-small-dobby-to722d0ng-k12.html",
+            "brand_name": "TOM TAILOR DENIM",
+            "article_name": "MINI STRUCTURE - Shirt",
+            "price_label": "29,99 € |  | VAT included",
+            "available_sizes": {
+               "XS": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "Only 2 left",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "navy small dobby",
+               "light blue"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Machine wash at 40°C, do not tumble dry"
+               },
+               "Details": {
+                  "Collar": "Mandarin collar",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Qualities": "Breathable",
+                  "Article number": "TO722D0NG-K12"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Fitted",
+                  "Length": "Normal",
+                  "Sleeve length": "70 cm (Size M)",
+                  "Back width": "41 cm (Size M)",
+                  "Total length": "75 cm (Size M)"
+               }
+            }
+         }
+      },
+      "2": {
+         "link": "https://en.zalando.de/jack-and-jones-premium-cardiff-formal-shirt-black-jam22d0ab-q11.html",
+         "details": {
+            "link": "https://en.zalando.de/jack-and-jones-premium-cardiff-formal-shirt-black-jam22d0ab-q11.html",
+            "brand_name": "Jack & Jones PREMIUM",
+            "article_name": "JPRBLACARDIFF SLIM FIT - Shirt",
+            "price_label": "34,99 € |  | VAT included",
+            "available_sizes": {
+               "XS": {
+                  "count": "",
+                  "price": ""
+               },
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "black",
+               "beige",
+               "cashmere blue",
+               "navy blazer",
+               "white"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Machine wash at 40°C, machine wash on gentle cycle"
+               },
+               "Details": {
+                  "Collar": "Kent collar",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Article number": "JAM22D0AB-Q11"
+               },
+               "Size & fit": {
+                  "Fit": "Slim Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "66 cm (Size M)",
+                  "Back width": "42 cm (Size M)",
+                  "Total length": "74 cm (Size M)"
+               }
+            }
+         }
+      }
+   },
+   "3": {
+      "1": {
+         "link": "https://en.zalando.de/threadbare-shirt-navy-thc22d026-k11.html",
+         "details": {
+            "link": "https://en.zalando.de/threadbare-shirt-navy-thc22d026-k11.html",
+            "brand_name": "Threadbare",
+            "article_name": "THBTROPICAL - Shirt",
+            "price_label": "34,99 € |  | VAT included",
+            "available_sizes": {
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "Only 1 left",
+                  "price": ""
+               },
+               "L": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "navy",
+               "mint",
+               "pink"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Insert material": "100% polyester"
+               },
+               "Details": {
+                  "Collar": "Kent collar",
+                  "Fastening": "Button",
+                  "Pattern": "Floral",
+                  "Article number": "THC22D026-K11"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Straight",
+                  "Length": "Long",
+                  "Sleeve length": "Short"
+               }
+            }
+         }
+      },
+      "2": {
+         "link": "https://en.zalando.de/seidensticker-slim-fit-formal-shirt-dark-blue-3se22d2i4-k11.html",
+         "details": {
+            "link": "https://en.zalando.de/seidensticker-slim-fit-formal-shirt-dark-blue-3se22d2i4-k11.html",
+            "brand_name": "Seidensticker",
+            "article_name": "SLIM FIT - Formal shirt",
+            "price_label": "47,99 € |  | VAT included",
+            "available_sizes": {
+               "36": {
+                  "count": "",
+                  "price": ""
+               },
+               "37": {
+                  "count": "",
+                  "price": ""
+               },
+               "38": {
+                  "count": "",
+                  "price": ""
+               },
+               "39": {
+                  "count": "",
+                  "price": ""
+               },
+               "40": {
+                  "count": "",
+                  "price": ""
+               },
+               "41": {
+                  "count": "",
+                  "price": ""
+               },
+               "42": {
+                  "count": "",
+                  "price": ""
+               },
+               "43": {
+                  "count": "",
+                  "price": ""
+               },
+               "44": {
+                  "count": "",
+                  "price": ""
+               },
+               "45": {
+                  "count": "Notify Me",
+                  "price": ""
+               }
+            },
+            "available_colors": [],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Machine wash at 40°C, machine wash on gentle cycle"
+               },
+               "Details": {
+                  "Collar": "Shark collar",
+                  "Fastening": "Button",
+                  "Pattern": "Polka dot",
+                  "Article number": "3SE22D2I4-K11"
+               },
+               "Size & fit": {
+                  "Our model's height": "Our model is 188 cm tall and is wearing size 40",
+                  "Fit": "Slim Fit",
+                  "Shape": "Fitted",
+                  "Length": "Long",
+                  "Sleeve length": "65 cm (Size 40)",
+                  "Back width": "42 cm (Size 40)",
+                  "Total length": "78 cm (Size 40)"
+               }
+            }
+         }
+      }
+   }
+}
