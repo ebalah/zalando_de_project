@@ -77,18 +77,12 @@ class ScrappingAssistant():
         t = _coef * np.random.ranf() + t
         self._sleep_t_sec(t)
 
-    def _scroll_to(self, scroll_to: float | WEB_ELEMENT):
+    def _scroll_to(self, scroll_to: float):
         """
         Scroll up/down to `scroll_to`
         
         """
-        # If scroll to is a web element, then get the y location of
-        # the element to scroll to.
-        if not isinstance(scroll_to, (float, int)):
-            scroll_to = scroll_to.location['y']
-        # Otherwise, scroll_to must be a floating number.
-        self.driver.execute_script("window.scrollTo(0, {})"
-                                   "".format(scroll_to))
+        self.driver.execute_script(f"window.scrollTo(0, {scroll_to})")
 
     def _sleep_and_scroll(self, scroll_to: float, _coef: float = .3):
         """
@@ -131,7 +125,7 @@ class ScrappingAssistant():
             scroll_to = current_y_location + _s_rand
         # If scroll to is a web element, then get the y location of
         # the element to scroll to.
-        if not isinstance(scroll_to, (float, int)):
+        if isinstance(scroll_to, WEB_ELEMENT):
             scroll_to = scroll_to.location['y']
         # Substract _s_rand from scroll_to.
         scroll_to = (scroll_to - _s_rand

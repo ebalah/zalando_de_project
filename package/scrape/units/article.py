@@ -203,7 +203,7 @@ class ArticleScrapper():
         article_link = self._get_link()
         # Inform the start of scrapping the article.
         self._sa.logger.log("Scrapping article {} started."
-                            "".format(article_link), 'INFO')
+                            "".format(article_link), 'INFO', _br=True)
         # Get the article container.
         article_container = self._sa._get_element_by_class('VKvyEj _0xLoFW _7ckuOK mROyo1 _IqB2w')
         # The name of the brand
