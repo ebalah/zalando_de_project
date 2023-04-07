@@ -329,6 +329,20 @@ class ScrappingAssistant():
         # Return the element
         return element
     
+    def _get_element_by_tag_name(self, tag_name: str,
+                                 parent_element: WEB_ELEMENT = None):
+        """
+        Get the web element, by searching it by
+        the tag name.
+
+        """
+        # Get locator
+        element_locator = self._get_tag_locator(tag_name)
+        # Get the element.
+        element = self._get_element(element_locator, parent_element)
+        # Return the element
+        return element
+    
     def _get_element_value(self, element_locator: tuple,
                            parent_element: WEB_DRIVER = None):
         """

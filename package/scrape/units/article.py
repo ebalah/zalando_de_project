@@ -1,11 +1,11 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException
 
 
 from package.utils.helpers import *
 from package.scrape.commun.assistants import ScrappingAssistant
 
+NOT_AN_ARTICLE_ERR_MSG = "AN_ALIEN_LINK_FOUND"
 
 
 class ArticleScrapper():
@@ -23,7 +23,6 @@ class ArticleScrapper():
     def __enter__(self):
         # Open a new tab to handle the article.
         self._sa._click_to_new_tab(self._article_element)
-        self._container = self._get_container()
         return self
 
     def __exit__(self, *args, **kwargs):
@@ -35,16 +34,7 @@ class ArticleScrapper():
         Get the article's details container.
         
         """
-        # Get locators
-        content_locator = self._sa._get_id_locator('main-content')
-        container_locator = self._sa._get_class_locator('VKvyEj _0xLoFW _7ckuOK mROyo1 _IqB2w')
-        # Wait the presence and visibility of the main container of
-        # the article details.
-        self._sa.long_wait.until(ec.visibility_of_element_located(container_locator))
-        # Find the container.
-        article_container = self._sa._get_element(content_locator).find_element(*container_locator)
-        # Return the locator
-        return article_container
+        return self._sa._get_element_by_class('DT5BTM VHXqc_ rceRmQ _4NtqZU mIlIve')
     
     def _get_link(self):
         """
@@ -89,23 +79,26 @@ class ArticleScrapper():
         
         """
         # Get the element of color section
-        color_section = self._sa._get_element_by_class('SXSnE1 _8O8c-d')
+        # color_section = self._sa._get_element_by_class('SXSnE1 _8O8c-d')
         # Get displayed color.
-        curr_displayed_color = self._sa._get_elements_by_class('_0Qm8W1 u-6V88 dgII7d pVrzNP zN9KaA',
-                                                           color_section)[-1].text
-        # if color_section. w5w9i_ _1PY7tW GRuH6Q C3wGFf
+        curr_displayed_color = self._sa._get_element_by_class('_0Qm8W1 u-6V88 dgII7d pVrzNP zN9KaA',
+                                                              _from).text
         # search for 'pl0w2g DT5BTM A-NCMf' class and get alt attribute of img tag.
         colors = []
         # get all colors items
-        try:
-            all_colors = self._sa._get_elements_by_class('pl0w2g DT5BTM A-NCMf', _from)
-        except NoSuchElementException as e:
+        all_colors = self._sa._get_elements_by_class('pl0w2g DT5BTM A-NCMf', _from)
+        # If no color was found in this section, return the currently
+        # displayed color.
+        if not all_colors:
             return [curr_displayed_color]
         # Iterate over all colors elements and get the alt
         # attribute of the img tag in each.
         for color_element in all_colors:
             # Search for the img tag and get the alt attribute.
-            color_name = color_element.find_element(By.TAG_NAME, 'img').get_attribute('alt')
+            try:
+                color_name = color_element.find_element(By.TAG_NAME, 'img').get_attribute('alt')
+            except NoSuchElementException as e:
+                continue
             # Append the color to colors.
             colors.append(color_name)
         # Return the found colors
@@ -205,22 +198,25 @@ class ArticleScrapper():
         self._sa.logger.log("Scrapping article {} started."
                             "".format(article_link), 'INFO', _br=True)
         # Get the article container.
-        article_container = self._sa._get_element_by_class('VKvyEj _0xLoFW _7ckuOK mROyo1 _IqB2w')
+        article_container = self._get_container()
+        # Get the data in x-wrapper-re-1-4 container.
+        x_wrapper_container = self._sa._get_element_by_tag_name('x-wrapper-re-1-4',
+                                                                article_container)
         # The name of the brand
-        brand_name = self._get_brand_name(_from=article_container)
+        brand_name = self._get_brand_name(_from=x_wrapper_container)
         self._sa.logger.log('Brand name found : {}'.format(brand_name))
         # The name of the article 
-        article_name = self._get_name(_from=article_container)
+        article_name = self._get_name(_from=x_wrapper_container)
         self._sa.logger.log('Article name found : {}'.format(article_name))
         # The price label (it may be in format : from $xx)
-        price_label = self._get_price(_from=article_container)
+        price_label = self._get_price(_from=x_wrapper_container)
         self._sa.logger.log('Price found : {}'.format(price_label))
+        # All the available colors
+        available_colors = self._get_colors(_from=x_wrapper_container)
+        self._sa.logger.log('Colors found : {}'.format(available_colors))
         # All available sizes
         available_sizes = self._get_sizes(_from=article_container)
         self._sa.logger.log('Sizes found : {}'.format(available_sizes))
-        # All the available colors
-        available_colors = self._get_colors(_from=article_container)
-        self._sa.logger.log('Colors found : {}'.format(available_colors))
         # The other details : Fit & Size, Material & Care, and Details
         other_details = self._get_extra_details(_from=article_container)
         self._sa.logger.log('Extra details found : {}'.format(other_details))

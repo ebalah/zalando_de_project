@@ -13,6 +13,9 @@ from package.scrape.units.article import ArticleScrapper
 
 
 
+ALIEN_LINKS = ['/outfits/', '/collections/', '/men/']
+
+
 class Scrapper():
 
     def __init__(self, assistant) -> None:
@@ -101,15 +104,43 @@ class Scrapper():
         # Otherwise, return False, indicating there is no more pages.
         return False
     
+    def is_alien_link(self, link: str):
+        """
+        Verify if a link is alien or not.
+        
+        """
+        for alien in ALIEN_LINKS:
+            if alien in link:
+                return False
+        return True
+    
+    def _is_an_article(self, link: str):
+        """
+        Verify if the the actual opened page is for an article.
+        
+        """
+        return self.is_alien_link(link)
+    
     def _get_articles(self):
         """
         Get all the article elements avaialable in the current
         page.
 
         """
-        # Products    '_0mW-4D _0xLoFW JT3_zV mo6ZnF _78xIQ-
-        class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
-        return self._sa._get_elements_by_class(class_names)
+        # Article elements class names
+        a_class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
+        # Links elements class names
+        l_class_names = '_LM JT3_zV CKDt_l CKDt_l LyRfpJ'
+        # Articles
+        articles = self._sa._get_elements_by_class(a_class_names)
+        # Filter articles with alien links
+        valid_articles = []
+        for article in articles:
+            link = self._sa._get_element_by_class(l_class_names, article).get_attribute('href')
+            if self._is_an_article(link):
+                valid_articles.append(article)
+        # Return only valid articles
+        return valid_articles
     
     def _scrape_single_page(self, n_articles):
         """
@@ -130,13 +161,13 @@ class Scrapper():
             # Open the artice details in a new tab
             try:
                 with ArticleScrapper(self._sa, article) as article_scrapper:
-                    # Get the link to the article page
-                    _link = article_scrapper._get_link()
                     # Scrape the article details.
                     _details = article_scrapper.scrape()
                     # Append the scrapped article's details and link
-                    article_details.update({'link': _link,
-                                            'details': _details})
+                    article_details.update(_details)
+            except RuntimeError as e:
+                if hasattr(e, 'message') and e.message == 'AN_ALIEN_LINK_FOUND':
+                    self._sa.logger.log("Skipped : Not an article.", 'ERROR')
             except:
                 self._sa.logger.log(traceback.format_exc(), 'ERROR', _br=True)
             # Append the scrapped articles to the pages'.
