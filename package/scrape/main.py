@@ -305,7 +305,7 @@ class Scrapper():
         # Return the scrapped data
         return self.scrapped_data
 
-    def to_pandas(self, resd_json=False,
+    def to_pandas(self, read_json=False,
                   save_to_csv=True,
                   output_dir=None):
         """
