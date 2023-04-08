@@ -5,8 +5,6 @@ from selenium.common.exceptions import NoSuchElementException
 from package.utils.helpers import *
 from package.scrape.commun.assistants import ScrappingAssistant
 
-NOT_AN_ARTICLE_ERR_MSG = "AN_ALIEN_LINK_FOUND"
-
 
 class ArticleScrapper():
 
@@ -15,7 +13,7 @@ class ArticleScrapper():
     
     """
 
-    def __init__(self, assistant, article_element) -> None:
+    def __init__(self, assistant, article_element = None) -> None:
         # ...
         self._sa: ScrappingAssistant = assistant
         self._article_element = article_element
@@ -68,8 +66,7 @@ class ArticleScrapper():
         Get the price label of the article.
 
         """
-        # _0xLoFW vSgP6A _7ckuOK
-        class_names = '_0xLoFW u9KIT8 vSgP6A EJ4MLB'
+        class_names = '_0xLoFW _78xIQ-'
         price_label: str = self._sa._get_element_value_by_class(class_names, _from)
         return price_label.replace('\n', ' | ')
 
