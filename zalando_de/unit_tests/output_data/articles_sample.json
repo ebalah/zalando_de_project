@@ -277,14 +277,14 @@
       "link": "https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html",
       "brand_name": "Sir Raymond Tailor",
       "article_name": "LANGARM - Shirt",
-      "price_label": "34,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -56%",
+      "price_label": "From 34,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | up to -56%",
       "available_sizes": {
          "S": {
-            "count": "",
+            "count": "Only 2 left",
             "price": ""
          },
          "M": {
-            "count": "",
+            "count": "Only 1 left",
             "price": ""
          },
          "L": {
@@ -335,7 +335,7 @@
       "price_label": "39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%",
       "available_sizes": {
          "S": {
-            "count": "",
+            "count": "Only 2 left",
             "price": ""
          },
          "M": {

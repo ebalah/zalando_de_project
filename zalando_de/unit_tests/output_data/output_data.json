@@ -1,62 +1,6 @@
 {
    "1": {
       "1": {
-         "link": "https://en.zalando.de/sir-raymond-tailor-shirt-green-sic22d040-m11.html",
-         "brand_name": "Sir Raymond Tailor",
-         "article_name": "BATA - Shirt",
-         "price_label": "39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%",
-         "available_sizes": {
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            },
-            "3XL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "green",
-            "navy",
-            "navy bordeaux"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "85% cotton, 15% polyester",
-               "Care instructions": "Machine wash at 30°C"
-            },
-            "Details": {
-               "Collar": "Button down",
-               "Fastening": "Button",
-               "Pattern": "Print",
-               "Article number": "SIC22D040-M11"
-            },
-            "Size & fit": {
-               "Fit": "Regular Fit",
-               "Shape": "Straight",
-               "Length": "Normal",
-               "Sleeve length": "65.5 cm (Size M)",
-               "Total length": "75 cm (Size M)"
-            }
-         }
-      },
-      "2": {
          "link": "https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html",
          "brand_name": "Jacey Quinn",
          "article_name": "Shirt",
@@ -113,11 +57,11 @@
             }
          }
       },
-      "3": {
-         "link": "https://en.zalando.de/blaeck-dante-shirt-olive-melange-b2o22d00g-m12.html",
-         "brand_name": "Bläck",
-         "article_name": "DANTE - Shirt",
-         "price_label": "79,90 € |  | VAT included",
+      "2": {
+         "link": "https://en.zalando.de/urban-classics-shirt-black-ur622d02p-q11.html",
+         "brand_name": "Urban Classics",
+         "article_name": "Shirt",
+         "price_label": "From 44,99 € |  | VAT included |  | Originally: |  | 49,99 € |  | -10%",
          "available_sizes": {
             "S": {
                "count": "",
@@ -138,26 +82,91 @@
             "XXL": {
                "count": "",
                "price": ""
+            },
+            "3XL": {
+               "count": "",
+               "price": ""
+            },
+            "4XL": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "5XL": {
+               "count": "Notify Me",
+               "price": ""
             }
          },
          "available_colors": [
-            "olive melange",
-            "dark brown mel",
-            "indigo blue",
-            "lt denim blue",
-            "orange melange",
-            "yellow melange"
+            "black",
+            "softseagrass"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "100% linen",
-               "Care instructions": "Machine wash at 40°C"
+               "Outer fabric material": "55% linen, 45% cotton",
+               "Care instructions": "Machine wash at 30°C"
             },
             "Details": {
-               "Collar": "Button down",
+               "Collar": "Mandarin collar",
                "Fastening": "Button",
-               "Pattern": "Marl",
-               "Article number": "B2O22D00G-M12"
+               "Pattern": "Plain",
+               "Article number": "UR622D02P-Q11"
+            },
+            "Size & fit": {
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Normal",
+               "Sleeve length": "Long"
+            }
+         }
+      },
+      "3": {
+         "link": "https://en.zalando.de/denim-culture-jonas-shirt-gruen-dev22d02t-m11.html",
+         "brand_name": "Denim Culture",
+         "article_name": "JONAS - Shirt",
+         "price_label": "39,95 € |  | VAT included |  | Originally: |  | 79,90 € |  | -50%",
+         "available_sizes": {
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            },
+            "3XL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "grün",
+            "beige",
+            "blau",
+            "navy",
+            "orange"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Machine wash at 30°C"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Checked",
+               "Article number": "DEV22D02T-M11"
             },
             "Size & fit": {
                "Fit": "Regular Fit",
@@ -301,127 +310,6 @@
          }
       },
       "6": {
-         "link": "https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html",
-         "brand_name": "TOM TAILOR DENIM",
-         "article_name": "Shirt",
-         "price_label": "From 20,99 € |  | VAT included |  | Originally: |  | 29,99 € |  | up to -30%",
-         "available_sizes": {
-            "XS": {
-               "count": "",
-               "price": ""
-            },
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "original",
-            "black iris blue",
-            "white"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Care instructions": "Machine wash at 40°C, do not tumble dry"
-            },
-            "Details": {
-               "Collar": "Button down",
-               "Fastening": "Button",
-               "Pattern": "Print",
-               "Article number": "TO722D0EQ-K11"
-            },
-            "Size & fit": {
-               "Our model's height": "Our model is 189 cm tall and is wearing size M",
-               "Fit": "Slim Fit",
-               "Shape": "Fitted",
-               "Length": "Normal",
-               "Sleeve length": "67 cm (Size M)",
-               "Back width": "43 cm (Size M)",
-               "Total length": "74 cm (Size M)"
-            }
-         }
-      },
-      "7": {
-         "link": "https://en.zalando.de/tommy-jeans-original-stretch-slim-fit-shirt-tob22d00r-q11.html",
-         "brand_name": "Tommy Jeans",
-         "article_name": "ORIGINAL STRETCH - Shirt",
-         "price_label": "69,95 € |  | VAT included",
-         "available_sizes": {
-            "XS": {
-               "count": "",
-               "price": ""
-            },
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            },
-            "3XL": {
-               "count": "Notify Me",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "black",
-            "black iris",
-            "classic white",
-            "lavender lustre"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "97% cotton, 3% elastane",
-               "Care instructions": "Machine wash at 30°C, machine wash on gentle cycle"
-            },
-            "Details": {
-               "Collar": "Kent collar",
-               "Fastening": "Button",
-               "Pattern": "Plain",
-               "Article number": "TOB22D00R-Q11"
-            },
-            "Size & fit": {
-               "Our model's height": "Our model is 188 cm tall and is wearing size M",
-               "Fit": "Slim Fit",
-               "Shape": "Fitted",
-               "Length": "Normal",
-               "Sleeve length": "67 cm (Size M)",
-               "Back width": "44 cm (Size M)",
-               "Total length": "75 cm (Size M)"
-            }
-         }
-      },
-      "8": {
          "link": "https://en.zalando.de/us-polo-assn-long-sleeve-shirt-navy-us222d00e-k13.html",
          "brand_name": "U.S. Polo Assn.",
          "article_name": "LONG SLEEVE - Shirt",
@@ -466,11 +354,11 @@
             }
          }
       },
-      "9": {
-         "link": "https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-k11.html",
-         "brand_name": "Jack & Jones",
-         "article_name": "JJEJACK SLIM FIT - Shirt",
-         "price_label": "15,99 € |  | VAT included |  | Originally: |  | 19,99 € |  | -20%",
+      "7": {
+         "link": "https://en.zalando.de/redefined-rebel-rrpark-shirt-duck-green-r0622d014-m11.html",
+         "brand_name": "Redefined Rebel",
+         "article_name": "PARK - Shirt",
+         "price_label": "39,95 € |  | VAT included",
          "available_sizes": {
             "XS": {
                "count": "",
@@ -498,35 +386,35 @@
             }
          },
          "available_colors": [
-            "total eclipse",
-            "black"
+            "duck green",
+            "navy blazer"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "100% cotton",
+               "Outer fabric material": "98% cotton, 2% elastane",
+               "Fabric": "Cord",
                "Care instructions": "Machine wash at 40°C"
             },
             "Details": {
-               "Collar": "Kent collar",
+               "Collar": "Button down",
                "Fastening": "Button",
-               "Pattern": "Floral",
-               "Article number": "JA222D1JW-K11"
+               "Pattern": "Plain",
+               "Article number": "R0622D014-M11"
             },
             "Size & fit": {
-               "Our model's height": "Our model is 188 cm tall and is wearing size M",
-               "Fit": "Slim Fit",
+               "Our model's height": "Our model is 187 cm tall and is wearing size M",
                "Length": "Normal",
-               "Sleeve length": "Short",
-               "Back width": "43 cm (Size M)",
-               "Total length": "75 cm (Size M)"
+               "Sleeve length": "63 cm (Size M)",
+               "Back width": "44 cm (Size M)",
+               "Total length": "76 cm (Size M)"
             }
          }
       },
-      "10": {
-         "link": "https://en.zalando.de/tommy-jeans-original-stretch-slim-fit-shirt-classic-white-tob22d00r-a11.html",
-         "brand_name": "Tommy Jeans",
-         "article_name": "ORIGINAL STRETCH - Shirt",
-         "price_label": "69,95 € |  | VAT included",
+      "8": {
+         "link": "https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html",
+         "brand_name": "TOM TAILOR DENIM",
+         "article_name": "Shirt",
+         "price_label": "From 20,99 € |  | VAT included |  | Originally: |  | 29,99 € |  | up to -30%",
          "available_sizes": {
             "XS": {
                "count": "",
@@ -536,6 +424,57 @@
                "count": "",
                "price": ""
             },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "Only 1 left",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "original",
+            "black iris blue",
+            "white"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Machine wash at 40°C, do not tumble dry"
+            },
+            "Details": {
+               "Collar": "Button down",
+               "Fastening": "Button",
+               "Pattern": "Print",
+               "Article number": "TO722D0EQ-K11"
+            },
+            "Size & fit": {
+               "Our model's height": "Our model is 189 cm tall and is wearing size M",
+               "Fit": "Slim Fit",
+               "Shape": "Fitted",
+               "Length": "Normal",
+               "Sleeve length": "67 cm (Size M)",
+               "Back width": "43 cm (Size M)",
+               "Total length": "74 cm (Size M)"
+            }
+         }
+      },
+      "9": {},
+      "10": {
+         "link": "https://en.zalando.de/us-polo-assn-long-sleeve-shirt-white-us222d00e-a11.html",
+         "brand_name": "U.S. Polo Assn.",
+         "article_name": "LONG SLEEVE - Shirt",
+         "price_label": "39,95 € |  | VAT included |  | Originally: |  | 69,95 € |  | -43%",
+         "available_sizes": {
             "M": {
                "count": "",
                "price": ""
@@ -558,41 +497,31 @@
             }
          },
          "available_colors": [
-            "classic white",
-            "black",
-            "black iris",
-            "lavender lustre"
+            "white",
+            "blue",
+            "navy"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "97% cotton, 3% elastane",
-               "Care instructions": "Machine wash at 30°C, machine wash on gentle cycle"
+               "Outer fabric material": "100% cotton"
             },
             "Details": {
-               "Collar": "Kent collar",
-               "Fastening": "Button",
-               "Sheer": "Semi-sheer",
                "Pattern": "Plain",
-               "Article number": "TOB22D00R-A11"
+               "Article number": "US222D00E-A11"
             },
             "Size & fit": {
-               "Our model's height": "Our model is 189 cm tall and is wearing size M",
-               "Fit": "Slim Fit",
-               "Shape": "Straight",
                "Length": "Normal",
-               "Sleeve length": "67 cm (Size M)",
-               "Back width": "43 cm (Size M)",
-               "Total length": "75 cm (Size M)"
+               "Sleeve length": "Long"
             }
          }
       }
    },
    "2": {
       "1": {
-         "link": "https://en.zalando.de/indicode-jeans-langarm-kepner-shirt-sky-way-ij022d039-k11.html",
+         "link": "https://en.zalando.de/indicode-jeans-shirt-navy-ij022d03v-k12.html",
          "brand_name": "INDICODE JEANS",
-         "article_name": "LANGARM KEPNER - Shirt",
-         "price_label": "From 49,99 € |  | VAT included |  | Originally: |  | 64,99 € |  | up to -23%",
+         "article_name": "LANGARM INRAFFI - Shirt",
+         "price_label": "39,99 € |  | VAT included",
          "available_sizes": {
             "S": {
                "count": "",
@@ -616,23 +545,24 @@
             }
          },
          "available_colors": [
-            "sky way",
-            "anise flower",
-            "iron",
-            "mojave",
-            "navy"
+            "navy",
+            "army",
+            "fog",
+            "living coral",
+            "offwhite",
+            "sky way"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Lining": "100% cotton",
+               "Outer fabric material": "70% cotton, 30% linen",
+               "Lining": "70% cotton, 30% linen",
                "Care instructions": "Machine wash at 40°C, do not tumble dry, Do not iron"
             },
             "Details": {
-               "Collar": "Button down",
+               "Collar": "Mandarin collar",
                "Fastening": "Button",
                "Pattern": "Plain",
-               "Article number": "IJ022D039-K11"
+               "Article number": "IJ022D03V-K12"
             },
             "Size & fit": {
                "Our model's height": "Our model is 189 cm tall and is wearing size L",
@@ -644,225 +574,11 @@
          }
       },
       "2": {
-         "link": "https://en.zalando.de/soulstar-msoviedo-shirt-tan-s1x22d003-b11.html",
-         "brand_name": "SOULSTAR",
-         "article_name": "MSOVIEDO - Shirt",
-         "price_label": "29,99 € |  | VAT included",
+         "link": "https://en.zalando.de/rusty-neal-shirt-bordo-rui22d004-g11.html",
+         "brand_name": "Rusty Neal",
+         "article_name": "FREIZEIT-HEMD - Shirt",
+         "price_label": "29,90 € |  | VAT included |  | Originally: |  | 39,90 € |  | -25%",
          "available_sizes": {
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "Only 2 left",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "tan",
-            "navy"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% polyester",
-               "Fabric": "Cord",
-               "Care instructions": "Do not tumble dry, machine wash at 30°C"
-            },
-            "Details": {
-               "Collar": "Kent collar",
-               "Fastening": "Button",
-               "Pattern": "Marl",
-               "Article number": "S1X22D003-B11"
-            },
-            "Size & fit": {
-               "Our model's height": "Our model is 178 cm tall and is wearing size M",
-               "Fit": "Regular Fit",
-               "Shape": "Straight",
-               "Length": "Normal",
-               "Sleeve length": "Long"
-            }
-         }
-      },
-      "3": {
-         "link": "https://en.zalando.de/us-polo-assn-armin-shirt-white-us222d00f-a11.html",
-         "brand_name": "U.S. Polo Assn.",
-         "article_name": "ARMIN OXFORD - Shirt",
-         "price_label": "47,99 € |  | VAT included |  | Originally: |  | 59,99 € |  | -20%",
-         "available_sizes": {
-            "S": {
-               "count": "Only 1 left",
-               "price": ""
-            },
-            "M": {
-               "count": "Notify Me",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "white",
-            "crockery",
-            "dark sapphire",
-            "dark sapphire stripe",
-            "light blue"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Care instructions": "Machine wash at 40°C"
-            },
-            "Details": {
-               "Collar": "Shirt collar",
-               "Fastening": "Button",
-               "Article number": "US222D00F-A11"
-            },
-            "Size & fit": {
-               "Length": "Normal",
-               "Sleeve length": "Long"
-            }
-         }
-      },
-      "4": {
-         "link": "https://en.zalando.de/pier-one-shirt-beige-pi922d0cq-b11.html",
-         "brand_name": "Pier One",
-         "article_name": "Shirt",
-         "price_label": "29,99 € |  | VAT included",
-         "available_sizes": {
-            "XS": {
-               "count": "",
-               "price": ""
-            },
-            "S": {
-               "count": "Notify Me",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "beige"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Care instructions": "Do not tumble dry, machine wash at 30°C"
-            },
-            "Details": {
-               "Collar": "Lapel collar",
-               "Fastening": "Button",
-               "Pattern": "Plain",
-               "Article number": "PI922D0CQ-B11"
-            },
-            "Size & fit": {
-               "Fit": "Regular Fit",
-               "Shape": "Straight",
-               "Length": "Normal",
-               "Sleeve length": "Short",
-               "Back width": "44 cm (Size M)",
-               "Total length": "73 cm (Size M)"
-            },
-            "Sustainability": {}
-         }
-      },
-      "5": {
-         "link": "https://en.zalando.de/pepe-jeans-noah-shirt-denim-pe122d0e6-k11.html",
-         "brand_name": "Pepe Jeans",
-         "article_name": "NOAH - Shirt",
-         "price_label": "89,95 € |  | VAT included",
-         "available_sizes": {
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "Notify Me",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "Only 2 left",
-               "price": ""
-            },
-            "XXL": {
-               "count": "Only 1 left",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "denim"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Fabric": "Denim",
-               "Care instructions": "Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle"
-            },
-            "Details": {
-               "Collar": "Kent collar",
-               "Fastening": "Button",
-               "Article number": "PE122D0E6-K11"
-            },
-            "Size & fit": {
-               "Our model's height": "Our model is 188 cm tall and is wearing size M",
-               "Fit": "Regular Fit",
-               "Shape": "Straight",
-               "Length": "Normal",
-               "Sleeve length": "64 cm (Size M)",
-               "Back width": "44 cm (Size M)",
-               "Total length": "73 cm (Size M)"
-            }
-         }
-      },
-      "6": {
-         "link": "https://en.zalando.de/pier-one-shirt-dark-blue-pi922da37-k11.html",
-         "brand_name": "Pier One",
-         "article_name": "Shirt",
-         "price_label": "39,99 € |  | VAT included",
-         "available_sizes": {
-            "XS": {
-               "count": "",
-               "price": ""
-            },
             "S": {
                "count": "",
                "price": ""
@@ -884,39 +600,102 @@
                "price": ""
             },
             "3XL": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "4XL": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "5XL": {
+               "count": "",
+               "price": ""
+            },
+            "6XL": {
                "count": "",
                "price": ""
             }
          },
          "available_colors": [
-            "dark blue",
-            "black"
+            "bordo",
+            "anthrazit",
+            "beige",
+            "blau",
+            "braun"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "70% cotton, 30% linen",
-               "Care instructions": "Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle"
+               "Outer fabric material": "60% cotton, 37% polyester, 3% elastane"
             },
             "Details": {
-               "Collar": "Mandarin collar",
+               "Collar": "Kent collar",
                "Fastening": "Button",
-               "Pattern": "Marl",
-               "Article number": "PI922DA37-K11"
+               "Pattern": "Plain",
+               "Article number": "RUI22D004-G11"
             },
             "Size & fit": {
-               "Our model's height": "Our model is 187 cm tall and is wearing size M",
+               "Fit": "Slim Fit",
+               "Shape": "Straight",
                "Length": "Normal",
-               "Sleeve length": "67 cm (Size M)",
-               "Back width": "45 cm (Size M)",
-               "Total length": "77 cm (Size M)"
-            },
-            "Sustainability": {}
+               "Sleeve length": "Long"
+            }
          }
       },
-      "7": {
-         "link": "https://en.zalando.de/selected-homme-shdonenew-mark-slim-fit-formal-shirt-se622d0pm-k13.html",
-         "brand_name": "Selected Homme",
-         "article_name": "SLIMNEW MARK SHIRT - Formal shirt",
+      "3": {
+         "link": "https://en.zalando.de/indicode-jeans-intremaine-shirt-army-ij022d03t-m11.html",
+         "brand_name": "INDICODE JEANS",
+         "article_name": "INTREMAINE - Shirt",
+         "price_label": "34,99 € |  | VAT included |  | Originally: |  | 39,99 € |  | -13%",
+         "available_sizes": {
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "army",
+            "navy"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Machine wash at 40°C, do not tumble dry, Do not iron"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Striped",
+               "Article number": "IJ022D03T-M11"
+            },
+            "Size & fit": {
+               "Our model's height": "Our model is 189 cm tall and is wearing size L",
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Long",
+               "Sleeve length": "Short"
+            }
+         }
+      },
+      "4": {
+         "link": "https://en.zalando.de/pier-one-shirt-greycoral-pi922da3y-c11.html",
+         "brand_name": "Pier One",
+         "article_name": "Shirt",
          "price_label": "31,99 € |  | VAT included |  | Originally: |  | 39,99 € |  | -20%",
          "available_sizes": {
             "XS": {
@@ -946,41 +725,100 @@
             "3XL": {
                "count": "",
                "price": ""
+            },
+            "4XL": {
+               "count": "",
+               "price": ""
+            },
+            "5XL": {
+               "count": "",
+               "price": ""
+            },
+            "6XL": {
+               "count": "",
+               "price": ""
             }
          },
          "available_colors": [
-            "navy blazer",
-            "black",
-            "bright white",
-            "bright white/red/navy/white",
-            "dark blue"
+            "grey/coral"
          ],
          "other_details": {
             "Material & care": {
                "Outer fabric material": "100% cotton",
-               "Care instructions": "Machine wash at 40°C, do not tumble dry, A shrinkage of up to 5% may occur"
+               "Care instructions": "Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle"
             },
             "Details": {
-               "Collar": "Shark collar",
+               "Collar": "Kent collar",
                "Fastening": "Button",
-               "Pattern": "Plain",
-               "Article number": "SE622D0PM-K13"
+               "Pattern": "Checked",
+               "Article number": "PI922DA3Y-C11"
             },
             "Size & fit": {
-               "Our model's height": "Our model is 187 cm tall and is wearing size M",
-               "Fit": "Slim Fit",
+               "Our model's height": "Our model is 186 cm tall and is wearing size M",
                "Length": "Normal",
-               "Sleeve length": "66 cm (Size M)",
-               "Back width": "51 cm (Size M)",
-               "Total length": "76 cm (Size M)"
+               "Sleeve length": "65 cm (Size M)",
+               "Back width": "45 cm (Size M)",
+               "Total length": "75 cm (Size M)"
+            },
+            "Sustainability": {}
+         }
+      },
+      "5": {
+         "link": "https://en.zalando.de/threadbare-shirt-navy-thc22d026-k11.html",
+         "brand_name": "Threadbare",
+         "article_name": "THBTROPICAL - Shirt",
+         "price_label": "34,99 € |  | VAT included",
+         "available_sizes": {
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "L": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "navy",
+            "mint",
+            "pink"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Insert material": "100% polyester"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Floral",
+               "Article number": "THC22D026-K11"
+            },
+            "Size & fit": {
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Long",
+               "Sleeve length": "Short"
             }
          }
       },
-      "8": {
-         "link": "https://en.zalando.de/pier-one-shirt-dark-blue-pi922d06a-k11.html",
-         "brand_name": "Pier One",
-         "article_name": "Shirt",
-         "price_label": "22,49 € |  | VAT included |  | Originally: |  | 27,99 € |  | -20%",
+      "6": {
+         "link": "https://en.zalando.de/rusty-neal-shirt-pink-rui22d004-j11.html",
+         "brand_name": "Rusty Neal",
+         "article_name": "FREIZEIT-HEMD - Shirt",
+         "price_label": "29,90 € |  | VAT included |  | Originally: |  | 39,90 € |  | -25%",
          "available_sizes": {
             "S": {
                "count": "",
@@ -1020,36 +858,230 @@
             }
          },
          "available_colors": [
-            "dark blue"
+            "pink",
+            "anthrazit",
+            "beige",
+            "blau",
+            "bordo"
          ],
          "other_details": {
             "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Care instructions": "Machine wash at 30°C"
+               "Outer fabric material": "60% cotton, 37% polyester, 3% elastane"
             },
             "Details": {
                "Collar": "Kent collar",
                "Fastening": "Button",
-               "Pattern": "Marl",
-               "Article number": "PI922D06A-K11"
+               "Pattern": "Plain",
+               "Article number": "RUI22D004-J11"
             },
             "Size & fit": {
-               "Our model's height": "Our model is 189 cm tall and is wearing size M",
-               "Fit": "Regular Fit",
+               "Fit": "Slim Fit",
                "Shape": "Straight",
                "Length": "Normal",
-               "Sleeve length": "Short",
-               "Back width": "46 cm (Size M)",
-               "Total length": "76 cm (Size M)"
+               "Sleeve length": "Long"
+            }
+         }
+      },
+      "7": {
+         "link": "https://en.zalando.de/redefined-rebel-jackson-jacket-denim-jacket-light-blue-r0622t00x-k11.html",
+         "brand_name": "Redefined Rebel",
+         "article_name": "JACKSON JACKET - Shirt",
+         "price_label": "39,95 € |  | VAT included",
+         "available_sizes": {
+            "XS": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "Only 1 left",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "light blue",
+            "black/grey"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Fabric": "Denim",
+               "Care instructions": "Machine wash at 40°C, do not tumble dry"
+            },
+            "Details": {
+               "Collar": "Turn-down collar",
+               "Fastening": "Button",
+               "Details": "Fringing",
+               "Article number": "R0622T00X-K11"
+            },
+            "Size & fit": {
+               "Our model's height": "Our model is 188 cm tall and is wearing size M",
+               "Length": "Normal",
+               "Sleeve length": "66 cm (Size M)",
+               "Back width": "42 cm (Size M)",
+               "Total length": "71 cm (Size M)"
+            }
+         }
+      },
+      "8": {
+         "link": "https://en.zalando.de/pier-one-2-pack-formal-shirt-whiteblack-pi922d05k-a13.html",
+         "brand_name": "Pier One",
+         "article_name": "2 PACK - Formal shirt",
+         "price_label": "36,99 € |  | VAT included |  | Originally: |  | 45,99 € |  | -20%",
+         "available_sizes": {
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            },
+            "3XL": {
+               "count": "Only 1 left",
+               "price": ""
+            },
+            "4XL": {
+               "count": "",
+               "price": ""
+            },
+            "5XL": {
+               "count": "",
+               "price": ""
+            },
+            "6XL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "white/black",
+            "light blue/dark blue",
+            "white",
+            "white/light blue"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "65% polyester, 35% cotton",
+               "Care instructions": "Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Plain",
+               "Article number": "PI922D05K-A13"
+            },
+            "Size & fit": {
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Long",
+               "Sleeve length": "69 cm (Size M)",
+               "Back width": "44 cm (Size M)",
+               "Total length": "79 cm (Size M)"
             },
             "Sustainability": {}
          }
       },
       "9": {
-         "link": "https://en.zalando.de/mango-parrot-shirt-zand-m9122d2gq-b11.html",
+         "link": "https://en.zalando.de/rusty-neal-shirt-sax-rui22d004-k11.html",
+         "brand_name": "Rusty Neal",
+         "article_name": "FREIZEIT-HEMD - Shirt",
+         "price_label": "29,90 € |  | VAT included |  | Originally: |  | 39,90 € |  | -25%",
+         "available_sizes": {
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            },
+            "3XL": {
+               "count": "",
+               "price": ""
+            },
+            "4XL": {
+               "count": "",
+               "price": ""
+            },
+            "5XL": {
+               "count": "",
+               "price": ""
+            },
+            "6XL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "sax",
+            "anthrazit",
+            "beige",
+            "blau",
+            "bordo"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "60% cotton, 37% polyester, 3% elastane"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Plain",
+               "Article number": "RUI22D004-K11"
+            },
+            "Size & fit": {
+               "Fit": "Slim Fit",
+               "Shape": "Straight",
+               "Length": "Normal",
+               "Sleeve length": "Long"
+            }
+         }
+      },
+      "10": {
+         "link": "https://en.zalando.de/mango-avispa-shirt-himmelbla-m9122d2g0-k12.html",
          "brand_name": "Mango",
-         "article_name": "PARROT - Shirt",
-         "price_label": "59,99 € |  | VAT included",
+         "article_name": "AVISPA - Shirt",
+         "price_label": "49,99 € |  | VAT included",
          "available_sizes": {
             "XS": {
                "count": "",
@@ -1077,78 +1109,21 @@
             }
          },
          "available_colors": [
-            "zand",
-            "bordeaux",
-            "donkermarine",
-            "groen",
-            "wit"
+            "himmelblå",
+            "biały",
+            "granatowy",
+            "gul",
+            "kaki"
          ],
          "other_details": {
             "Material & care": {
                "Outer fabric material": "100% linen"
             },
             "Details": {
-               "Collar": "Shark collar",
-               "Fastening": "Button",
-               "Pattern": "Plain",
-               "Article number": "M9122D2GQ-B11"
-            },
-            "Size & fit": {
-               "Fit": "Regular Fit",
-               "Shape": "Straight",
-               "Length": "Long",
-               "Sleeve length": "Long"
-            }
-         }
-      },
-      "10": {
-         "link": "https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html",
-         "brand_name": "Jacey Quinn",
-         "article_name": "Shirt",
-         "price_label": "44,90 € |  | VAT included |  | Originally: |  | 89,90 € |  | -50%",
-         "available_sizes": {
-            "S": {
-               "count": "",
-               "price": ""
-            },
-            "M": {
-               "count": "",
-               "price": ""
-            },
-            "L": {
-               "count": "",
-               "price": ""
-            },
-            "XL": {
-               "count": "",
-               "price": ""
-            },
-            "XXL": {
-               "count": "",
-               "price": ""
-            },
-            "3XL": {
-               "count": "",
-               "price": ""
-            }
-         },
-         "available_colors": [
-            "light green",
-            "black",
-            "blue",
-            "bordeaux",
-            "light navy"
-         ],
-         "other_details": {
-            "Material & care": {
-               "Outer fabric material": "100% cotton",
-               "Care instructions": "Machine wash at 30°C"
-            },
-            "Details": {
                "Collar": "Button down",
                "Fastening": "Button",
-               "Pattern": "Plain",
-               "Article number": "J4K22D00K-M11"
+               "Pattern": "Marl",
+               "Article number": "M9122D2G0-K12"
             },
             "Size & fit": {
                "Fit": "Regular Fit",

@@ -3,10 +3,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 from zalando_de.utils.helpers import *
-from zalando_de.scrape.commun.assistants import ScrappingAssistant
+from zalando_de.scrape.commun.assistants import ScraperAssistant
 
 
-class ArticleScrapper():
+class ArticleScraper():
 
     """
     A context manager to manage articles in a new tab.
@@ -15,7 +15,7 @@ class ArticleScrapper():
 
     def __init__(self, assistant, article_element = None) -> None:
         # ...
-        self._sa: ScrappingAssistant = assistant
+        self._sa: ScraperAssistant = assistant
         self._article_element = article_element
 
     def __enter__(self):

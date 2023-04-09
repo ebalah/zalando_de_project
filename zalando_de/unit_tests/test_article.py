@@ -3,8 +3,7 @@ import traceback
 import json
 
 import zalando_de
-from zalando_de.scrape import Scrapper, ScrappingAssistant
-from zalando_de.utils.helpers import file_name_timer
+from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
 
 
@@ -32,23 +31,23 @@ def save_to_json(data: list[dict]):
         json.dump(data, json_file, indent=3, ensure_ascii=False)
 
 
-@pytest.fixture(scope='module')
-def scrapper():
+def get_scraper():
     logger = get_logger()
-    assistant = ScrappingAssistant(logger=logger)
-    return Scrapper(assistant)
+    assistant = ScraperAssistant(logger=logger)
+    return Scraper(assistant)
 
 
 @pytest.mark.parametrize('articles_link', articles_link)
-def test_article_scrapper(articles_link, scrapper: Scrapper):
+def test_article_scraper(articles_link):
     """
-    Test the functionalties of the Scrapper.get
+    Test the functionalties of the scraper.get
     
     """
+    scraper = get_scraper()
     # Get the details
     try:
-        article_details = scrapper.scrape_articles(articles_link)
+        article_details = scraper.scrape_articles(articles_link)
         # save 
         save_to_json(article_details)
     except Exception as e:
-        scrapper._sa.logger.log(traceback.format_exc())
+        scraper._sa.logger.log(traceback.format_exc())

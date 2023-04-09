@@ -7,26 +7,28 @@ from selenium.common.exceptions import TimeoutException
 
 import json
 
-from zalando_de.utils.helpers import *
-from zalando_de.scrape.commun.assistants import ScrappingAssistant
-from zalando_de.scrape.units.article import ArticleScrapper
+from zalando_de.utils.helpers import (total_items,
+                                      total_pages,
+                                      current_datetime)
+from zalando_de.scrape.commun.assistants import ScraperAssistant
+from zalando_de.scrape.units.article import ArticleScraper
 
 
 
-ALIEN_LINKS = ['/outfits/', '/collections/', '/men/']
+ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
 
 
-class Scrapper():
+class Scraper():
 
     def __init__(self, assistant) -> None:
         # Logging configuration.
-        self._sa: ScrappingAssistant = self.__validate_assistant(assistant)
-        # Log the initiation of the scrapper
-        self._sa.logger.log("Initiate the scrapper object.", 'INFO', _br=True)
+        self._sa: ScraperAssistant = self.__validate_assistant(assistant)
+        # Log the initiation of the scraper
+        self._sa.logger.log("Initiate the scraper object.", 'INFO', _br=True)
         # Main link
         self.main_link = "https://en.zalando.de/mens-clothing-shirts/"
-        # Scrapped data
-        self.scrapped_data = {}
+        # Scraped data
+        self.scraped_data = {}
         # Metadata
         self._metadata = {}
 
@@ -71,15 +73,15 @@ class Scrapper():
         """
         # Total items
         class_names = '_0Qm8W1 _7Cm1F9 FxZV-M weHhRC u-6V88 FxZV-M'
-        total_items = clean_text_number(self._sa._get_element_value_by_class(class_names))
+        _total_items = total_items(self._sa._get_element_value_by_class(class_names))
         # Total pages
         class_names = '_0Qm8W1 _7Cm1F9 FxZV-M pVrzNP JCuRr_ _0xLoFW uEg2FS FCIprz'
-        _, total_pages = clean_pagination_label(self._sa._get_element_value_by_class(class_names))
-        # Save the values into the scrapper's metadata
-        self.save_metadata({'total_pages': total_pages,
-                            'total_items': total_items})
+        _, _total_pages = total_pages(self._sa._get_element_value_by_class(class_names))
+        # Save the values into the scraper's metadata
+        self.save_metadata({'total_pages': _total_pages,
+                            'total_items': _total_items})
         # Return the details
-        return total_items, total_pages
+        return _total_items, _total_pages
     
     def _curr_url(self):
         """
@@ -162,10 +164,10 @@ class Scrapper():
             return "Not an article"
         # Get the article page
         self._sa.driver.get(link)
-        # Define the article scrapper
-        article_scrapper = ArticleScrapper(self._sa)
+        # Define the article scraper
+        article_scraper = ArticleScraper(self._sa)
         # Scrape the article
-        return article_scrapper.scrape()
+        return article_scraper.scrape()
 
     
     def _scrape_single_page(self, n_articles):
@@ -186,20 +188,20 @@ class Scrapper():
             article_details = {}
             # Open the artice details in a new tab
             try:
-                with ArticleScrapper(self._sa, article) as article_scrapper:
+                with ArticleScraper(self._sa, article) as article_scraper:
                     # Scrape the article details.
-                    _details = article_scrapper.scrape()
-                    # Append the scrapped article's details and link
+                    _details = article_scraper.scrape()
+                    # Append the scraped article's details and link
                     article_details.update(_details)
             except:
                 self._sa.logger.log(traceback.format_exc(), 'ERROR', _br=True)
-            # Append the scrapped articles to the pages'.
+            # Append the scraped articles to the pages'.
             articles_details.update({article_number : article_details})
             # Check if the maximum articles to scrape is reached.
             if article_number == n_articles:
                 break
-        # Inform the number of scrapped articles.
-        self._sa.logger.log("Succefully {} articles were scrapped."
+        # Inform the number of scraped articles.
+        self._sa.logger.log("Succefully {} articles were scraped."
                             "".format(len(articles_details)), 'INFO')
         # Return the final results
         return articles_details
@@ -215,10 +217,10 @@ class Scrapper():
         # Get the page's articles
         page_articles = self._scrape_single_page(n_articles)
         # Inform the succes of the  n_articles.
-        self._sa.logger.log("{} articles scrapped successfully from page {}"
+        self._sa.logger.log("{} articles scraped successfully from page {}"
                             "".format(n_articles, page_number), 'INFO', _br=True)
-        # Append the scrapped page to the scrapped data.
-        self.scrapped_data.update({page_number: page_articles})
+        # Append the scraped page to the scraped data.
+        self.scraped_data.update({page_number: page_articles})
 
     def _start(self, n_pages=1, n_articles=1):
         """
@@ -233,15 +235,15 @@ class Scrapper():
         # Search for the total items and pages
         self._save_page_details()
         # Start scrapping
-        scrapped_pages = 0
+        scraped_pages = 0
         while True:
             # Scrape page articles.
-            self._scrape(n_articles, scrapped_pages + 1)
-            # Increase the number of scrapped pages.
-            scrapped_pages += 1
+            self._scrape(n_articles, scraped_pages + 1)
+            # Increase the number of scraped pages.
+            scraped_pages += 1
             # Check if the maximum number of pages to scrape is
             # reached, or if there is not more pages to scrape.
-            if scrapped_pages == n_pages or not self._next_page():
+            if scraped_pages == n_pages or not self._next_page():
                 # If so end the scrapping.
                 break
 
@@ -270,15 +272,19 @@ class Scrapper():
         pages of the first n_pages.
 
         """
+        # Save the starting datetime.
+        self.save_metadata({'started_in': current_datetime()})
         try:
             self._start(n_pages, n_articles)
         except:
             self._sa.logger.log(traceback.format_exc(), 'ERROR', _br=True)
             self._sa.logger.log("Scrapping failed.", 'ERROR', _br=True)
+        # Save the finishing datetime
+        self.save_metadata({'finished_in': current_datetime()})
 
     def save_metadata(self, meta_dict: dict):
         """
-        Save the metadata to trace the last status of the scrapper.
+        Save the metadata to trace the last status of the scraper.
 
         This must be helpful to continue the scrapping in case of
         any incident.
@@ -292,24 +298,24 @@ class Scrapper():
 
     def to_dict(self, output_dir):
         """
-        Save scrapped data and it's metadata into a json file, and
+        Save scraped data and it's metadata into a json file, and
         return a dictionary.
         
         """
         # Save metadata
         with open(f"{output_dir}\\metadata.json", "w+", encoding='utf-8') as mf:
             json.dump(self._metadata, mf, indent=3, ensure_ascii=False)
-        # Save the scrapperd data
+        # Save the scraperd data
         with open(f"{output_dir}\\output_data.json", "w+", encoding='utf-8') as mf:
-            json.dump(self.scrapped_data, mf, indent=3, ensure_ascii=False)
-        # Return the scrapped data
-        return self.scrapped_data
+            json.dump(self.scraped_data, mf, indent=3, ensure_ascii=False)
+        # Return the scraped data
+        return self.scraped_data
 
     def to_pandas(self, read_json=False,
                   save_to_csv=True,
                   output_dir=None):
         """
-        Convert the scrapped data into a pandas dataframe.
+        Convert the scraped data into a pandas dataframe.
         
         """
         ...

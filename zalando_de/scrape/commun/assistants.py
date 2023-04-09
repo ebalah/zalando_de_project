@@ -25,7 +25,7 @@ MEDIUM_WAIT = 7
 SHORT_WAIT = 5
 
 
-class ScrappingAssistant():
+class ScraperAssistant():
 
     def __init__(self, driver = None, logger = None) -> None:
         # Configure the helper tool
