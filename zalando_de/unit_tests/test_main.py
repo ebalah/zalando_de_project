@@ -5,8 +5,8 @@ from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
 
 
-out_log =  f"{zalando_de.__path__[0]}\\main_scraper_logging.log"
-output_dir = f"{zalando_de.__path__[0]}\\output"
+out_log =  f"{zalando_de.__path__[0]}\\..\\output\\logs\\main_scraper_logging.log"
+output_dir = f"{zalando_de.__path__[0]}\\..\\output\\data"
 
 
 def get_logger():

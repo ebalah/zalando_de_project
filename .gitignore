@@ -10,10 +10,6 @@ __pycache__/
 *.pyo
 *.pyc
 
-# Logs
-*.log
-*.json
-
 # Pytest cache
 .pytest_cache
 
