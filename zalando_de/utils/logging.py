@@ -12,14 +12,6 @@ except ImportError:
 from zalando_de.utils.helpers import prefix_timer, rel_path
 
 
-LEVELS_INT = {10: 'DEBUG',
-              20: 'INFO',
-              30: 'WARNING',
-              40: 'ERROR',
-              50: 'CRITICAL'}
-
-LEVELS_STR = {v: k for k, v in LEVELS_INT.items()}
-
 LEVELS_COLORS = {'DEBUG': 'cyan',
                  'INFO': 'green',
                  'WARNING': 'yellow',
@@ -33,8 +25,8 @@ def handle_level(level):
     and return it left-justified in a string of a width 9.
 
     """
-    if not isinstance(level, str):
-        level = LEVELS_INT.get(level, '')
+    if isinstance(level, int):
+        level = logging.getLevelName(level)
     # left-justify in a string of a width 9
     return level.ljust(9)
 
@@ -91,23 +83,17 @@ def handle_formatter(out: str = None):
 
 class Logger():
 
-    levels = {'DEBUG': 10,
-              'INFO': 20,
-              'WARNING': 30,
-              'ERROR': 40,
-              'CRITICAL': 50}
-
-    def __init__(self, out=None) -> None:
+    def __init__(self, out=None, min_level = 10) -> None:
         self.logger = logging.getLogger('scrapping_logger')
-        self.config(out)
+        self.config(out, min_level)
 
-    def config(self, out):
+    def config(self, out, min_level):
         """
         Configure the logger.
 
         """
         # Set the level
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(min_level)
         # If teh logger has already handlers, remove them
         if self.logger.handlers:
             for handler in self.logger.handlers:
@@ -145,7 +131,7 @@ class Logger():
             called_from = rel_path(inspect.stack()[2].filename)
         # Handle the level
         if isinstance(level, str):
-            level = LEVELS_STR.get(level, 0)
+            level = logging.getLevelName(level)
         # Add a suffix that includes the datetime, the level, the
         # filename if show_details is true.
         if show_details:
