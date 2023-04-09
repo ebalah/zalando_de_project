@@ -6,11 +6,13 @@
 
 # python cache
 __pycache__/
+.ipynb_checkpoints/
 *.pyo
 *.pyc
 
 # Logs
-# *.log
+*.log
+*.json
 
 # Pytest cache
 .pytest_cache

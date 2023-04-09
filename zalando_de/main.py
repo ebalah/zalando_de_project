@@ -5,8 +5,8 @@ import pandas as pd
 import json
 
 from zalando_de.utils.logging import Logger
-from zalando_de.utils.helpers import file_name_timer
-from zalando_de.scrape.main import scraper
+from zalando_de.utils.helpers import suffix_timer
+from zalando_de.scrape.main import Scraper
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 
 
@@ -61,7 +61,7 @@ def run():
     # The directory where the outputs are expected to be saved.
     output_dir = f"{curr_dir}\\output"
 
-    log_output = f"{output_dir}\\log_output_{file_name_timer()}.log"
+    log_output = f"{output_dir}\\log_output_{suffix_timer()}.log"
 
     logger = Logger(log_output)
 
@@ -77,7 +77,7 @@ def run():
     assistant = ScraperAssistant(logger=logger)
 
     # Initiate the scraper
-    scraper = scraper(logger=logger)
+    scraper = Scraper(logger=logger)
 
     # Start scrapping
     scraper.scrape()
@@ -96,4 +96,5 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    # run()
+    ...

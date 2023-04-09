@@ -7,8 +7,8 @@ from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
 
 
-out_log =  f"{zalando_de.__path__[0]}\\unit_tests\\output_test_article.log"
-output_dir = f"{zalando_de.__path__[0]}\\unit_tests\\output_data"
+out_log =  f"{zalando_de.__path__[0]}\\main_article_logging.log"
+output_dir = f"{zalando_de.__path__[0]}\\output"
 
 
 articles_link = [[
