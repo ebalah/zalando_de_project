@@ -1,15 +1,14 @@
-import warnings
 import time
 import os
 
-import package
+import zalando_de
 
 
 # Path helpers
 
-pkg_dir: str = os.path.dirname(package.__path__[0])
+pkg_dir: str = os.path.dirname(zalando_de.__path__[0])
 
-def get_relative_path(path: str):
+def rel_path(path: str):
     """
     Convert the absolute path to relative.
     
@@ -19,45 +18,48 @@ def get_relative_path(path: str):
     return relative_path.replace('\\', '/')
 
 
-### Data helpers.
+### Date helpers.
 
-def datem():
+def prefix_timer():
     return time.strftime("[%b %d, %Y %H:%M:%S] ~ $")
 
 
-def file_name_timer():
+def suffix_timer():
     return time.strftime("%Y%m%d_%H%M%S")
+
+def current_datetime():
+    return time.strftime("%A, %B %d, %Y %I:%M:%S %p")
 
 
 ### Selenium helpers
 
-def clean_text_number(text_number):
+def total_items(text: str):
     """
     Clean a number provided in text.
     """
     # If text number is empty, return it
-    if not text_number:
+    if not text:
         return -1
     # Vectorize the text number.
-    text_vector: list = text_number.lower().split()[:-1]
+    text_vector: list = text.lower().split()[:-1]
     # Concatenate the remaning elements and remove commas
-    _text_number = ' '.join(text_vector).replace(',', '').strip()
+    _total_items = ' '.join(text_vector).replace(',', '').strip()
     # Try to convert the text number to a numeric number.
     try:
-        return int(_text_number)
+        return int(_total_items)
     except:
-        raise ValueError("The text_number {} could not be "
-                         "cleaned.".format(text_number))
+        raise ValueError("The text {} could not be "
+                         "cleaned.".format(text))
     
-def clean_pagination_label(text_pagin):
+def total_pages(text: str):
     """
     Clean a pagination indexer provided in text.
     """
-    # If text_pagin is empty, return -1
-    if not text_pagin:
+    # If text is empty, return -1
+    if not text:
         return -1
     # Vectorize the text.
-    text_vector: list = text_pagin.lower().split()
+    text_vector: list = text.lower().split()
     # get the current page number, and the total of pages.
     _, current_page, _, totale_pages = text_vector
     # try to convert them to integers.
@@ -66,32 +68,22 @@ def clean_pagination_label(text_pagin):
     except:
         raise RuntimeError("Couldn't cast {} to integer. "
                            "Provided text was : {}"
-                           "".format(current_page, text_pagin))
+                           "".format(current_page, text))
     try:
         totale_pages = int(totale_pages)
     except:
         raise RuntimeError("Couldn't cast {} to integer. "
                            "Provided text was : {}"
-                           "".format(totale_pages, text_pagin))
+                           "".format(totale_pages, text))
     return current_page, totale_pages
     
-
-def PendingDeprecation(func):
-    """
-    A decorator to mark a function as deprecated.
-    
-    """
-    # wrappe the function
-    def wrapper_func(*args, **kwargs):
-        func_name = func.__name__
-        warnings.warn("Function {} is deprecated.", PendingDeprecationWarning)
-        return func(*args, **kwargs)
-    # return the wrapper
-    return wrapper_func
     
 
 __all__ = [
-    'clean_text_number',
-    'clean_pagination_label',
-    'PendingDeprecation'
+    'rel_path',
+    'prefix_timer',
+    'suffix_timer',
+    'current_datetime',
+    'total_items',
+    'total_pages'
 ]
