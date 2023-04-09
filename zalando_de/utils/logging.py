@@ -141,6 +141,8 @@ class Logger():
         """
         # Get the file name from which the log is called.
         called_from = rel_path(inspect.stack()[1].filename)
+        if called_from.endswith("logging.py"):
+            called_from = rel_path(inspect.stack()[2].filename)
         # Handle the level
         if isinstance(level, str):
             level = LEVELS_STR.get(level, 0)
