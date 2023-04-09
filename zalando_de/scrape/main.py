@@ -24,7 +24,7 @@ class Scraper():
         # Logging configuration.
         self._sa: ScraperAssistant = self.__validate_assistant(assistant)
         # Log the initiation of the scraper
-        self._sa.logger.log("Initiate the scraper object.", 'INFO', _br=True)
+        self._sa.logger.info("Initiate the scraper object.", _br=True)
         # Main link
         self.main_link = "https://en.zalando.de/mens-clothing-shirts/"
         # Scraped data
@@ -160,7 +160,7 @@ class Scraper():
         """
         # Validate the link
         if not self._is_an_article_link(link):
-            self._sa.logger.log("The article's link is not valid.", 'WARNING')
+            self._sa.logger.warn("The article's link is not valid.")
             return "Not an article"
         # Get the article page
         self._sa.driver.get(link)
@@ -178,8 +178,8 @@ class Scraper():
         # Get the articles list
         articles_elements = self._get_articles()
         # Inform the number of found articles.
-        self._sa.logger.log("Found {} articles."
-                            "".format(len(articles_elements)), 'INFO')
+        self._sa.logger.info("Found {} articles."
+                             "".format(len(articles_elements)))
         # Initiate the page articles with an empty dictionary.
         articles_details = {}
         # Extract the details of each found article
@@ -194,15 +194,16 @@ class Scraper():
                     # Append the scraped article's details and link
                     article_details.update(_details)
             except:
-                self._sa.logger.log(traceback.format_exc(), 'ERROR', _br=True)
+                self._sa.logger.error(traceback.format_exc(),
+                                      show_details=False, _br=True)
             # Append the scraped articles to the pages'.
             articles_details.update({article_number : article_details})
             # Check if the maximum articles to scrape is reached.
             if article_number == n_articles:
                 break
         # Inform the number of scraped articles.
-        self._sa.logger.log("Succefully {} articles were scraped."
-                            "".format(len(articles_details)), 'INFO')
+        self._sa.logger.info("Succefully {} articles were scraped."
+                            "".format(len(articles_details)))
         # Return the final results
         return articles_details
 
@@ -212,13 +213,13 @@ class Scraper():
         Scrape the website.
         """
         # Inform starting scrapping the articles.
-        self._sa.logger.log("Starting scrapping page  {} ... Link : {}"
-                            "".format(page_number, self._curr_url()), 'INFO', _br=True)
+        self._sa.logger.info("Starting scrapping page  {} ... Link : {}"
+                            "".format(page_number, self._curr_url()), _br=True)
         # Get the page's articles
         page_articles = self._scrape_single_page(n_articles)
         # Inform the succes of the  n_articles.
-        self._sa.logger.log("{} articles scraped successfully from page {}"
-                            "".format(n_articles, page_number), 'INFO', _br=True)
+        self._sa.logger.info("{} articles scraped successfully from page {}"
+                            "".format(n_articles, page_number), _br=True)
         # Append the scraped page to the scraped data.
         self.scraped_data.update({page_number: page_articles})
 
@@ -277,8 +278,9 @@ class Scraper():
         try:
             self._start(n_pages, n_articles)
         except:
-            self._sa.logger.log(traceback.format_exc(), 'ERROR', _br=True)
-            self._sa.logger.log("Scrapping failed.", 'ERROR', _br=True)
+            self._sa.logger.error(traceback.format_exc(), 'ERROR',
+                                  show_details=False, _br=True)
+            self._sa.logger.error("Scrapping failed.", _br=True)
         # Save the finishing datetime
         self.save_metadata({'finished_in': current_datetime()})
 
@@ -293,8 +295,8 @@ class Scraper():
         for key, value in meta_dict.items():
             self._metadata.update({key: value})
             # Log the added metadata
-            self._sa.logger.log("{} = {} saved to metadata"
-                                "".format(key, value), 'INFO')
+            self._sa.logger.info("{} = {} saved to metadata"
+                                "".format(key, value))
 
     def to_dict(self, output_dir):
         """

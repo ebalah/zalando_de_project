@@ -50,4 +50,4 @@ def test_article_scraper(articles_link):
         # save 
         save_to_json(article_details)
     except Exception as e:
-        scraper._sa.logger.log(traceback.format_exc())
+        scraper._sa.logger.error(traceback.format_exc(), show_details=False)

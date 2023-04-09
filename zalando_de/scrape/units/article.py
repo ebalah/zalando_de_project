@@ -192,8 +192,8 @@ class ArticleScraper():
         # Get the article link
         article_link = self._get_link()
         # Inform the start of scrapping the article.
-        self._sa.logger.log("Scrapping article {} started."
-                            "".format(article_link), 'INFO', _br=True)
+        self._sa.logger.info("Scrapping article {} started."
+                             "".format(article_link), _br=True)
         # Get the article container.
         article_container = self._get_container()
         # Get the data in x-wrapper-re-1-4 container.
@@ -201,24 +201,24 @@ class ArticleScraper():
                                                                 article_container)
         # The name of the brand
         brand_name = self._get_brand_name(_from=x_wrapper_container)
-        self._sa.logger.log('Brand name found : {}'.format(brand_name))
+        self._sa.logger.debug('Brand name found : {}'.format(brand_name))
         # The name of the article 
         article_name = self._get_name(_from=x_wrapper_container)
-        self._sa.logger.log('Article name found : {}'.format(article_name))
+        self._sa.logger.debug('Article name found : {}'.format(article_name))
         # The price label (it may be in format : from $xx)
         price_label = self._get_price(_from=x_wrapper_container)
-        self._sa.logger.log('Price found : {}'.format(price_label))
+        self._sa.logger.debug('Price found : {}'.format(price_label))
         # All the available colors
         available_colors = self._get_colors(_from=x_wrapper_container)
-        self._sa.logger.log('Colors found : {}'.format(available_colors))
+        self._sa.logger.debug('Colors found : {}'.format(available_colors))
         # All available sizes
         available_sizes = self._get_sizes(_from=article_container)
-        self._sa.logger.log('Sizes found : {}'.format(available_sizes))
+        self._sa.logger.debug('Sizes found : {}'.format(available_sizes))
         # The other details : Fit & Size, Material & Care, and Details
         other_details = self._get_extra_details(_from=article_container)
-        self._sa.logger.log('Extra details found : {}'.format(other_details))
+        self._sa.logger.debug('Extra details found : {}'.format(other_details))
         # Inform the end of scrapping the article.
-        self._sa.logger.log("Scrapping the article finished successfully.", 'INFO')
+        self._sa.logger.info("Scrapping the article finished successfully.")
         # Concatenate the details into one dictionary
         article_details = {'link': article_link,
                            'brand_name': brand_name,
