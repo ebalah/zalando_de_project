@@ -6,8 +6,8 @@ import json
 
 from zalando_de.utils.logging import Logger
 from zalando_de.utils.helpers import file_name_timer
-from zalando_de.scrape.main import Scrapper
-from zalando_de.scrape.commun.assistants import ScrappingAssistant
+from zalando_de.scrape.main import scraper
+from zalando_de.scrape.commun.assistants import ScraperAssistant
 
 
 def truncate_output_directory(output_dir, logger: Logger):
@@ -74,19 +74,19 @@ def run():
     #######################################################################
 
     # Initiate the Shared Helper Tool
-    assistant = ScrappingAssistant(logger=logger)
+    assistant = ScraperAssistant(logger=logger)
 
-    # Initiate the scrapper
-    scrapper = Scrapper(logger=logger)
+    # Initiate the scraper
+    scraper = scraper(logger=logger)
 
     # Start scrapping
-    scrapper.scrape()
+    scraper.scrape()
     
     # Save channels with no results it to a json file.
-    products_json = scrapper.to_dict()
+    products_json = scraper.to_dict()
 
     # Convert the cleaned data into a pandas dataframe.
-    products_dataframe = scrapper.to_pandas()
+    products_dataframe = scraper.to_pandas()
 
     # Save the dataframe into excel file.
     csv_output_file = f"{output_dir}\\data_output.xlsx"
