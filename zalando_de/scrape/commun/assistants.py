@@ -30,6 +30,7 @@ class ScraperAssistant():
     def __init__(self, driver = None, logger = None) -> None:
         # Configure the helper tool
         self.__config(driver, logger)
+        self.__log_new_session()
     
     def __config_driver(self, driver):
         self.driver: webdriver.Edge = driver or self._init_driver()
@@ -47,6 +48,11 @@ class ScraperAssistant():
         self.__config_logger(logger)
         self.__config_driver(driver)
         self.__config_wait( *args, **kwargs)
+
+    def __log_new_session(self):
+        sep = "===" * 20
+        header = "\n{} [ New Session ] {}\n".format(sep, sep)
+        self.logger.info(header, show_details=False, _br=True)
 
     def _init_driver(self):
         """

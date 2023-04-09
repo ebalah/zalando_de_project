@@ -228,4 +228,4 @@ class ArticleScraper():
                            'available_colors': available_colors,
                            'other_details': other_details}
         # Return the details
-        return article_details
+        return article_details, article_link

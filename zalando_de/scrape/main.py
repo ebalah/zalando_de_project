@@ -9,7 +9,10 @@ import json
 
 from zalando_de.utils.helpers import (total_items,
                                       total_pages,
-                                      current_datetime)
+                                      current_datetime,
+                                      delta_datetime,
+                                      suffix_timer,
+                                      is_a_directory)
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.scrape.units.article import ArticleScraper
 
@@ -20,9 +23,11 @@ ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
 
 class Scraper():
 
-    def __init__(self, assistant) -> None:
+    def __init__(self, assistant, out) -> None:
         # Logging configuration.
         self._sa: ScraperAssistant = self.__validate_assistant(assistant)
+        # Define the outputs destination directory.
+        self._output_directory = self.__validate_output_dir(out)
         # Log the initiation of the scraper
         self._sa.logger.info("Initiate the scraper object.", _br=True)
         # Main link
@@ -31,10 +36,114 @@ class Scraper():
         self.scraped_data = {}
         # Metadata
         self._metadata = {}
+        # Scraped articles
+        self.scraped_articles = self._read_scraped_articles()
 
     # NOTE: This needs to be improved.
     def __validate_assistant(self, assistant):
+        if not assistant:
+            raise ValueError("Invalid scraper assistant")
         return assistant
+    
+    # NOTE: This needs to be improved.
+    def __validate_output_dir(self, out):
+        if not is_a_directory(out):
+            raise ValueError("Invalid output destination : {}"
+                             "".format(out))
+        return out
+    
+    def _save_metadata(self, meta_dict: dict):
+        """
+        Save the metadata to trace the last status of the scraper.
+
+        This must be helpful to continue the scrapping in case of
+        any incident.
+
+        """
+        for key, value in meta_dict.items():
+            self._metadata.update({key: value})
+            
+    def _read_scraped_articles(self):
+        """
+        Read the already scraped articles.
+        
+        """
+        try:
+            input_fn = f"{self._output_directory}\\scraped_articles.json"
+            with open(input_fn, 'r+', encoding='utf-8') as input_file:
+                scraped_articles = json.load(input_file)
+            # Log
+            self._sa.logger.info("Scraped articles are read : {} "
+                                "articles.".format(len(scraped_articles)))
+            return set(scraped_articles)
+        
+        except:
+            return set()
+            
+    def _extract_id_from_link(self, link: str):
+        """
+        Extract an id for an article from its link.
+
+        """
+        article_id = (link.removeprefix('https://en.zalando.de/')
+                          .removesuffix('.html'))
+        return article_id
+    
+    def _save_article(self, article_link):
+        """
+        Save scraped articles.
+
+        The purpose of saving the scraped articles is to avoid
+        scrapping them twice.
+
+        Articles are identifed by an ID extracted
+        directly from their link.
+
+        """
+        # Extract the ID
+        article_id = self._extract_id_from_link(article_link)
+        # Save the article as successfully scraped.
+        self.scraped_articles.add(article_id)
+
+    def _save_scraped_articles(self):
+        """
+        Save the scraped article to json file.
+        
+        """
+        # Prepare the articles to save.
+        scraped_articles = list(self.scraped_articles)
+        # Prepare the destination file name.
+        output_fn = f"{self._output_directory}\\scraped_articles.json"
+        with open(output_fn, 'w+', encoding='utf-8') as output_file:
+            json.dump(scraped_articles,
+                      output_file,
+                      indent=3,
+                      ensure_ascii=False)
+        # Log
+        self._sa.logger.info("Scraped articles ({}) are saved to {}"
+                             "".format(len(scraped_articles), output_fn))
+        
+    def _save_scraped_details(self):
+        """
+        Save scraped data and it's metadata into a json file.
+        
+        """
+        # Prepare the dictionary to hold all the results.
+        scraped_data = {'metadata': self._metadata,
+                        'data': self.scraped_data}
+        # Prepare the destination json file name
+        output_fn = f"{self._output_directory}\\scraped_details_{suffix_timer()}.json"
+        # Save the scraperd data
+        with open(output_fn, "w+", encoding='utf-8') as outpu_file:
+            json.dump(scraped_data,
+                      outpu_file,
+                      indent=3,
+                      ensure_ascii=False)
+        # Log
+        self._sa.logger.info("Scraped articles's details saved into {}"
+                             "".format(output_fn))
+
+
 
     def _handle_cookies(self, accept=False,
                         get_link: bool = False):
@@ -78,7 +187,7 @@ class Scraper():
         class_names = '_0Qm8W1 _7Cm1F9 FxZV-M pVrzNP JCuRr_ _0xLoFW uEg2FS FCIprz'
         _, _total_pages = total_pages(self._sa._get_element_value_by_class(class_names))
         # Save the values into the scraper's metadata
-        self.save_metadata({'total_pages': _total_pages,
+        self._save_metadata({'total_pages': _total_pages,
                             'total_items': _total_items})
         # Return the details
         return _total_items, _total_pages
@@ -123,14 +232,21 @@ class Scraper():
         # Otherwise, return False
         return False
     
-    def _is_an_article_link(self, link: str):
+    def _is_valid_article(self, link: str):
         """
         Verify if the the actual opened page is for an article.
         
         """
         # Verify if the link is alien, and return the opposite
         # results : False if so, otherwise True
-        return not self._is_alien_link(link)
+        if self._is_alien_link(link):
+            return False
+        # Verify if the article is already scraped or not
+        _id = self._extract_id_from_link(link)
+        if _id in self.scraped_articles:
+            return False
+        # Return the True (at this point the article is valid to scrape)
+        return True
     
     def _get_articles(self):
         """
@@ -148,7 +264,7 @@ class Scraper():
         valid_articles = []
         for article in articles:
             link = self._sa._get_element_by_class(l_class_names, article).get_attribute('href')
-            if self._is_an_article_link(link):
+            if self._is_valid_article(link):
                 valid_articles.append(article)
         # Return only valid articles
         return valid_articles
@@ -159,7 +275,7 @@ class Scraper():
         
         """
         # Validate the link
-        if not self._is_an_article_link(link):
+        if not self._is_valid_article(link):
             self._sa.logger.warn("The article's link is not valid.")
             return "Not an article"
         # Get the article page
@@ -190,9 +306,10 @@ class Scraper():
             try:
                 with ArticleScraper(self._sa, article) as article_scraper:
                     # Scrape the article details.
-                    _details = article_scraper.scrape()
+                    _details, _link = article_scraper.scrape()
                     # Append the scraped article's details and link
                     article_details.update(_details)
+                    self._save_article(_link)
             except:
                 self._sa.logger.error(traceback.format_exc(),
                                       show_details=False, _br=True)
@@ -253,6 +370,10 @@ class Scraper():
         Scrape a single or a list of articles independently
         using their customized link.
         
+        This method is intended to be used only in case a set
+        of articles are not perfectly scraped or were skipped
+        while scrapping.
+
         """
         # Make sure the links is alist.
         if not isinstance(links, list):
@@ -274,50 +395,36 @@ class Scraper():
 
         """
         # Save the starting datetime.
-        self.save_metadata({'started_in': current_datetime()})
+        start_time, start_time_str = current_datetime()
+        self._save_metadata({'started_at': start_time_str})
         try:
             self._start(n_pages, n_articles)
         except:
-            self._sa.logger.error(traceback.format_exc(), 'ERROR',
+            self._sa.logger.error(traceback.format_exc(),
                                   show_details=False, _br=True)
             self._sa.logger.error("Scrapping failed.", _br=True)
         # Save the finishing datetime
-        self.save_metadata({'finished_in': current_datetime()})
+        end_time, end_time_str = current_datetime()
+        self._save_metadata({'finished_at': end_time_str,
+                            'done_in': delta_datetime(start_time, end_time)})
 
-    def save_metadata(self, meta_dict: dict):
+    def save_to_json(self):
         """
-        Save the metadata to trace the last status of the scraper.
-
-        This must be helpful to continue the scrapping in case of
-        any incident.
-
-        """
-        for key, value in meta_dict.items():
-            self._metadata.update({key: value})
-            # Log the added metadata
-            self._sa.logger.info("{} = {} saved to metadata"
-                                "".format(key, value))
-
-    def to_dict(self, output_dir):
-        """
-        Save scraped data and it's metadata into a json file, and
-        return a dictionary.
+        Save scraped details and it's metadata into a json file.
         
         """
-        # Save metadata
-        with open(f"{output_dir}\\metadata.json", "w+", encoding='utf-8') as mf:
-            json.dump(self._metadata, mf, indent=3, ensure_ascii=False)
-        # Save the scraperd data
-        with open(f"{output_dir}\\output_data.json", "w+", encoding='utf-8') as mf:
-            json.dump(self.scraped_data, mf, indent=3, ensure_ascii=False)
-        # Return the scraped data
-        return self.scraped_data
+        # Log
+        self._sa.logger.debug("Saving the scraped articles ...")
+        self._save_scraped_details()
+        self._save_scraped_articles()
+        # Log the success of saving the data.
+        self._sa.logger.info("Done.")
 
-    def to_pandas(self, read_json=False,
-                  save_to_csv=True,
-                  output_dir=None):
+    @staticmethod
+    def to_table():
         """
-        Convert the scraped data into a pandas dataframe.
+        Read all the scraped articles from json files, convert it
+        into a pandas dataframe, and save it as csv.
         
         """
         ...

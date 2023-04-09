@@ -20,12 +20,12 @@ def test_main_scraper():
     # Define the assistant
     assistant = ScraperAssistant(logger=logger)
     # The scraper
-    main_scraper = Scraper(assistant=assistant)
+    main_scraper = Scraper(assistant=assistant, out=output_dir)
     # Start scrapping 3 articles
     main_scraper.scrape(n_pages=3, n_articles=5)
     # save the scrapped data into a json file.
-    main_scraper.to_dict(output_dir)
+    main_scraper.save_to_json()
     # Save the scrapped data into a csv file.
-    main_scraper.to_pandas(read_json=False,
-                            save_to_csv=True,
-                            output_dir=output_dir)
+    # main_scraper.to_pandas(read_json=False,
+    #                         save_to_csv=True,
+    #                         output_dir=output_dir)
