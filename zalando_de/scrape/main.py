@@ -19,6 +19,9 @@ from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.scrape.units.article import ArticleScraper
 
 
+BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
+                             WebDriverException)
+
 
 ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
 
@@ -309,8 +312,7 @@ class Scraper():
             # If the the browser windows forced to close (i.e. a
             # `NoSuchWindowException` or WebDriverException raised)
             # stop the process.
-            except (NoSuchWindowException,
-                    WebDriverException) as e:
+            except BROWSER_CLOSED_EXCEPTIONS as e:
                 # Return the final results
                 self.scraped_data.update(articles_details)
                 # Inform the number of scraped articles.
@@ -366,9 +368,10 @@ class Scraper():
         # If the the browser windows forced to close (i.e. a
         # `NoSuchWindowException` or WebDriverException raised)
         # stop the process.
-        except (NoSuchWindowException,
-                WebDriverException) as e:
+        except BROWSER_CLOSED_EXCEPTIONS:
                 # Log the error
+                self._sa.logger.error(traceback.format_exc(),
+                                    show_details=False, _br=True)
                 self._sa.logger.error("Failed to continue. It seems that the "
                                       "browser is forcefully closed.\n", _br=True)
         # If any other exception raise, log the exception trace,
@@ -406,8 +409,10 @@ class Scraper():
             # If the the browser windows forced to close (i.e. a
             # `NoSuchWindowException` or WebDriverException raised)
             # stop the process.
-            except (NoSuchWindowException, WebDriverException):
+            except BROWSER_CLOSED_EXCEPTIONS:
                 # Log the error
+                self._sa.logger.error(traceback.format_exc(),
+                                    show_details=False, _br=True)
                 self._sa.logger.error("Failed to continue. It seems that the "
                                       "browser is forcefully closed.\n", _br=True)
                 break
