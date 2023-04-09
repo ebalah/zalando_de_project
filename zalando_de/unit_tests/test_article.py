@@ -28,13 +28,16 @@ def get_logger():
 def save_to_json(data: list[dict]):
     """ save to json file """
     with open(f"{output_dir}\\articles_sample.json", 'w+', encoding='utf-8') as json_file:
-        json.dump(data, json_file, indent=3, ensure_ascii=False)
+        json.dump(data,
+                  json_file,
+                  indent=3,
+                  ensure_ascii=False)
 
 
 def get_scraper():
     logger = get_logger()
     assistant = ScraperAssistant(logger=logger)
-    return Scraper(assistant)
+    return Scraper(assistant, out=output_dir)
 
 
 @pytest.mark.parametrize('articles_link', articles_link)
