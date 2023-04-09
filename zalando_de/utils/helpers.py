@@ -30,6 +30,13 @@ def rel_path(path: str):
     # Return relative_path with  replaced with /
     return relative_path.replace('\\', '/')
 
+def is_a_directory(dir_path):
+    """
+    Verify if a directory exists.
+
+    """
+    return os.path.exists(dir_path)
+
 
 ### Date helpers.
 
@@ -57,11 +64,11 @@ def delta_datetime(t_1: float, t_2: float):
     if t_1 > t_2:
         t_2, t_1 = t_1, t_2
     # Get days
-    delta_t, days = _euc_div(t_2 - t_1, 86400)
+    days, delta_t = _euc_div(t_2 - t_1, 86400)
     # Get hours
-    delta_t, hours = _euc_div(delta_t, 3600)
+    hours, delta_t = _euc_div(delta_t, 3600)
     # Get minutes and seconds
-    seconds, minutes = _euc_div(delta_t, 60)
+    minutes, seconds = _euc_div(delta_t, 60)
     # Return a string of the combined extracted date units.
     return ("{} days, {} hours, {} minutes, and {:.3f} "
             "seconds".format(days, hours, minutes, seconds))
@@ -117,6 +124,7 @@ def total_pages(text: str):
 
 __all__ = [
     'rel_path',
+    'is_a_directory',
     'prefix_timer',
     'suffix_timer',
     'current_datetime',
