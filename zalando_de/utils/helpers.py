@@ -4,6 +4,19 @@ import os
 import zalando_de
 
 
+# Privat helpers
+
+def _euc_div(dividend, divisor):
+    """
+    Perform an euclidean division, and return
+    the quotient and the remainder.
+    
+    """
+    remainder = dividend % divisor
+    quotient = int(dividend / divisor)
+    return quotient, remainder
+
+
 # Path helpers
 
 pkg_dir: str = os.path.dirname(zalando_de.__path__[0])
@@ -28,7 +41,30 @@ def suffix_timer():
     return time.strftime("%Y%m%d_%H%M%S")
 
 def current_datetime():
-    return time.strftime("%A, %B %d, %Y %I:%M:%S %p")
+    timestamp = time.time()
+    timestamp_str = time.strftime("%Y-%m-%d %H:%M:%S",
+                                  time.localtime(timestamp))
+    return timestamp, timestamp_str
+
+def delta_datetime(t_1: float, t_2: float):
+    """
+    Extract days, hours, minutes, and seconds
+    from a delta of two moments given in seconds.
+
+    """
+    # t_2 is expected to be greater than t_1. So if it's
+    # not, swap the given times.
+    if t_1 > t_2:
+        t_2, t_1 = t_1, t_2
+    # Get days
+    delta_t, days = _euc_div(t_2 - t_1, 86400)
+    # Get hours
+    delta_t, hours = _euc_div(delta_t, 3600)
+    # Get minutes and seconds
+    seconds, minutes = _euc_div(delta_t, 60)
+    # Return a string of the combined extracted date units.
+    return ("{} days, {} hours, {} minutes, and {:.3f} "
+            "seconds".format(days, hours, minutes, seconds))
 
 
 ### Selenium helpers
@@ -84,6 +120,7 @@ __all__ = [
     'prefix_timer',
     'suffix_timer',
     'current_datetime',
+    'delta_datetime',
     'total_items',
     'total_pages'
 ]
