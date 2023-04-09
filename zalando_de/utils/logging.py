@@ -108,11 +108,13 @@ class Logger():
         """
         # Set the level
         self.logger.setLevel(logging.DEBUG)
-        # If an output file is provided, configure to output
-        # the logs to a file
-        if not self.logger.handlers:
-            handler = handle_formatter(out)
-            self.logger.addHandler(handler)
+        # If teh logger has already handlers, remove them
+        if self.logger.handlers:
+            for handler in self.logger.handlers:
+                self.logger.removeHandler(handler)
+        # And add a new handler.
+        handler = handle_formatter(out)
+        self.logger.addHandler(handler)
 
     def log(self, message, level=10, show_details=True, _br=False):
         """
@@ -144,10 +146,10 @@ class Logger():
             level = LEVELS_STR.get(level, 0)
         # Add a suffix that includes the datetime, the level, the
         # filename if show_details is true.
-        if not show_details:
+        if show_details:
             message = ("{} [{}] {} : {}"
                        "".format(prefix_timer(),
-                                 handle_level(),
+                                 handle_level(level),
                                  called_from,
                                  message))
         # Add the new line if _br set to True
