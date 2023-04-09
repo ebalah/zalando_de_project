@@ -15,8 +15,8 @@ from zalando_de.utils.logging import Logger
 from zalando_de.utils.helpers import *
 
 PROFILE = webdriver
-WEB_DRIVER = webdriver.Edge
-OPTIONS = webdriver.EdgeOptions
+WEB_DRIVER = webdriver.Chrome
+OPTIONS = webdriver.ChromeOptions
 WEB_ELEMENT = WebElement
 
 XLONG_WAIT = 20
@@ -33,7 +33,7 @@ class ScraperAssistant():
         self.__log_new_session()
     
     def __config_driver(self, driver):
-        self.driver: webdriver.Edge = driver or self._init_driver()
+        self.driver: WEB_DRIVER = driver or self._init_driver()
 
     def __config_logger(self, logger):
         self.logger: Logger = logger or Logger()
@@ -59,11 +59,11 @@ class ScraperAssistant():
         Initiate the driver.
         
         """
-        # create a new instance of the Edge options
+        # create a new instance of the driver options
         options = OPTIONS()
         # set the driver window's to start maximized.
         options.add_argument("start-maximized")
-        # create a new instance of the Edge driver with the options
+        # create a new instance of the driver with the options
         return WEB_DRIVER(options=options)
 
     def _sleep_t_sec(self, t: float = 1, _coef = .3):

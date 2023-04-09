@@ -31,6 +31,9 @@ def parse_arguments():
     """
     parser = argparse.ArgumentParser(description='Zalando.de scrapping')
     # Add test argument.
+    parser.add_argument('--restart', action='store_true',
+                        help='Earse all the data previously scraped and restart again.')
+    # Add test argument.
     parser.add_argument('--test', action='store_true',
                         help='Executes the script in test mode')
     # Parse the arguments.
