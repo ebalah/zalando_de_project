@@ -1,0 +1,24 @@
+
+
+============================================================ [ New Session ] ============================================================
+
+
+[Apr 09, 2023 12:46:10] ~ $ [INFO     ] zalando_de/utils/logging.py : Initiate the scraper object.
+
+[Apr 09, 2023 12:46:18] ~ $ [INFO     ] zalando_de/utils/logging.py : Scrapping article https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html started.
+[Apr 09, 2023 12:46:18] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Brand name found : Pier One
+[Apr 09, 2023 12:46:18] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Article name found : Shirt
+[Apr 09, 2023 12:46:18] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Price found : 34,99 € |  | VAT included
+[Apr 09, 2023 12:46:18] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Colors found : ['dark green', 'dark blue', 'light blue']
+[Apr 09, 2023 12:46:22] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 09, 2023 12:46:23] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Marl', 'Article number': 'PI922D09R-M11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Long', 'Sleeve length': '66 cm (Size M)', 'Back width': '44 cm (Size M)', 'Total length': '77 cm (Size M)'}}
+[Apr 09, 2023 12:46:23] ~ $ [INFO     ] zalando_de/utils/logging.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 12:46:24] ~ $ [INFO     ] zalando_de/utils/logging.py : Scrapping article https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html started.
+[Apr 09, 2023 12:46:24] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Brand name found : OLYMP No. Six
+[Apr 09, 2023 12:46:24] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Article name found : Formal shirt
+[Apr 09, 2023 12:46:24] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Price found : 47,95 € |  | 59,95 € |  | VAT included
+[Apr 09, 2023 12:46:24] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Colors found : ['bleu']
+[Apr 09, 2023 12:46:28] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Sizes found : {'36': {'count': '', 'price': ''}, '37': {'count': '', 'price': ''}, '38': {'count': '', 'price': ''}, '39': {'count': '', 'price': ''}, '40': {'count': '', 'price': ''}, '41': {'count': '', 'price': ''}, '42': {'count': '', 'price': ''}, '43': {'count': '', 'price': ''}, '44': {'count': '', 'price': ''}, '45': {'count': '', 'price': ''}, '46': {'count': '', 'price': ''}}
+[Apr 09, 2023 12:46:28] ~ $ [DEBUG    ] zalando_de/utils/logging.py : Extra details found : {'Material & care': {'Outer fabric material': '97% cotton, 3% elastane', 'Care instructions': 'Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle'}, 'Details': {'Collar': 'Shark collar', 'Fastening': 'Button', 'Pattern': 'Checked', 'Article number': 'OL022D04G-K11'}, 'Size & fit': {'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Long', 'Sleeve length': '67 cm (Size 41)', 'Back width': '45 cm (Size 41)', 'Total length': '80 cm (Size 41)'}}
+[Apr 09, 2023 12:46:28] ~ $ [INFO     ] zalando_de/utils/logging.py : Scrapping the article finished successfully.

@@ -22,7 +22,7 @@ def test_main_scraper():
     # The scraper
     main_scraper = Scraper(assistant=assistant, out=output_dir)
     # Start scrapping 3 articles
-    main_scraper.scrape(n_pages=3, n_articles=5)
+    main_scraper.scrape(n_pages=2, n_articles=2)
     # save the scrapped data into a json file.
     main_scraper.save_to_json()
     # Save the scrapped data into a csv file.

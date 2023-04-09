@@ -1,0 +1,250 @@
+{
+   "metadata": {
+      "started_at": "2023-04-09 12:46:32",
+      "total_pages": 200,
+      "total_items": 16776,
+      "finished_at": "2023-04-09 12:47:31",
+      "done_in": "0 days, 0 hours, 0 minutes, and 59.479 seconds"
+   },
+   "data": {
+      "1": {
+         "1": {
+            "link": "https://en.zalando.de/sir-raymond-tailor-shirt-green-sic22d040-m11.html",
+            "brand_name": "Sir Raymond Tailor",
+            "article_name": "BATA - Shirt",
+            "price_label": "39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%",
+            "available_sizes": {
+               "S": {
+                  "count": "Only 2 left",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               },
+               "3XL": {
+                  "count": "Notify Me",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "green",
+               "navy",
+               "navy bordeaux"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "85% cotton, 15% polyester",
+                  "Care instructions": "Machine wash at 30°C"
+               },
+               "Details": {
+                  "Collar": "Button down",
+                  "Fastening": "Button",
+                  "Pattern": "Print",
+                  "Article number": "SIC22D040-M11"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "65.5 cm (Size M)",
+                  "Total length": "75 cm (Size M)"
+               }
+            }
+         },
+         "2": {
+            "link": "https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html",
+            "brand_name": "Jacey Quinn",
+            "article_name": "Shirt",
+            "price_label": "44,90 € |  | VAT included |  | Originally: |  | 89,90 € |  | -50%",
+            "available_sizes": {
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               },
+               "3XL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "light green",
+               "black",
+               "blue",
+               "bordeaux",
+               "light navy"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Machine wash at 30°C"
+               },
+               "Details": {
+                  "Collar": "Button down",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Article number": "J4K22D00K-M11"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "Long"
+               }
+            }
+         }
+      },
+      "2": {
+         "1": {
+            "link": "https://en.zalando.de/rusty-neal-shirt-sax-rui22d004-k11.html",
+            "brand_name": "Rusty Neal",
+            "article_name": "FREIZEIT-HEMD - Shirt",
+            "price_label": "29,90 € |  | VAT included |  | Originally: |  | 39,90 € |  | -25%",
+            "available_sizes": {
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               },
+               "3XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "4XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "5XL": {
+                  "count": "",
+                  "price": ""
+               },
+               "6XL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "sax",
+               "anthrazit",
+               "beige",
+               "blau",
+               "bordo"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "60% cotton, 37% polyester, 3% elastane"
+               },
+               "Details": {
+                  "Collar": "Kent collar",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Article number": "RUI22D004-K11"
+               },
+               "Size & fit": {
+                  "Fit": "Slim Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "Long"
+               }
+            }
+         },
+         "2": {
+            "link": "https://en.zalando.de/superdry-washed-oxford-shirt-classic-blue-oxford-su222d0ml-k14.html",
+            "brand_name": "Superdry",
+            "article_name": "WASHED OXFORD - Shirt",
+            "price_label": "From 55,99 € |  | VAT included |  | Originally: |  | 69,99 € |  | up to -20%",
+            "available_sizes": {
+               "S": {
+                  "count": "Only 1 left",
+                  "price": "69,99 €"
+               },
+               "M": {
+                  "count": "",
+                  "price": "69,99 €"
+               },
+               "L": {
+                  "count": "Only 2 left",
+                  "price": "69,99 €"
+               },
+               "XL": {
+                  "count": "Only 1 left",
+                  "price": "69,99 €"
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "classic blue oxford",
+               "blue ticking stripe",
+               "city pink",
+               "eclipse navy",
+               "optic",
+               "sage"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Do not bleach"
+               },
+               "Details": {
+                  "Collar": "Button down",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Article number": "SU222D0ML-K14"
+               },
+               "Size & fit": {
+                  "Fit": "Regular Fit",
+                  "Shape": "Straight",
+                  "Length": "Normal",
+                  "Sleeve length": "Long"
+               }
+            }
+         }
+      }
+   }
+}

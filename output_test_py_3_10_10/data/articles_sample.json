@@ -1,0 +1,157 @@
+{
+   "1": [
+      {
+         "link": "https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html",
+         "brand_name": "Pier One",
+         "article_name": "Shirt",
+         "price_label": "34,99 € |  | VAT included",
+         "available_sizes": {
+            "XS": {
+               "count": "",
+               "price": ""
+            },
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            },
+            "3XL": {
+               "count": "",
+               "price": ""
+            },
+            "4XL": {
+               "count": "",
+               "price": ""
+            },
+            "5XL": {
+               "count": "",
+               "price": ""
+            },
+            "6XL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "dark green",
+            "dark blue",
+            "light blue"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle"
+            },
+            "Details": {
+               "Collar": "Button down",
+               "Fastening": "Button",
+               "Pattern": "Marl",
+               "Article number": "PI922D09R-M11"
+            },
+            "Size & fit": {
+               "Our model's height": "Our model is 188 cm tall and is wearing size M",
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Long",
+               "Sleeve length": "66 cm (Size M)",
+               "Back width": "44 cm (Size M)",
+               "Total length": "77 cm (Size M)"
+            }
+         }
+      },
+      "https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html"
+   ],
+   "2": [
+      {
+         "link": "https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html",
+         "brand_name": "OLYMP No. Six",
+         "article_name": "Formal shirt",
+         "price_label": "47,95 € |  | 59,95 € |  | VAT included",
+         "available_sizes": {
+            "36": {
+               "count": "",
+               "price": ""
+            },
+            "37": {
+               "count": "",
+               "price": ""
+            },
+            "38": {
+               "count": "",
+               "price": ""
+            },
+            "39": {
+               "count": "",
+               "price": ""
+            },
+            "40": {
+               "count": "",
+               "price": ""
+            },
+            "41": {
+               "count": "",
+               "price": ""
+            },
+            "42": {
+               "count": "",
+               "price": ""
+            },
+            "43": {
+               "count": "",
+               "price": ""
+            },
+            "44": {
+               "count": "",
+               "price": ""
+            },
+            "45": {
+               "count": "",
+               "price": ""
+            },
+            "46": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "bleu"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "97% cotton, 3% elastane",
+               "Care instructions": "Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle"
+            },
+            "Details": {
+               "Collar": "Shark collar",
+               "Fastening": "Button",
+               "Pattern": "Checked",
+               "Article number": "OL022D04G-K11"
+            },
+            "Size & fit": {
+               "Fit": "Slim Fit",
+               "Shape": "Fitted",
+               "Length": "Long",
+               "Sleeve length": "67 cm (Size 41)",
+               "Back width": "45 cm (Size 41)",
+               "Total length": "80 cm (Size 41)"
+            }
+         }
+      },
+      "https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html"
+   ]
+}
