@@ -1,0 +1,72 @@
+
+
+============================================================ [ New Session ] ============================================================
+
+
+[Apr 09, 2023 22:10:36] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+
+[Apr 09, 2023 22:10:43] ~ $ [INFO     ] zalando_de/scrape/main.py : Starting scrapping ...
+[Apr 09, 2023 22:10:45] ~ $ [INFO     ] zalando_de/scrape/main.py : Found 84 articles.
+
+[Apr 09, 2023 22:10:49] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/urban-classics-shirt-whitesand-black-ur622d02i-b11.html started.
+[Apr 09, 2023 22:10:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Urban Classics
+[Apr 09, 2023 22:10:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : MOCK CHECK - Shirt
+[Apr 09, 2023 22:10:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : From 35,99 € |  | VAT included |  | Originally: |  | 44,99 € |  | -20%
+[Apr 09, 2023 22:10:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['whitesand black']
+[Apr 09, 2023 22:10:53] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': 'Only 1 left', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}}
+[Apr 09, 2023 22:10:53] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Checked', 'Article number': 'UR622D02I-B11'}, 'Size & fit': {'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Long', 'Sleeve length': 'Long'}}
+[Apr 09, 2023 22:10:53] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:10:59] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/defacto-shirt-beige-dez22d0o6-b11.html started.
+[Apr 09, 2023 22:10:59] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : DeFacto
+[Apr 09, 2023 22:10:59] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : REGULAR FIT - Shirt
+[Apr 09, 2023 22:11:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,90 € |  | VAT included
+[Apr 09, 2023 22:11:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['beige']
+[Apr 09, 2023 22:11:04] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': 'Notify Me', 'price': ''}, 'M': {'count': 'Notify Me', 'price': ''}, 'L': {'count': 'Notify Me', 'price': ''}, 'XL': {'count': 'Only 1 left', 'price': ''}, 'XXL': {'count': 'Only 1 left', 'price': ''}, '3XL': {'count': 'Only 1 left', 'price': ''}, '4XL': {'count': 'Only 2 left', 'price': ''}, '5XL': {'count': 'Only 1 left', 'price': ''}}
+[Apr 09, 2023 22:11:05] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '44% polyester, 23% cotton, 17% acrylic, 8% viscose, 8% wool', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Checked', 'Article number': 'DEZ22D0O6-B11'}, 'Size & fit': {"Our model's height": 'Our model is 189 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': 'Long'}}
+[Apr 09, 2023 22:11:05] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:11:10] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/denim-culture-denim-culture-hemd-delmar-shirt-dunkel-pink-dev22d01n-j11.html started.
+[Apr 09, 2023 22:11:11] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Denim Culture
+[Apr 09, 2023 22:11:11] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : DENIM CULTURE HEMD DELMAR - Shirt
+[Apr 09, 2023 22:11:11] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 29,95 € |  | VAT included |  | Originally: |  | 69,95 € |  | -57%
+[Apr 09, 2023 22:11:12] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['dunkel pink', 'grau', 'royal']
+[Apr 09, 2023 22:11:15] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}}
+[Apr 09, 2023 22:11:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '80% cotton, 20% polyester', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Striped', 'Article number': 'DEV22D01N-J11'}, 'Size & fit': {'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': 'Long'}}
+[Apr 09, 2023 22:11:16] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:11:21] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/pier-one-formal-shirt-white-pi922da31-a11.html started.
+[Apr 09, 2023 22:11:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
+[Apr 09, 2023 22:11:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 09, 2023 22:11:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 29,99 € |  | VAT included
+[Apr 09, 2023 22:11:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white', 'black', 'blue/white', 'bordeaux', 'dark blue']
+[Apr 09, 2023 22:11:26] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 09, 2023 22:11:27] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C, do not tumble dry'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Sheer': 'Semi-sheer', 'Pattern': 'Plain', 'Article number': 'PI922DA31-A11'}, 'Size & fit': {"Our model's height": 'Our model is 186 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Length': 'Normal', 'Sleeve length': '66 cm (Size M)', 'Back width': '53 cm (Size M)', 'Total length': '76 cm (Size M)'}, 'Sustainability': {}}
+[Apr 09, 2023 22:11:27] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:11:33] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11.html started.
+[Apr 09, 2023 22:11:33] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Jack & Jones
+[Apr 09, 2023 22:11:33] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : JJEJACK SLIM FIT - Shirt
+[Apr 09, 2023 22:11:33] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 15,99 € |  | VAT included |  | Originally: |  | 19,99 € |  | -20%
+[Apr 09, 2023 22:11:33] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['black', 'total eclipse']
+[Apr 09, 2023 22:11:41] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 09, 2023 22:11:42] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Floral', 'Article number': 'JA222D1JW-Q11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Length': 'Normal', 'Sleeve length': 'Short', 'Back width': '44 cm (Size M)', 'Total length': '75 cm (Size M)'}}
+[Apr 09, 2023 22:11:42] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:11:47] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping article https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html started.
+[Apr 09, 2023 22:11:48] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : TOM TAILOR DENIM
+[Apr 09, 2023 22:11:48] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 09, 2023 22:11:48] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : From 20,99 € |  | VAT included |  | Originally: |  | 29,99 € |  | up to -30%
+[Apr 09, 2023 22:11:48] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['original', 'black iris blue', 'white']
+[Apr 09, 2023 22:11:51] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 09, 2023 22:11:52] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C, do not tumble dry'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Print', 'Article number': 'TO722D0EQ-K11'}, 'Size & fit': {"Our model's height": 'Our model is 189 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Normal', 'Sleeve length': '67 cm (Size M)', 'Back width': '43 cm (Size M)', 'Total length': '74 cm (Size M)'}}
+[Apr 09, 2023 22:11:52] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Scrapping the article finished successfully.
+
+[Apr 09, 2023 22:11:57] ~ $ [INFO     ] zalando_de/scrape/main.py : 6 out of 84 articles were succefully scraped.
+
+[Apr 09, 2023 22:11:57] ~ $ [ERROR    ] zalando_de/scrape/main.py : Failed to continue. It seems that the browser is forcefully closed.
+
+[Apr 09, 2023 22:11:57] ~ $ [DEBUG    ] zalando_de/scrape/main.py : Saving the scraped articles ...
+[Apr 09, 2023 22:11:58] ~ $ [INFO     ] zalando_de/scrape/main.py : Scraped articles's details (6) saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de/../output/data/scraped_details_20230409_221157.json
+[Apr 09, 2023 22:11:58] ~ $ [INFO     ] zalando_de/scrape/main.py : Scraped articles (6) are saved to C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de/../output/data/scraped_articles.json
+[Apr 09, 2023 22:11:58] ~ $ [INFO     ] zalando_de/scrape/main.py : Done.

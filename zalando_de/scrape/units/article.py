@@ -42,6 +42,15 @@ class ArticleScraper():
         # Get the href attribute of the first a tage found in the
         # article element's html. 
         return self._sa.driver.current_url
+            
+    def _extract_id_from_link(self, link: str):
+        """
+        Extract an id for an article from its link.
+
+        """
+        article_id = (link.replace('https://en.zalando.de/', '')
+                          .replace('.html', ''))
+        return article_id
 
     def _get_brand_name(self, _from = None):
         """
@@ -191,6 +200,8 @@ class ArticleScraper():
         """
         # Get the article link
         article_link = self._get_link()
+        # Get the article's ID
+        article_id = self._extract_id_from_link(article_link)
         # Inform the start of scrapping the article.
         self._sa.logger.info("Scrapping article {} started."
                              "".format(article_link), _br=True)
@@ -228,4 +239,4 @@ class ArticleScraper():
                            'available_colors': available_colors,
                            'other_details': other_details}
         # Return the details
-        return article_details, article_link
+        return article_details, article_id
