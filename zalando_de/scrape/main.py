@@ -417,6 +417,10 @@ class Scraper():
                 self._sa.logger.error(traceback.format_exc(),
                                     show_details=False, _br=True)
                 self._sa.logger.error("The article Skipped : Failed to scrape.\n", _br=True)
+        # Inform the number of scraped articles.
+        self._sa.logger.info("{} out of {} articles were succefully scraped."
+                            "".format(len(articles_details), len(links)),
+                            _br=True)
         # Return the articles' details
         return articles_details
 
