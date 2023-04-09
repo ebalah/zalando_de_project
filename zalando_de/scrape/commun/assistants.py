@@ -103,7 +103,7 @@ class ScraperAssistant():
         self._scroll_to(scroll_to)
         
         
-    def sleep_and_scroll(self, scroll_to: float | WEB_ELEMENT = 'randomly'):
+    def sleep_and_scroll(self, scroll_to: float = 'randomly'):
         """
         Sleep and scroll to mimic the human behavior.
 

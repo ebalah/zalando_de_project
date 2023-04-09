@@ -7,8 +7,8 @@ from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
 
 
-out_log =  f"{zalando_de.__path__[0]}\\..\\output\\logs\\main_article_logging.log"
-output_dir = f"{zalando_de.__path__[0]}\\..\\output\\data"
+out_log =  f"{zalando_de.__path__[0]}\\..\\output_test\\logs\\main_article_logging.log"
+output_dir = f"{zalando_de.__path__[0]}\\..\\output_test\\data"
 
 
 articles_link = [[
@@ -25,7 +25,7 @@ def get_logger():
     return Logger(out_log)
 
 
-def save_to_json(data: list[dict]):
+def save_to_json(data: list):
     """ save to json file """
     with open(f"{output_dir}\\articles_sample.json", 'w+', encoding='utf-8') as json_file:
         json.dump(data,

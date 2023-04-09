@@ -85,8 +85,8 @@ class Scraper():
         Extract an id for an article from its link.
 
         """
-        article_id = (link.removeprefix('https://en.zalando.de/')
-                          .removesuffix('.html'))
+        article_id = (link.replace('https://en.zalando.de/', '')
+                          .replace('.html', ''))
         return article_id
     
     def _save_article(self, article_link):
@@ -365,7 +365,7 @@ class Scraper():
                 # If so end the scrapping.
                 break
 
-    def scrape_articles(self, links: list[str] | str):
+    def scrape_articles(self, links: str):
         """
         Scrape a single or a list of articles independently
         using their customized link.
