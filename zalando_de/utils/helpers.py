@@ -35,6 +35,7 @@ def is_a_directory(dir_path):
     Verify if a directory exists.
 
     """
+    dir_path = os.path.normpath(dir_path)
     return os.path.exists(dir_path)
 
 

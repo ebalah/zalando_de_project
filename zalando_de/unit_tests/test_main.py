@@ -5,8 +5,8 @@ from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
 
 
-out_log =  f"{zalando_de.__path__[0]}\\..\\output_test_chrome\\logs\\main_scraper_logging.log"
-output_dir = f"{zalando_de.__path__[0]}\\..\\output_test_chrome\\data"
+out_log =  f"{zalando_de.__path__[0]}/../output/logs/main_scraper_logging.log"
+output_dir = f"{zalando_de.__path__[0]}/../output/data"
 
 
 def get_logger():
@@ -22,7 +22,7 @@ def test_main_scraper():
     # The scraper
     main_scraper = Scraper(assistant=assistant, out=output_dir)
     # Start scrapping 3 articles
-    main_scraper.scrape(n_pages=3, n_articles=10)
+    main_scraper.scrape(n_pages=1, n_articles=1)
     # save the scrapped data into a json file.
     main_scraper.save_to_json()
     # Save the scrapped data into a csv file.

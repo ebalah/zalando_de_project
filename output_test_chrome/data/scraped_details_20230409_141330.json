@@ -1,0 +1,69 @@
+{
+   "metadata": {
+      "started_at": "2023-04-09 14:13:10",
+      "total_pages": 200,
+      "total_items": 16779,
+      "finished_at": "2023-04-09 14:13:30",
+      "done_in": "0 days, 0 hours, 0 minutes, and 19.871 seconds"
+   },
+   "data": {
+      "1": {
+         "1": {
+            "link": "https://en.zalando.de/tom-tailor-denim-shirt-black-iris-blue-to722d0eq-k12.html",
+            "brand_name": "TOM TAILOR DENIM",
+            "article_name": "Shirt",
+            "price_label": "From 23,99 € |  | VAT included |  | Originally: |  | 29,99 € |  | -20%",
+            "available_sizes": {
+               "XS": {
+                  "count": "",
+                  "price": ""
+               },
+               "S": {
+                  "count": "",
+                  "price": ""
+               },
+               "M": {
+                  "count": "",
+                  "price": ""
+               },
+               "L": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "XL": {
+                  "count": "Notify Me",
+                  "price": ""
+               },
+               "XXL": {
+                  "count": "",
+                  "price": ""
+               }
+            },
+            "available_colors": [
+               "black iris blue",
+               "original",
+               "white"
+            ],
+            "other_details": {
+               "Material & care": {
+                  "Outer fabric material": "100% cotton",
+                  "Care instructions": "Machine wash at 40°C, do not tumble dry"
+               },
+               "Details": {
+                  "Collar": "Button down",
+                  "Fastening": "Button",
+                  "Pattern": "Plain",
+                  "Article number": "TO722D0EQ-K12"
+               },
+               "Size & fit": {
+                  "Our model's height": "Our model is 189 cm tall and is wearing size M",
+                  "Length": "Normal",
+                  "Sleeve length": "69 cm (Size M)",
+                  "Back width": "45 cm (Size M)",
+                  "Total length": "75 cm (Size M)"
+               }
+            }
+         }
+      }
+   }
+}

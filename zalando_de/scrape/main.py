@@ -69,7 +69,7 @@ class Scraper():
         
         """
         try:
-            input_fn = f"{self._output_directory}\\scraped_articles.json"
+            input_fn = f"{self._output_directory}/scraped_articles.json"
             with open(input_fn, 'r+', encoding='utf-8') as input_file:
                 scraped_articles = json.load(input_file)
             # Log
@@ -113,7 +113,7 @@ class Scraper():
         # Prepare the articles to save.
         scraped_articles = list(self.scraped_articles)
         # Prepare the destination file name.
-        output_fn = f"{self._output_directory}\\scraped_articles.json"
+        output_fn = f"{self._output_directory}/scraped_articles.json"
         with open(output_fn, 'w+', encoding='utf-8') as output_file:
             json.dump(scraped_articles,
                       output_file,
@@ -132,7 +132,7 @@ class Scraper():
         scraped_data = {'metadata': self._metadata,
                         'data': self.scraped_data}
         # Prepare the destination json file name
-        output_fn = f"{self._output_directory}\\scraped_details_{suffix_timer()}.json"
+        output_fn = f"{self._output_directory}/scraped_details_{suffix_timer()}.json"
         # Save the scraperd data
         with open(output_fn, "w+", encoding='utf-8') as outpu_file:
             json.dump(scraped_data,
