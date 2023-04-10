@@ -31,7 +31,7 @@ def handle_level(level):
     return level.ljust(9)
 
 
-def handle_formatter(out: str = None):
+def init_handler(out: str = None):
     """
     Handle logging formatter.
 
@@ -83,7 +83,7 @@ def handle_formatter(out: str = None):
 
 class Logger():
 
-    def __init__(self, out=None, min_level = 10) -> None:
+    def __init__(self, out=None, min_level: int = 10) -> None:
         self.logger = logging.getLogger('scrapping_logger')
         self.config(out, min_level)
 
@@ -99,7 +99,7 @@ class Logger():
             for handler in self.logger.handlers:
                 self.logger.removeHandler(handler)
         # And add a new handler.
-        handler = handle_formatter(out)
+        handler = init_handler(out)
         self.logger.addHandler(handler)
 
     def log(self, message, level=10, show_details=True, _br=False):
@@ -153,7 +153,7 @@ class Logger():
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 0, show_details, _br)
+        self.log(message, 10, show_details, _br)
 
     def debug(self, message, show_details=True, _br=False):
         """
