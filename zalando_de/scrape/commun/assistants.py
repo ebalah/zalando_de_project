@@ -29,14 +29,24 @@ class ScraperAssistant():
 
     def __init__(self, driver = None, logger = None) -> None:
         # Configure the helper tool
-        self.__config(driver, logger)
-        self.__log_new_session()
+        self.__pend_driver = driver
+        self.__pend_logger = logger
     
-    def __config_driver(self, driver):
-        self.driver: WEB_DRIVER = driver or self._init_driver()
+    def __enter__(self):
+        self.__config()
+        self.__log_new_session()
+        return self
 
-    def __config_logger(self, logger):
-        self.logger: Logger = logger or Logger()
+    def __config(self, *args, **kwargs):
+        self.__config_logger()
+        self.__config_driver()
+        self.__config_wait( *args, **kwargs)
+
+    def __config_driver(self):
+        self.driver: WEB_DRIVER = self.__pend_driver or self._init_driver()
+
+    def __config_logger(self):
+        self.logger: Logger = self.__pend_logger or Logger()
 
     def __config_wait(self):
         self.xlong_wait = WebDriverWait(self.driver, XLONG_WAIT)
@@ -44,15 +54,19 @@ class ScraperAssistant():
         self.medium_wait = WebDriverWait(self.driver, MEDIUM_WAIT)
         self.short_wait = WebDriverWait(self.driver, SHORT_WAIT)
 
-    def __config(self, driver, logger, *args, **kwargs):
-        self.__config_logger(logger)
-        self.__config_driver(driver)
-        self.__config_wait( *args, **kwargs)
-
     def __log_new_session(self):
         sep = "===" * 20
         header = "\n{} [ New Session ] {}\n".format(sep, sep)
         self.logger.info(header, show_details=False, _br=True)
+
+    def __exit__(self, exc_type, exc_value, tb):
+        # Catch exceptions raised within th with block.
+        if exc_type is not None:
+            self.logger.error("The Scarper assistant closed due "
+                              "to : {}\n{}".format(exc_value, tb), _br=True)
+        # Tear down the driver
+        self.logger.info("The driver quited.", _br=True)
+        self.driver.quit()
 
     def _init_driver(self):
         """
