@@ -20,7 +20,8 @@ from zalando_de.scrape.units.article import ArticleScraper
 
 
 BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
-                             WebDriverException)
+                             WebDriverException,
+                             ConnectionResetError)
 
 
 ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
@@ -330,7 +331,7 @@ class Scraper():
                             "".format(len(articles_details), len(articles_elements)),
                             _br=True)
         # Add the scraped data
-        self.scraped_data.update({articles_details})
+        self.scraped_data.update(articles_details)
 
     def _scrape(self):
         """
