@@ -517,11 +517,11 @@ class Scraper():
                                           show_details=False)
                     setattr(e, 'msg__browser_closed_forcibly', "")
                 elif (isinstance(e, WebDriverException) and
-                        "ERR_INTERNET_DISCONNECTED" in e.msg):
+                        e.msg.__contains__("ERR_INTERNET_DISCONNECTED")):
                     self._sa.logger.error("Processing interrupted : No Internet "
                                          "Connection", _lbr=True, _rbr=True)
                     self._sa.logger.error(traceback.format_exc(), show_details=False)
-                    return
+                    setattr(e, 'msg__internet_disconnected', "")
                 # Raise the error.
                 raise e
         finally:

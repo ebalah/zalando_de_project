@@ -108,12 +108,13 @@ def run():
                         _lbr=True, _rbr=True)
             
         except Exception as e:
-            if not hasattr(e, 'msg__browser_closed_forcibly'):
+            if not (hasattr(e, 'msg__browser_closed_forcibly')
+                    or hasattr(e, 'msg__internet_disconnected')):
                 # This excepts the errors logging in case of one
                 # of BROWSER_CLOSED_EXCEPTIONS is catched.
                 logger.error("Processing Failed with an Error :",
                              _lbr=True, _rbr=True)
-                logger.error(traceback.format_exc())
+                logger.error(traceback.format_exc(), show_details=False)
 
 
 if __name__ == '__main__':
