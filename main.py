@@ -1,12 +1,11 @@
 import argparse
 import os
 
-import pandas as pd
-import json
-
 from zalando_de.scrape.main import Scraper
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.utils.logging import Logger
+
+
 
 def truncate_directory(output_dir):
     """
@@ -19,6 +18,7 @@ def truncate_directory(output_dir):
     for file_name in file_names:
         file_path = os.path.join(output_dir, file_name)
         os.remove(file_path)
+
 
 def parse_arguments():
     """
@@ -43,6 +43,7 @@ def parse_arguments():
     # Retuen them.
     return args
 
+
 def _create_directory_if_not_exists(path, trunc):
     """
     Create the directory if not exits.
@@ -59,36 +60,65 @@ def _create_directory_if_not_exists(path, trunc):
 
 def run():
 
+    
+    # NOTE : Added only for testing
+    # LINKS = ['https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html',
+    #          'https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html',
+    #          'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html',
+    #          'https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html',
+    #          'https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html',
+    #          'https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html',
+    #          'https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html',
+    #          'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html']
+
     args = parse_arguments()
 
     # Handle the outputs destination directory
     if args.odir:
         output_dir = args.odir
     elif args.test :
-        output_dir = f"{os.path.dirname(__file__)}/output_test"
+        output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output_test_single"
     else :
-        output_dir = f"{os.path.dirname(__file__)}/output"
+        output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output"
 
     # Handle the data and logs folders.
     _create_directory_if_not_exists(f"{output_dir}/data", args.trunc)
     _create_directory_if_not_exists(f"{output_dir}/logs", args.trunc)
     
     data_output_dir = f"{output_dir}/data"
+    print("Outputing data to {}".format(data_output_dir))
+    
     log_output_file = f"{output_dir}/logs/logging.log"
+    print("Logging to {}".format(log_output_file))
 
+    # Define the logger
     logger = Logger(log_output_file, args.log_level)
 
-    # Initiate the Shared Helper Tool
-    assistant = ScraperAssistant(logger=logger)
+    # Start Processing (Scrapping)
+    with ScraperAssistant(logger=logger) as assistant:
 
-    # Initiate the scraper
-    scraper = Scraper(assistant=assistant, out=data_output_dir)
+        try:
+            scraper = Scraper(assistant=assistant, out=data_output_dir)
+            #### Testing single article scraping. #####################
+            # scraper.scrape('single', LINKS) 
+            ###########################################################
+            scraper.scrape()
+            logger.info("Processing finished successfully.",
+                        _lbr=True, _rbr=True)
+            
+        except Exception as e:
+            if (hasattr(e, 'reason_why') and
+                    e.reason_why == "BrowserClosedForcibly"):
+                logger.info("Processing finished ( Probably the "
+                            "Internet connection is lost, or the "
+                            "browser is closed forcibly closed ).",
+                            _lbr=True, _rbr=True)
+                
+            else:
+                logger.info("Processing Failed with an Error :",
+                            _lbr=True, _rbr=True)
+                raise e
 
-    # Start scrapping
-    scraper.scrape()
-    
-    # Save channels with no results it to a json file.
-    scraper.save_to_json()
 
 if __name__ == '__main__':
     run()
