@@ -8,12 +8,17 @@ from zalando_de.utils.helpers import create_directory
 
 
 
-LINKS = ['https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html',
-        'https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html',
-        'https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html',
-        'https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html',
-        'https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html',
-        'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html']
+LINKS = [
+    'https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html',
+    'https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html',
+    'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html',
+    'https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html',
+    'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html', # Duplicated
+    'https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html', # Duplicated
+    'https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html',
+    'https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html',
+    'https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html',  # Duplicated
+]
 
 
 def get_outputs(hw: str):
@@ -25,8 +30,8 @@ def get_outputs(hw: str):
 
 
 @pytest.mark.parametrize('how', [
-    'single',
-    'all'
+    'all',
+    'single'
 ])
 def test_scrape_all(how):
     """

@@ -24,7 +24,7 @@ def parse_arguments():
     parser.add_argument('--odir', type=str, default=None,
                         help='Specifies the output directory.')
     # Specify logging level.
-    parser.add_argument('--log_level', type=int, default=10,
+    parser.add_argument('--log_level', type=int, default=20,
                         help=('Specifies the minimum logging level (must '
                               'be used reduce the logging memory.)'))
     # Parse the arguments.
@@ -56,9 +56,14 @@ def run():
     else :
         output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output"
 
+    truncate_output = False
+    if args.trunc:
+        if input("Are you sure to truncate the output ? (yes/no)") == 'yes':
+            truncate_output = True
+
     # Handle the data and logs folders.
-    create_directory(f"{output_dir}/data", args.trunc)
-    create_directory(f"{output_dir}/logs", args.trunc)
+    create_directory(f"{output_dir}/data", truncate_output)
+    create_directory(f"{output_dir}/logs", truncate_output)
     
     data_output_dir = f"{output_dir}/data"
     print("Outputing data to {}".format(data_output_dir))
@@ -69,26 +74,41 @@ def run():
     # Define the logger
     logger = Logger(log_output_file, args.log_level)
 
-    # Start Processing (Scrapping)
-    with ScraperAssistant(logger=logger) as assistant:
+    while True:
 
-        try:
-            scraper = Scraper(assistant=assistant, out=data_output_dir)
-            #### Testing single article scraping. #####################
-            # scraper.scrape('single', LINKS) 
-            ###########################################################
-            scraper.scrape()
-            logger.info("Processing finished successfully.",
-                        _lbr=True, _rbr=True)
-            
-        except Exception as e:
-            if not (hasattr(e, 'msg__browser_closed_forcibly')
-                    or hasattr(e, 'msg__internet_disconnected')):
-                # This excepts the errors logging in case of one
-                # of BROWSER_CLOSED_EXCEPTIONS is catched.
-                logger.error("Processing Failed with an Error :",
-                             _lbr=True, _rbr=True)
+        # Start Processing (Scrapping)
+        with ScraperAssistant(logger=logger) as assistant:
+
+            try:
+                scraper = Scraper(assistant=assistant, out=data_output_dir)
+                #### Testing single article scraping. #####################
+                # scraper.scrape('single', LINKS) 
+                ###########################################################
+                scraper.scrape()
+                logger.info("Processing finished successfully.",
+                            _lbr=True, _rbr=True)
+                break
+                
+            except KeyboardInterrupt:
+                logger.error("Processing forcibly stopped using "
+                            "keyboard : Ctrl+C",
+                            _lbr=True, _rbr=True)
                 logger.error(traceback.format_exc(), show_details=False)
+                break
+                
+            except Exception as e:
+                if not (hasattr(e, 'msg__browser_closed_forcibly')
+                        or hasattr(e, 'msg__internet_disconnected')):
+                    # This excepts the errors logging in case of one
+                    # of BROWSER_CLOSED_EXCEPTIONS is catched.
+                    logger.error("Processing Failed with an Error :",
+                                _lbr=True, _rbr=True)
+                    logger.error(traceback.format_exc(), show_details=False)
+
+                    if input("Do you want to continue ? (yes/no)") == 'yes':
+                        continue
+
+                    break
 
 
 if __name__ == '__main__':

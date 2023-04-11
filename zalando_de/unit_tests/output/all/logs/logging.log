@@ -2,114 +2,128 @@
 ============================================================ [ New Session ] ============================================================
 
 
-[Apr 11, 2023 14:21:59] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+[Apr 11, 2023 21:55:42] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
 
-[Apr 11, 2023 14:22:06] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing new page =================================================
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/556Mi0f-SxK/ ) is an alien link.
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/campaigns/tommy-jeans-x-smiley/ ) is an alien link.
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/7IUvB_ScTeS/ ) is an alien link.
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/ptS8v6SeSOS ) is an alien link.
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/8MhnPWs7R26/ ) is an alien link.
-[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/iVNQ6M-QSuq/ ) is an alien link.
-[Apr 11, 2023 14:22:08] ~ $ [INFO     ] zalando_de/scrape/main.py : Found 84 articles (out of 84) to process [0 were processed in previous pages].
+[Apr 11, 2023 21:55:49] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing new page =================================================
 
-[Apr 11, 2023 14:22:12] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html started.
-[Apr 11, 2023 14:22:16] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
 
-[Apr 11, 2023 14:22:21] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11.html started.
-[Apr 11, 2023 14:22:26] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 11, 2023 21:55:49] ~ $ [INFO     ] zalando_de/scrape/main.py : Searching page's articles ...
 
-[Apr 11, 2023 14:22:32] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html started.
+[Apr 11, 2023 21:55:49] ~ $ [INFO     ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/556Mi0f-SxK/ ) is an alien link.
+[Apr 11, 2023 21:55:49] ~ $ [INFO     ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/7IUvB_ScTeS/ ) is an alien link.
+[Apr 11, 2023 21:55:49] ~ $ [INFO     ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/PaYO35CcRZ-/?_rfl=de ) is an alien link.
+[Apr 11, 2023 21:55:50] ~ $ [INFO     ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/8MhnPWs7R26/ ) is an alien link.
+[Apr 11, 2023 21:55:50] ~ $ [INFO     ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/71-RxWoYTPi/ ) is an alien link.
+[Apr 11, 2023 21:55:51] ~ $ [INFO     ] zalando_de/scrape/main.py : Found 85 articles (out of 85) to process [0 were processed in previous pages].
+
+[Apr 11, 2023 21:55:56] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11.html started.
+[Apr 11, 2023 21:55:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Jack & Jones
+[Apr 11, 2023 21:55:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : JJEJACK SLIM FIT - Shirt
+[Apr 11, 2023 21:55:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 15,99 € |  | VAT included |  | Originally: |  | 19,99 € |  | -20%
+[Apr 11, 2023 21:55:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['black', 'total eclipse']
+[Apr 11, 2023 21:56:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:56:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Floral', 'Article number': 'JA222D1JW-Q11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Length': 'Normal', 'Sleeve length': 'Short', 'Back width': '44 cm (Size M)', 'Total length': '75 cm (Size M)'}}
+[Apr 11, 2023 21:56:01] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:06] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html started.
+[Apr 11, 2023 21:56:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : TOM TAILOR DENIM
+[Apr 11, 2023 21:56:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 11, 2023 21:56:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 20,99 € |  | VAT included |  | Originally: |  | 29,99 € |  | -30%
+[Apr 11, 2023 21:56:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['original', 'black iris blue', 'white']
+[Apr 11, 2023 21:56:09] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:56:10] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C, do not tumble dry'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Print', 'Article number': 'TO722D0EQ-K11'}, 'Size & fit': {"Our model's height": 'Our model is 189 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Normal', 'Sleeve length': '67 cm (Size M)', 'Back width': '43 cm (Size M)', 'Total length': '74 cm (Size M)'}}
+[Apr 11, 2023 21:56:10] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:16] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/redefined-rebel-rrpark-shirt-duck-green-r0622d014-m11.html started.
+[Apr 11, 2023 21:56:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Redefined Rebel
+[Apr 11, 2023 21:56:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : PARK - Shirt
+[Apr 11, 2023 21:56:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included
+[Apr 11, 2023 21:56:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['duck green', 'navy blazer']
+[Apr 11, 2023 21:56:20] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:56:21] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '98% cotton, 2% elastane', 'Fabric': 'Cord', 'Care instructions': 'Machine wash at 40°C'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Plain', 'Article number': 'R0622D014-M11'}, 'Size & fit': {"Our model's height": 'Our model is 187 cm tall and is wearing size M', 'Length': 'Normal', 'Sleeve length': '63 cm (Size M)', 'Back width': '44 cm (Size M)', 'Total length': '76 cm (Size M)'}}
+[Apr 11, 2023 21:56:21] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:27] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/us-polo-assn-long-sleeve-shirt-navy-us222d00e-k13.html started.
+[Apr 11, 2023 21:56:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : U.S. Polo Assn.
+[Apr 11, 2023 21:56:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : LONG SLEEVE - Shirt
+[Apr 11, 2023 21:56:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included |  | Originally: |  | 69,95 € |  | -43%
+[Apr 11, 2023 21:56:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['navy', 'blue', 'white']
+[Apr 11, 2023 21:56:31] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': 'Notify Me', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
+[Apr 11, 2023 21:56:32] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton'}, 'Details': {'Article number': 'US222D00E-K13'}, 'Size & fit': {'Length': 'Normal', 'Sleeve length': 'Extra long'}}
+[Apr 11, 2023 21:56:32] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:37] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/us-polo-assn-long-sleeve-shirt-white-us222d00e-a11.html started.
+[Apr 11, 2023 21:56:38] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : U.S. Polo Assn.
+[Apr 11, 2023 21:56:38] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : LONG SLEEVE - Shirt
+[Apr 11, 2023 21:56:38] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included |  | Originally: |  | 69,95 € |  | -43%
+[Apr 11, 2023 21:56:38] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white', 'blue', 'navy']
+[Apr 11, 2023 21:56:41] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': 'Notify Me', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
+[Apr 11, 2023 21:56:42] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton'}, 'Details': {'Pattern': 'Plain', 'Article number': 'US222D00E-A11'}, 'Size & fit': {'Length': 'Normal', 'Sleeve length': 'Long'}}
+[Apr 11, 2023 21:56:42] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:48] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-k11.html started.
+[Apr 11, 2023 21:56:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Jack & Jones
+[Apr 11, 2023 21:56:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : JJEJACK SLIM FIT - Shirt
+[Apr 11, 2023 21:56:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 15,99 € |  | VAT included |  | Originally: |  | 19,99 € |  | -20%
+[Apr 11, 2023 21:56:49] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['total eclipse', 'black']
+[Apr 11, 2023 21:56:53] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:56:54] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Floral', 'Article number': 'JA222D1JW-K11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Length': 'Normal', 'Sleeve length': 'Short', 'Back width': '43 cm (Size M)', 'Total length': '75 cm (Size M)'}}
+[Apr 11, 2023 21:56:54] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:56:59] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-formal-shirt-white-pi922da31-a11.html started.
+[Apr 11, 2023 21:57:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
+[Apr 11, 2023 21:57:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 11, 2023 21:57:01] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 29,99 € |  | VAT included
+[Apr 11, 2023 21:57:01] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white', 'black', 'blue/white', 'bordeaux', 'dark blue']
+[Apr 11, 2023 21:57:05] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:57:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Machine wash at 40°C, do not tumble dry'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Sheer': 'Semi-sheer', 'Pattern': 'Plain', 'Article number': 'PI922DA31-A11'}, 'Size & fit': {"Our model's height": 'Our model is 186 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Length': 'Normal', 'Sleeve length': '66 cm (Size M)', 'Back width': '53 cm (Size M)', 'Total length': '76 cm (Size M)'}, 'Sustainability': {}}
+[Apr 11, 2023 21:57:06] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:57:12] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-shirt-white-pi922d0b0-a11.html started.
+[Apr 11, 2023 21:57:12] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
+[Apr 11, 2023 21:57:12] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 11, 2023 21:57:12] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 28,09 € |  | VAT included |  | Originally: |  | 34,99 € |  | -20%
+[Apr 11, 2023 21:57:12] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white', 'black', 'light blue', 'mottled beige', 'olive', 'red']
+[Apr 11, 2023 21:57:15] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 11, 2023 21:57:16] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '55% cotton, 45% linen', 'Care instructions': 'Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle'}, 'Details': {'Collar': 'Mandarin collar', 'Fastening': 'Button', 'Pattern': 'Plain', 'Article number': 'PI922D0B0-A11'}, 'Size & fit': {"Our model's height": 'Our model is 185 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': '67 cm (Size M)', 'Back width': '47 cm (Size M)', 'Total length': '77 cm (Size M)'}}
+[Apr 11, 2023 21:57:16] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : 8 out of 85 articles were successfully processed.
+
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing interrupted : It is possible that the internet connection has been lost or that the browser has been closed forcibly
 
 Traceback (most recent call last):
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 377, in _process_page
-    self._save_article(article_id, article_details)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 375, in _process_page
-    article_details, article_id = article_scraper.scrape()
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 215, in scrape
-    article_container = self._get_container()
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 41, in _get_container
-    return self._sa._get_element_by_class('DT5BTM VHXqc_ rceRmQ _4NtqZU mIlIve')
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 325, in _get_element_by_class
-    element = self._get_element(element_locator, parent_element)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 311, in _get_element
-    self.short_wait.until(ec.presence_of_element_located(element_locator))
-  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00D6DCE3]
-	(No symbol) [0x00D039D1]
-	(No symbol) [0x00C14DA8]
-	(No symbol) [0x00C4019F]
-	(No symbol) [0x00C403AB]
-	(No symbol) [0x00C6EE62]
-	(No symbol) [0x00C5AF14]
-	(No symbol) [0x00C6D57C]
-	(No symbol) [0x00C5ACC6]
-	(No symbol) [0x00C36F68]
-	(No symbol) [0x00C380CD]
-	GetHandleVerifier [0x00FE3832+2506274]
-	GetHandleVerifier [0x01019794+2727300]
-	GetHandleVerifier [0x0101E36C+2746716]
-	GetHandleVerifier [0x00E16690+617600]
-	(No symbol) [0x00D0C712]
-	(No symbol) [0x00D11FF8]
-	(No symbol) [0x00D120DB]
-	(No symbol) [0x00D1C63B]
-	BaseThreadInitThunk [0x77386BD9+25]
-	RtlGetFullPathName_UEx [0x77DF8FD2+1218]
-	RtlGetFullPathName_UEx [0x77DF8F9D+1165]
-
-
-
-[Apr 11, 2023 14:22:37] ~ $ [WARNING  ] zalando_de/scrape/main.py : Processing skipped : Failed due to TimeoutException
-
-[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : 2 out of 84 articles were successfully processed.
-
-[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing interrupted : It is possible that the internet connection has been lost or that the browser has been closed forcibly
-
-Traceback (most recent call last):
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 500, in scrape
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 516, in scrape
     process_func(*args)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 420, in _process
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 436, in _process
     self._process_page()
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 394, in _process_page
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 409, in _process_page
     except Exception as e: raise e
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 373, in _process_page
-    with ArticleScraper(self._sa, article) as article_scraper:
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 23, in __enter__
-    self._sa._click_to_new_tab(self._article_element)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 205, in _click_to_new_tab
-    self._move_mouse_to(element)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 181, in _move_mouse_to
-    self.sleep_and_scroll(element)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 153, in sleep_and_scroll
-    scroll_to = scroll_to.location['y']
-  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webelement.py", line 294, in location
-    old_loc = self._execute(Command.GET_ELEMENT_RECT)["value"]
-  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webelement.py", line 403, in _execute
-    return self._parent.execute(command, params)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 391, in _process_page
+    self._save_article(article_id, article_details)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 389, in _process_page
+    article_details, article_id = article_scraper.scrape()
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 226, in scrape
+    article_link = self._get_link()
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 63, in _get_link
+    _link = self._sa.driver.current_url
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 530, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
   File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
     self.error_handler.check_response(response)
   File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
     raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
   (Session info: chrome=111.0.5563.148)
 Stacktrace:
 Backtrace:
 	(No symbol) [0x00D6DCE3]
 	(No symbol) [0x00D039D1]
 	(No symbol) [0x00C14DA8]
-	(No symbol) [0x00C176FB]
-	(No symbol) [0x00C175D0]
-	(No symbol) [0x00C17850]
-	(No symbol) [0x00C3D2AB]
-	(No symbol) [0x00C5AECC]
-	(No symbol) [0x00C38726]
-	(No symbol) [0x00C5B224]
-	(No symbol) [0x00C6D57C]
+	(No symbol) [0x00BFD0D3]
+	(No symbol) [0x00C5EA8B]
+	(No symbol) [0x00C6D093]
 	(No symbol) [0x00C5ACC6]
 	(No symbol) [0x00C36F68]
 	(No symbol) [0x00C380CD]
@@ -127,10 +141,10 @@ Backtrace:
 
 
 
-[Apr 11, 2023 14:22:37] ~ $ [WARNING  ] zalando_de/scrape/main.py : Saving processed articles' data ...
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : Saving processed articles' data ...
 
-[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\metadata.json
-[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts__20230411_142237.json
-[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts.csv
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\metadata.json
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts(not_cleaned).json
+[Apr 11, 2023 21:57:22] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts.csv
 
-[Apr 11, 2023 14:22:39] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.
+[Apr 11, 2023 21:57:24] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.
