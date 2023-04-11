@@ -1,4 +1,5 @@
 import time
+import traceback
 
 import numpy as np
 
@@ -56,16 +57,19 @@ class ScraperAssistant():
 
     def __log_new_session(self):
         sep = "===" * 20
-        header = "\n{} [ New Session ] {}\n".format(sep, sep)
-        self.logger.info(header, show_details=False, _br=True)
+        header = "{} [ New Session ] {}".format(sep, sep)
+        self.logger.info(header, show_details=False, _lbr=True, _rbr=True)
 
     def __exit__(self, exc_type, exc_value, tb):
         # Catch exceptions raised within th with block.
         if exc_type is not None:
-            self.logger.error("The Scarper assistant closed due "
-                              "to : {}\n{}".format(exc_value, tb), _br=True)
+            self.logger.error("The Scarper Assistant exited with an Error :")
+            self.logger.error("".join(traceback
+                                      .format_exception(exc_type,
+                                                        exc_value,
+                                                        tb)), _lbr=True)
         # Tear down the driver
-        self.logger.info("The driver quited.", _br=True)
+        self.logger.info("The driver quited.")
         self.driver.quit()
 
     def _init_driver(self):
@@ -471,3 +475,7 @@ class ScraperAssistant():
         elements = self._get_elements(elements_locator, parent_element)
         # Return the element
         return elements
+    
+    def get(self, link):
+        self.driver.get(link)
+        self._wait_to_load()
