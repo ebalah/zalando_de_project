@@ -54,6 +54,7 @@ class ScraperAssistant():
         self.long_wait = WebDriverWait(self.driver, LONG_WAIT)
         self.medium_wait = WebDriverWait(self.driver, MEDIUM_WAIT)
         self.short_wait = WebDriverWait(self.driver, SHORT_WAIT)
+        self.driver.set_page_load_timeout(10)
 
     def __log_new_session(self):
         sep = "===" * 20
