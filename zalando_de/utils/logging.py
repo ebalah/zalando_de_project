@@ -83,7 +83,7 @@ def init_handler(out: str = None):
 
 class Logger():
 
-    def __init__(self, out=None, min_level: int = 30) -> None:
+    def __init__(self, out=None, min_level: int = 20) -> None:
         self.logger = logging.getLogger('scrapping_logger')
         self.config(out, min_level)
 
