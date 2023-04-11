@@ -30,6 +30,12 @@ def rel_path(path: str):
     # Return relative_path with  replaced with /
     return relative_path.replace('\\', '/')
 
+def norm_path(path: str):
+    """
+    Normalize a path.
+    """
+    return os.path.normpath(path)
+
 def is_a_directory(dir_path):
     """
     Verify if a directory exists.
@@ -40,6 +46,9 @@ def is_a_directory(dir_path):
 
 
 ### Date helpers.
+
+def timer():
+    return time.strftime("%b %d, %Y %H:%M:%S")
 
 def prefix_timer():
     return time.strftime("[%b %d, %Y %H:%M:%S] ~ $")
@@ -125,7 +134,9 @@ def total_pages(text: str):
 
 __all__ = [
     'rel_path',
+    'norm_path',
     'is_a_directory',
+    'timer',
     'prefix_timer',
     'suffix_timer',
     'current_datetime',
