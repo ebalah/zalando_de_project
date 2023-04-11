@@ -47,7 +47,7 @@ class Scraper():
         self._main_link = "https://en.zalando.de/mens-clothing-shirts/"
         # ...
         self._cleaner = Cleaner()
-        self._csv_sep = "|"
+        self._csv_sep = ";"
         self._processed_articles = self._get_processed_articles()
         self._newl_processed_articles = {}
         self._metadata = {}
@@ -251,7 +251,7 @@ class Scraper():
         page.
 
         """
-        self._sa.logger.debug("Searching page's articles ...",
+        self._sa.logger.info("Searching page's articles ...",
                              _lbr=True, _rbr=True)
         # Article elements class names
         a_class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
@@ -268,8 +268,8 @@ class Scraper():
             if is_valid:
                 valid_articles.append(article)
             else:
-                self._sa.logger.warn("The link ( {} ) is {}.".format(link,
-                                                                     valid_msg))
+                self._sa.logger.info("The link ( {} ) is {}."
+                                     "".format(link, valid_msg))
             if valid_msg == 'already processed':
                 duplicated += 1
         # Return only valid articles
@@ -301,15 +301,23 @@ class Scraper():
         Save processed articles into a json file.
         
         """
-        # Prepare the dictionary to hold all the results.
-        processed_articles = {'metadata': self._metadata,
-                              'data': self._newl_processed_articles}
         # Prepare the destination json file name
-        json_fn = f"{self._output_directory}/{self._output_filename}__{suffix_timer()}.json"
+        json_fn = f"{self._output_directory}/{self._output_filename}(not_cleaned).json"
+        # Prepare the dictionary to hold all the results.
+        processed_articles = {suffix_timer():{'metadata': self._metadata,
+                                              'data': self._newl_processed_articles}}
+        
+        try:
+            with open(json_fn, "w+", encoding='utf-8') as output_file:
+                prev_processed_articles = json.load(output_file)
+        except Exception:
+            prev_processed_articles = {}
+        # Update the read file
+        prev_processed_articles.update(processed_articles)
         # Save the scraperd data
-        with open(json_fn, "w+", encoding='utf-8') as outpu_file:
-            json.dump(processed_articles,
-                      outpu_file,
+        with open(json_fn, "w+", encoding='utf-8') as output_file:
+            json.dump(prev_processed_articles,
+                      output_file,
                       indent=3,
                       ensure_ascii=False)
         # Return the path the data saved to
@@ -392,7 +400,7 @@ class Scraper():
                     # Log the trace to show the skipping cause.
                     self._sa.logger.warn("Processing skipped : Failed due to "
                                          "{}".format(type(e).__name__),
-                                         _rbr=True)
+                                         _lbr=True, _rbr=True)
                     self._sa.logger.error(traceback.format_exc(),
                                         show_details=False)
                     continue
@@ -421,7 +429,8 @@ class Scraper():
         while True:
             # Scrape page articles.
             self._sa.logger.info("Processing new page "
-                                 "{}".format('='*49), _lbr=True)
+                                 "{}".format('='*49),
+                                 _lbr=True, _rbr=True)
             # Scrape the page's articles
             try:
                 self._process_page()
@@ -536,7 +545,7 @@ class Scraper():
             end_time, end_time_str = current_datetime()
             self._add_metadata({'finished_at': end_time_str,
                                 'done_in': delta_datetime(start_time, end_time)})
-            self._sa.logger.warn("Saving processed articles' data ...",
+            self._sa.logger.info("Saving processed articles' data ...",
                                  _lbr=True, _rbr=True)
             self._save()
 
