@@ -5,20 +5,8 @@ import os
 from zalando_de.scrape.main import Scraper
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.utils.logging import Logger
+from zalando_de.utils.helpers import create_directory
 
-
-
-def truncate_directory(output_dir):
-    """
-    Truncate the directory.
-
-    """
-    # get all the file names in the directory
-    file_names = os.listdir(output_dir)
-    # loop through each file name and remove it
-    for file_name in file_names:
-        file_path = os.path.join(output_dir, file_name)
-        os.remove(file_path)
 
 
 def parse_arguments():
@@ -45,20 +33,6 @@ def parse_arguments():
     return args
 
 
-def _create_directory_if_not_exists(path, trunc):
-    """
-    Create the directory if not exits.
-
-    If trunc is not None, remove all the file in it.
-    
-    """
-    try:
-        os.makedirs(path)
-    except FileExistsError:
-        if trunc:
-            truncate_directory(path)
-
-
 def run():
 
     
@@ -83,8 +57,8 @@ def run():
         output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output"
 
     # Handle the data and logs folders.
-    _create_directory_if_not_exists(f"{output_dir}/data", args.trunc)
-    _create_directory_if_not_exists(f"{output_dir}/logs", args.trunc)
+    create_directory(f"{output_dir}/data", args.trunc)
+    create_directory(f"{output_dir}/logs", args.trunc)
     
     data_output_dir = f"{output_dir}/data"
     print("Outputing data to {}".format(data_output_dir))
