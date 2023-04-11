@@ -8,14 +8,13 @@ from selenium.common.exceptions import (TimeoutException,
                                         WebDriverException)
 
 import json
+import pandas as pd
 
-from zalando_de.utils.helpers import (total_items,
-                                      total_pages,
-                                      current_datetime,
-                                      delta_datetime,
-                                      suffix_timer,
-                                      is_a_directory)
+from zalando_de.utils.helpers import (total_items, total_pages, norm_path,
+                                      current_datetime, delta_datetime,
+                                      suffix_timer, is_a_directory)
 from zalando_de.scrape.commun.assistants import ScraperAssistant
+from zalando_de.scrape.commun.cleaners import Cleaner
 from zalando_de.scrape.units.article import ArticleScraper
 
 
@@ -26,126 +25,39 @@ BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
 
 ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
 
+ID_COLNAME = 'ID'
+
 
 class Scraper():
 
     def __init__(self, assistant, out) -> None:
         # Logging configuration.
         self._sa: ScraperAssistant = self.__validate_assistant(assistant)
-        # Define the outputs destination directory.
+        # Define the outputs destination directory and name.
         self._output_directory = self.__validate_output_dir(out)
+        self._output_filename = "zalando_de_mens_shirts"
+        # Define the 
         # Log the initiation of the scraper
-        self._sa.logger.info("Initiate the scraper object.", _br=True)
+        self._sa.logger.info("Initiate the scraper object.", _lbr=True)
         # Main link
-        self.main_link = "https://en.zalando.de/mens-clothing-shirts/"
-        # Scraped data
-        self.scraped_data = {}
-        # Metadata
+        self._main_link = "https://en.zalando.de/mens-clothing-shirts/"
+        # ...
+        self._cleaner = Cleaner()
+        self._csv_sep = "|"
+        self._prev_processed_articles = self._get_processed_articles()
+        self._newl_processed_articles = {}
         self._metadata = {}
-        # Scraped articles
-        self.scraped_articles = self._read_scraped_articles()
 
-    # NOTE: This needs to be improved.
     def __validate_assistant(self, assistant):
         if not assistant:
-            raise ValueError("Invalid scraper assistant")
+            raise ValueError("Invalid scraper assistant.")
         return assistant
     
-    # NOTE: This needs to be improved.
     def __validate_output_dir(self, out):
         if not is_a_directory(out):
             raise ValueError("Invalid output destination : {}"
                              "".format(out))
         return out
-    
-    def _save_metadata(self, meta_dict: dict):
-        """
-        Save the metadata to trace the last status of the scraper.
-
-        This must be helpful to continue the scrapping in case of
-        any incident.
-
-        """
-        for key, value in meta_dict.items():
-            self._metadata.update({key: value})
-            
-    def _read_scraped_articles(self):
-        """
-        Read the already scraped articles.
-        
-        """
-        try:
-            input_fn = f"{self._output_directory}/scraped_articles.json"
-            with open(input_fn, 'r+', encoding='utf-8') as input_file:
-                scraped_articles = json.load(input_file)
-            # Log
-            self._sa.logger.info("Scraped articles are read : {} "
-                                "articles.".format(len(scraped_articles)))
-            return set(scraped_articles)
-        
-        except:
-            return set()
-            
-    def _extract_id_from_link(self, link: str):
-        """
-        Extract an id for an article from its link.
-
-        """
-        article_id = (link.replace('https://en.zalando.de/', '')
-                          .replace('.html', ''))
-        return article_id
-    
-    def _save_article(self, article_id):
-        """
-        Save scraped articles.
-
-        The purpose of saving the scraped articles is to avoid
-        scrapping them twice.
-
-        Articles are identifed by an ID extracted
-        directly from their link.
-
-        """
-        # Save the article as successfully scraped.
-        self.scraped_articles.add(article_id)
-
-    def _save_scraped_articles(self):
-        """
-        Save the scraped article to json file.
-        
-        """
-        # Prepare the articles to save.
-        scraped_articles = list(self.scraped_articles)
-        # Prepare the destination file name.
-        output_fn = f"{self._output_directory}/scraped_articles.json"
-        with open(output_fn, 'w+', encoding='utf-8') as output_file:
-            json.dump(scraped_articles,
-                      output_file,
-                      indent=3,
-                      ensure_ascii=False)
-        # Log
-        self._sa.logger.info("Scraped articles ({}) are saved to {}"
-                             "".format(len(scraped_articles), output_fn))
-        
-    def _save_scraped_details(self):
-        """
-        Save scraped data and it's metadata into a json file.
-        
-        """
-        # Prepare the dictionary to hold all the results.
-        scraped_data = {'metadata': self._metadata,
-                        'data': self.scraped_data}
-        # Prepare the destination json file name
-        output_fn = f"{self._output_directory}/scraped_details_{suffix_timer()}.json"
-        # Save the scraperd data
-        with open(output_fn, "w+", encoding='utf-8') as outpu_file:
-            json.dump(scraped_data,
-                      outpu_file,
-                      indent=3,
-                      ensure_ascii=False)
-        # Log
-        self._sa.logger.info("Scraped articles's details ({}) saved into {}"
-                             "".format(len(self.scraped_data), output_fn))
 
     def _handle_cookies(self, accept=False,
                         get_link: bool = False):
@@ -155,10 +67,12 @@ class Scraper():
         """
         # If get_link, then get the driver to the main link
         if get_link:
-            self._sa.driver.get(self.main_link)
+            self._sa.get(self._main_link)
+
         # Wait for the dialog presence.
         try:
-            self._sa.xlong_wait.until(ec.visibility_of_element_located((By.ID, 'uc-main-banner')),
+            self._sa.xlong_wait.until(ec.visibility_of_element_located((By.ID,
+                                                                        'uc-main-banner')),
                                       message='Cookies did not poped up.')
             # Get the dialog
             popup = self._sa.driver.find_element(By.ID, "uc-main-banner")
@@ -171,10 +85,84 @@ class Scraper():
             # Wait the disapearence of the dialog.
             self._sa.long_wait.until_not(ec.presence_of_element_located((By.ID, "uc-btn-accept-banner")))
             self._sa._sleep_t_sec()
+            
         except TimeoutException as e:
             if e.msg != 'Cookies did not poped up.': raise e
+            
+    def _get_processed_articles(self):
+        """
+        Read the previously processed articles.
+        
+        """
+        articles_path = f"{self._output_directory}/{self._output_filename}.csv"
+        try:
+            prev_processed_articles = set(pd.read_csv(articles_path, sep=self._csv_sep)[ID_COLNAME])
+            self._sa.logger.info("Processed articles read : {} "
+                                "articles.".format(prev_processed_articles.__len__()))
+        except FileNotFoundError:
+            prev_processed_articles = set()
+        return prev_processed_articles
+    
+    def _add_metadata(self, meta_dict: dict):
+        """
+        Add to metadata to trace the last status of the scraper.
 
-    def _save_details(self):
+        This must be helpful to continue the processing in case of
+        any incident.
+
+        """
+        for key, value in meta_dict.items():
+            self._metadata.update({key: value})
+
+    def _save_metadata(self):
+        """
+        Save the metadata to trace the last status of the scraper.
+
+        This must be helpful to continue the processing in case of
+        any incident.
+
+        """
+        metadata_path = f"{self._output_directory}/metadata.json"
+        meta_dict = {suffix_timer(): self._metadata}
+        # Read the old metadata file's content.
+        try:
+            with open(metadata_path, 'r+', encoding='utf-8') as mf:
+                prev_metas = json.load(mf)
+        except Exception as e:
+            if (isinstance(e, FileNotFoundError) or
+                (isinstance(e, json.JSONDecodeError) 
+                    and e.msg == "Expecting value")):
+                prev_metas = {}
+            else : raise
+        meta_dict.update(prev_metas)
+        # Update the metadata file's content.
+        with open(metadata_path, 'w+', encoding='utf-8') as mf:
+            json.dump(meta_dict,
+                      mf, indent=3,
+                      ensure_ascii=False)
+        # Return the path the metadata saved to
+        return norm_path(metadata_path)
+            
+    def _extract_ID(self, link: str):
+        """
+        Extract an id for an article from its link.
+
+        """
+        article_id = (link.replace('https://en.zalando.de/', '')
+                          .replace('.html', ''))
+        return article_id
+
+    def _save_article(self, id, details):
+        """
+        Save the scraped article to csv file.
+        
+        """
+        self._newl_processed_articles.update({id: details})
+        if 'processed_articles' in self._metadata:
+            self._metadata['processed_articles'] += 1
+        else: self._add_metadata({'processed_articles': 1})
+
+    def _high_level_details(self):
         """
         Get the current page's details, and save them to metadata.
         
@@ -189,19 +177,19 @@ class Scraper():
         class_names = '_0Qm8W1 _7Cm1F9 FxZV-M pVrzNP JCuRr_ _0xLoFW uEg2FS FCIprz'
         _, _total_pages = total_pages(self._sa._get_element_value_by_class(class_names))
         # Save the values into the scraper's metadata
-        self._save_metadata({'total_pages': _total_pages,
+        self._add_metadata({'total_pages': _total_pages,
                              'total_items': _total_items})
         # Return the details
         return _total_items, _total_pages
     
-    def _curr_url(self):
+    def _get_current_url(self):
         """
         Get the currently opened page's url.
 
         """
         return self._sa.driver.current_url
 
-    def _next_page(self):
+    def _is_next_page(self):
         """
         Find the next page's button, and check if it is disabled.
         If so, return False, otherwise return True.
@@ -244,13 +232,13 @@ class Scraper():
         if self._is_alien_link(link):
             return False
         # Verify if the article is already scraped or not
-        _id = self._extract_id_from_link(link)
-        if _id in self.scraped_articles:
+        _id = self._extract_ID(link)
+        if _id in self._prev_processed_articles:
             return False
         # Return the True (at this point the article is valid to scrape)
         return True
     
-    def _get_articles(self):
+    def _get_page_articles(self):
         """
         Get all the article elements avaialable in the current
         page.
@@ -271,129 +259,161 @@ class Scraper():
         # Return only valid articles
         return valid_articles
     
-    def _scrape_single_article(self, link: str):
+    def _clean_processed_articles(self):
         """
-        Scrape a single article using a link.
+        _clean_processed_articles
         
         """
-        # Validate the link
-        if not self._is_valid_article(link):
-            self._sa.logger.warn("The article's link is not valid.")
-            return "Not an article"
-        # Get the article page
-        self._sa.driver.get(link)
-        # Define the article scraper
-        article_scraper = ArticleScraper(self._sa)
-        # Scrape the article
-        return article_scraper.scrape()
-
-    def _scrape_single_page(self):
+        # Newly processed articles
+        processed_articles = self._newl_processed_articles
+        # Clean the processed articles' details.
+        # NOTE: This cleaning is needed to clean the price and
+        # split the data entries of :
+        # - Material & care,
+        # - Size & Fit,
+        # - and Details.
+        for _id, _details in processed_articles.items():
+            cleaned = self._cleaner.clean(_details)
+            processed_articles.update({_id: cleaned})
+        # Create a new datarame of the cleaned data.
+        return pd.DataFrame.from_dict(processed_articles,
+                                      orient="index").reset_index(drop=False,
+                                                                  names=['ID'])
+    
+    def _save_to_json(self):
         """
-        Get all articles from the current page.
+        Save processed articles into a json file.
+        
+        """
+        # Prepare the dictionary to hold all the results.
+        processed_articles = {'metadata': self._metadata,
+                              'data': self._newl_processed_articles}
+        # Prepare the destination json file name
+        json_fn = f"{self._output_directory}/{self._output_filename}__{suffix_timer()}.json"
+        # Save the scraperd data
+        with open(json_fn, "w+", encoding='utf-8') as outpu_file:
+            json.dump(processed_articles,
+                      outpu_file,
+                      indent=3,
+                      ensure_ascii=False)
+        # Return the path the data saved to
+        return norm_path(json_fn)
+            
+    def _save_to_csv(self):
+        """
+        Save processed articles into a csv file.
+        
+        """
+        csv_fn = f"{self._output_directory}/{self._output_filename}.csv"
+        # Convert the processed articles' details to a dataframe.
+        newl_processed_articles = self._clean_processed_articles()
+        # Read the previously processed articles CSV file.
+        try:
+            prev_processed_articles = pd.read_csv(csv_fn, sep=self._csv_sep)
+        except FileNotFoundError:
+            prev_processed_articles = None
+        # Save the dataframe into a CSV file.
+        pd.concat([prev_processed_articles,
+                   newl_processed_articles]).to_csv(csv_fn,
+                                                    index=False,
+                                                    sep=self._csv_sep)
+        # Return the path the data saved to
+        return norm_path(csv_fn)
+
+    def _save(self):
+        """
+        Save processed articles into a JSON and CSV files.
+
+        Also a metadata json file is saved.
+        
+        """
+        saved_to = self._save_metadata()
+        self._sa.logger.info("Metadata saved into {}"
+                             "".format(saved_to))
+        saved_to = self._save_to_json()
+        self._sa.logger.info("Processed articles saved (JSON) into {}"
+                             "".format(saved_to))
+        saved_to = self._save_to_csv()
+        self._sa.logger.info("Processed articles saved (CSV) into {}"
+                             "".format(saved_to))
+        
+    def _process_page(self):
+        """
+        Process all the articles in the current page.
 
         """
-        # Get the articles list
-        articles_elements = self._get_articles()
+        # The list of all articles
+        articles_elements = self._get_page_articles()
         # Inform the number of found articles.
         self._sa.logger.info("Found {} articles."
                              "".format(len(articles_elements)))
+        processed_articles = 0
         # Initiate the page articles with an empty dictionary.
-        articles_details = {}
-        # Extract the details of each found article
-        for article in articles_elements:
-            # Open the article details in a new tab
-            try:
-                with ArticleScraper(self._sa, article) as article_scraper:
-                    # Scrape the article details.
-                    article_details, article_id = article_scraper.scrape()
-                    # Append the scraped article's details and link
-                    self._save_article(article_id)
-                    # Append the scraped articles to the pages'.
-                    articles_details.update({article_id : article_details})
-            # If the the browser windows forced to close (i.e. a
-            # `NoSuchWindowException` or WebDriverException raised)
-            # stop the process.
-            except BROWSER_CLOSED_EXCEPTIONS as e:
-                # Return the final results
-                self.scraped_data.update(articles_details)
-                # Inform the number of scraped articles.
-                self._sa.logger.info("{} out of {} articles were succefully scraped."
-                                    "".format(len(articles_details), len(articles_elements)),
-                                    _br=True)
-                raise e
-            # If any other exception raise, log the exception trace,
-            # and continue.
-            except:
-                self._sa.logger.error(traceback.format_exc(),
-                                      show_details=False, _br=True)
+        try:
+            # Extract the details of each found article
+            for article in articles_elements:
+                # Open the article details in a new tab
+                try:
+                    with ArticleScraper(self._sa, article) as article_scraper:
+                        # Process the article to scrape the details.
+                        article_details, article_id = article_scraper.scrape()
+                        # Append the processed article to the pages'.
+                        self._save_article(article_id, article_details)
+                        # Inform the sucess of processing the article.
+                        processed_articles += 1
+                # If the the browser windows forced to close (i.e. a
+                # `NoSuchWindowException` or WebDriverException raised)
+                # stop the process.
+                except BROWSER_CLOSED_EXCEPTIONS: raise
+                # If any other exception is raised, log the trace and
+                # continue.
+                except Exception as e:
+                    # Log the trace to show the skipping cause.
+                    self._sa.logger.error(traceback.format_exc(),
+                                        show_details=False, _lbr=True, _rbr=True)
+                    self._sa.logger.warn("Processing Failed. Skipped.")
+                    continue
+        # If processing the article failed, log the trace to identify
+        # the reason why.
+        except Exception as e: raise e
         # Inform the number of scraped articles.
-        self._sa.logger.info("{} out of {} articles were succefully scraped."
-                            "".format(len(articles_details), len(articles_elements)),
-                            _br=True)
-        # Add the scraped data
-        self.scraped_data.update(articles_details)
+        finally:
+            self._sa.logger.info("{} out of {} articles were succefully "
+                                 "processed.".format(processed_articles,
+                                                     len(articles_elements)),
+                                _lbr=True)
 
-    def _scrape(self):
+    def _process(self):
         """
-        Start scrapping.
+        Start processing.
 
         """
-        # Get the targeted link (self.main_link)
-        self._sa.driver.get(self.main_link)
+        # Get the targeted link (self._main_link)
+        self._sa.get(self._main_link)
         # handle cookies
         self._handle_cookies()
         # Search for the total items and pages
-        self._save_details()
-        # Start scrapping
+        self._high_level_details()
+        # Start processing
         while True:
             # Scrape page articles.
-            self._sa.logger.info("Starting scrapping ...", _br=True)
+            self._sa.logger.info("Processing new page ...", _lbr=True)
             # Scrape the page's articles
             try:
-                self._scrape_single_page()
-            except Exception as e: raise e
-            # If there is not more pages to scrape, stop.
-            if not self._next_page():
-                break
-
-    def scrape(self):
-        """
-        Start the process of scrapping the men's shirts.
-
-        """
-        # Save the starting datetime.
-        start_time, start_time_str = current_datetime()
-        self._save_metadata({'started_at': start_time_str})
-        try:
-            self._scrape()
-        # If the the browser windows forced to close (i.e. a
-        # `NoSuchWindowException` or WebDriverException raised)
-        # stop the process.
-        except BROWSER_CLOSED_EXCEPTIONS:
-                # Log the error
-                self._sa.logger.error(traceback.format_exc(),
-                                    show_details=False, _br=True)
-                self._sa.logger.error("Failed to continue. It seems that the "
-                                      "browser is forcefully closed.\n", _br=True)
-        # If any other exception raise, log the exception trace,
-        # and continue.
-        except:
-            self._sa.logger.error(traceback.format_exc(),
-                                  show_details=False, _br=True)
-            self._sa.logger.error("Scrapping failed.", _br=True)
-        # Save the finishing datetime
-        end_time, end_time_str = current_datetime()
-        self._save_metadata({'finished_at': end_time_str,
-                            'done_in': delta_datetime(start_time, end_time)})
-        
-    def scrape_articles(self, links: str):
+                self._process_page()
+                # If there is not more pages to scrape, stop.
+                if not self._is_next_page(): break
+            # ...
+            except Exception: raise
+    
+    def _process_articles(self, links: str):
         """
         Scrape a single or a list of articles independently
         using their customized link.
         
         This method is intended to be used only in case a set
         of articles are not perfectly scraped or were skipped
-        while scrapping.
+        while processing.
 
         """
         # Make sure the links is alist.
@@ -401,59 +421,91 @@ class Scraper():
             links = [links]
         # handle cookies
         self._handle_cookies(get_link=True)
-        # Initiate the details diction to holde the results
-        articles_details = {}
-        for article_link in links:
-            try:
-                article_details, article_id = self._scrape_single_article(article_link)
-                articles_details.update({article_id: article_details})
-            # If the the browser windows forced to close (i.e. a
-            # `NoSuchWindowException` or WebDriverException raised)
-            # stop the process.
-            except BROWSER_CLOSED_EXCEPTIONS:
-                # Log the error
-                self._sa.logger.error(traceback.format_exc(),
-                                    show_details=False, _br=True)
-                self._sa.logger.error("Failed to continue. It seems that the "
-                                      "browser is forcefully closed.\n", _br=True)
-                break
-            # If any other exception raise, log the exception trace,
-            # and continue.
-            except:
-                self._sa.logger.error(traceback.format_exc(),
-                                    show_details=False, _br=True)
-                self._sa.logger.error("The article Skipped : Failed to scrape.\n", _br=True)
-        # Inform the number of scraped articles.
-        self._sa.logger.info("{} out of {} articles were succefully scraped."
-                            "".format(len(articles_details), len(links)),
-                            _br=True)
-        # Return the articles' details
-        return articles_details
+        # Define the article scraper
+        article_scraper = ArticleScraper(self._sa)
+        processed_articles = 0
+        try:
+            for article_link in links:
+                # Get the article page
+                self._sa.get(article_link)
+                # Validate the link
+                if not self._is_valid_article(article_link):
+                    self._sa.logger.warn("The link ( {} ) is not for a valid"
+                                        "article. Processing skipped."
+                                        "".format(article_link))
+                    continue
+                try:
+                    article_details, article_id = article_scraper.scrape()
+                    self._save_article(article_id, article_details)
+                    processed_articles += 1
+                # If the the browser windows forced to close (i.e. a
+                # `NoSuchWindowException` or WebDriverException raised)
+                # stop the process.
+                except BROWSER_CLOSED_EXCEPTIONS: raise
+                # If any other exception is raised, log the trace and
+                # continue.
+                except Exception as e:
+                    # Log the trace to show the skipping cause.
+                    self._sa.logger.error(traceback.format_exc(),
+                                        show_details=False, _lbr=True, _rbr=True)
+                    self._sa.logger.warn("Processing Failed. Skipped.")
+                    continue
+        # If processing the article failed, log the trace to identify
+        # the reason why.
+        except Exception as e: raise e
+        finally:
+            # Inform the number of scraped articles.
+            self._sa.logger.info("{} out of {} articles were succefully scraped."
+                                "".format(processed_articles, len(links)),
+                                _lbr=True)
 
-    def save_to_json(self):
+    def scrape(self, how: str = 'all', links: list = []):
         """
-        Save scraped details and it's metadata into a json file.
+        Start the process of processing the men's shirts.
+
+        - If the how is set to `'all'`, links is ignored, and
+        all the available articles will be processed.
+
+        - If `'single'`, then only the articles whom link is
+        specfied in `links` will be processed.
+
+        """
+        # Save the starting datetime.
+        start_time, start_time_str = current_datetime()
+        self._add_metadata({'started_at': start_time_str})
         
-        """
-        # Log
-        self._sa.logger.debug("Saving the scraped articles ...")
-        self._save_scraped_details()
-        self._save_scraped_articles()
-        # Log the success of saving the data.
-        self._sa.logger.info("Done.")
+        # Pick the requested scraping method.
+        if how == 'single':
+            process_func = self._process_articles
+            args = [links]
+        else:
+            process_func = self._process
+            args = []
 
-    def _clean_scraped_articles(self):
-        """
-        _clean_scraped_articles
-        
-        """
-        _data = self.scraped_data
+        try:
+            process_func(*args)
+        # If the the browser windows forced to close (i.e. a
+        # `NoSuchWindowException` or WebDriverException raised)
+        # stop the process.
+        except Exception as e:
+                # If the exception is raised because the browser was
+                # forced to close (manualy), add an attricute to it
+                # so it can be identifed later.
+                if isinstance(e, BROWSER_CLOSED_EXCEPTIONS):
+                    self._sa.logger.error("Failed to continue. It "
+                                          "seems that the browser is "
+                                          "forcibly closed.",
+                                          _lbr=True, _rbr=True)
+                    self._sa.logger.error(traceback.format_exc(),
+                                          show_details=False)
+                    e.reason_why = "BrowserClosedForcibly"
+                else:
+                    e.reason_why = ""
+                raise e
+        finally:
+            # Save the finishing datetime
+            end_time, end_time_str = current_datetime()
+            self._add_metadata({'finished_at': end_time_str,
+                                'done_in': delta_datetime(start_time, end_time)})
+            self._save()
 
-
-    def save_to_csv(self):
-        """
-        Read all the scraped articles from json files, convert it
-        into a pandas dataframe, and save it as csv.
-        
-        """
-        dataframe = self._clean_scraped_articles()
