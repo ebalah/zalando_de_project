@@ -44,7 +44,7 @@ class Scraper():
         # ...
         self._cleaner = Cleaner()
         self._csv_sep = "|"
-        self._prev_processed_articles = self._get_processed_articles()
+        self._processed_articles = self._get_processed_articles()
         self._newl_processed_articles = {}
         self._metadata = {}
 
@@ -158,6 +158,7 @@ class Scraper():
         
         """
         self._newl_processed_articles.update({id: details})
+        self._processed_articles.add(id)
         if 'processed_articles' in self._metadata:
             self._metadata['processed_articles'] += 1
         else: self._add_metadata({'processed_articles': 1})
@@ -230,10 +231,16 @@ class Scraper():
         # Verify if the link is alien, and return the opposite
         # results : False if so, otherwise True
         if self._is_alien_link(link):
+            self._sa.logger.warn("The link ( {} ) is not for a valid "
+                                "article. Processing skipped."
+                                "".format(link), _lbr=True)
             return False
         # Verify if the article is already scraped or not
         _id = self._extract_ID(link)
-        if _id in self._prev_processed_articles:
+        if _id in self._processed_articles:
+            self._sa.logger.warn("The link ( {} ) is already processed. "
+                                 "Processing skipped."
+                                "".format(link), _lbr=True)
             return False
         # Return the True (at this point the article is valid to scrape)
         return True
@@ -347,7 +354,6 @@ class Scraper():
         # Inform the number of found articles.
         self._sa.logger.info("Found {} articles."
                              "".format(len(articles_elements)))
-        processed_articles = 0
         # Initiate the page articles with an empty dictionary.
         try:
             # Extract the details of each found article
@@ -360,7 +366,6 @@ class Scraper():
                         # Append the processed article to the pages'.
                         self._save_article(article_id, article_details)
                         # Inform the sucess of processing the article.
-                        processed_articles += 1
                 # If the the browser windows forced to close (i.e. a
                 # `NoSuchWindowException` or WebDriverException raised)
                 # stop the process.
@@ -379,7 +384,7 @@ class Scraper():
         # Inform the number of scraped articles.
         finally:
             self._sa.logger.info("{} out of {} articles were succefully "
-                                 "processed.".format(processed_articles,
+                                 "processed.".format(len(self._newl_processed_articles),
                                                      len(articles_elements)),
                                 _lbr=True)
 
@@ -423,21 +428,16 @@ class Scraper():
         self._handle_cookies(get_link=True)
         # Define the article scraper
         article_scraper = ArticleScraper(self._sa)
-        processed_articles = 0
         try:
             for article_link in links:
                 # Get the article page
                 self._sa.get(article_link)
                 # Validate the link
                 if not self._is_valid_article(article_link):
-                    self._sa.logger.warn("The link ( {} ) is not for a valid"
-                                        "article. Processing skipped."
-                                        "".format(article_link))
                     continue
                 try:
                     article_details, article_id = article_scraper.scrape()
                     self._save_article(article_id, article_details)
-                    processed_articles += 1
                 # If the the browser windows forced to close (i.e. a
                 # `NoSuchWindowException` or WebDriverException raised)
                 # stop the process.
@@ -452,12 +452,13 @@ class Scraper():
                     continue
         # If processing the article failed, log the trace to identify
         # the reason why.
-        except Exception as e: raise e
+        except Exception as e:
+            raise e
         finally:
             # Inform the number of scraped articles.
             self._sa.logger.info("{} out of {} articles were succefully scraped."
-                                "".format(processed_articles, len(links)),
-                                _lbr=True)
+                                "".format(len(self._newl_processed_articles),
+                                          len(links)), _lbr=True)
 
     def scrape(self, how: str = 'all', links: list = []):
         """
