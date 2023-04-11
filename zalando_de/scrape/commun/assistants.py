@@ -70,7 +70,7 @@ class ScraperAssistant():
         #                                                 tb)), _lbr=True)
         # Tear down the driver
         self.driver.quit()
-        self.logger.info("The browser closed.")
+        self.logger.info("The browser closed.", _lbr=True)
 
     def _init_driver(self):
         """

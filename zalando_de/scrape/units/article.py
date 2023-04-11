@@ -235,7 +235,7 @@ class ArticleScraper():
         other_details = self._get_extra_details(_from=article_container)
         self._sa.logger.debug('Extra details found : {}'.format(other_details))
         # Inform the end of processing the article.
-        self._sa.logger.info("Processing the article finished successfully.")
+        self._sa.logger.info("Processing finished successfully.")
         # Concatenate the details into one dictionary
         article_details = {'link': article_link,
                            'brand_name': brand_name,

@@ -6,7 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import (TimeoutException,
-                                        NoSuchWindowException)
+                                        WebDriverException,
+                                        NoSuchWindowException,
+                                        StaleElementReferenceException)
 
 import json
 import pandas as pd
@@ -20,6 +22,7 @@ from zalando_de.scrape.units.article import ArticleScraper
 
 
 BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
+                             StaleElementReferenceException,
                              HTTPError,
                              ConnectionError)
 
@@ -232,19 +235,13 @@ class Scraper():
         # Verify if the link is alien, and return the opposite
         # results : False if so, otherwise True
         if self._is_alien_link(link):
-            self._sa.logger.warn("The link ( {} ) is not for a valid "
-                                "article. Processing skipped."
-                                "".format(link), _lbr=True)
-            return False
+            return False, "an alien link"
         # Verify if the article is already scraped or not
         _id = self._extract_ID(link)
         if _id in self._processed_articles:
-            self._sa.logger.warn("The link ( {} ) is already processed. "
-                                 "Processing skipped."
-                                "".format(link), _lbr=True)
-            return False
+            return False, "already processed"
         # Return the True (at this point the article is valid to scrape)
-        return True
+        return True, "ok"
     
     def _get_page_articles(self):
         """
@@ -252,6 +249,8 @@ class Scraper():
         page.
 
         """
+        self._sa.logger.debug("Searching page's articles ...",
+                             _lbr=True, _rbr=True)
         # Article elements class names
         a_class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
         # Links elements class names
@@ -259,13 +258,20 @@ class Scraper():
         # Articles
         articles = self._sa._get_elements_by_class(a_class_names)
         # Filter articles with alien links
-        valid_articles = []
+        valid_articles, duplicated = [], 0
         for article in articles:
-            link = self._sa._get_element_by_class(l_class_names, article).get_attribute('href')
-            if self._is_valid_article(link):
+            link = self._sa._get_element_by_class(l_class_names,
+                                                  article).get_attribute('href')
+            is_valid, valid_msg = self._is_valid_article(link)
+            if is_valid:
                 valid_articles.append(article)
+            else:
+                self._sa.logger.warn("The link ( {} ) is {}.".format(link,
+                                                                     valid_msg))
+            if valid_msg == 'already processed':
+                duplicated += 1
         # Return only valid articles
-        return valid_articles
+        return valid_articles, duplicated
     
     def _clean_processed_articles(self):
         """
@@ -351,10 +357,13 @@ class Scraper():
 
         """
         # The list of all articles
-        articles_elements = self._get_page_articles()
+        articles_elements, n_duplicated = self._get_page_articles()
+        n_valid_articles = len(articles_elements)
+        n_articles = n_valid_articles + n_duplicated
         # Inform the number of found articles.
-        self._sa.logger.info("Found {} articles."
-                             "".format(len(articles_elements)))
+        self._sa.logger.info("Found {} articles (out of {}) to process "
+                             "[{} were processed in previous pages]."
+                             "".format(n_valid_articles, n_articles, n_duplicated))
         # Initiate the page articles with an empty dictionary.
         try:
             # Extract the details of each found article
@@ -377,7 +386,8 @@ class Scraper():
                     # Log the trace to show the skipping cause.
                     self._sa.logger.error(traceback.format_exc(),
                                         show_details=False, _lbr=True, _rbr=True)
-                    self._sa.logger.warn("Processing Failed. Skipped.")
+                    self._sa.logger.warn("Processing skipped : Failed due to "
+                                         "{}".format(type(e).__name__))
                     continue
         # If processing the article failed, log the trace to identify
         # the reason why.
@@ -403,7 +413,8 @@ class Scraper():
         # Start processing
         while True:
             # Scrape page articles.
-            self._sa.logger.info("Processing new page ...", _lbr=True)
+            self._sa.logger.info("Processing new page "
+                                 "{}".format('='*49), _lbr=True)
             # Scrape the page's articles
             try:
                 self._process_page()
@@ -434,7 +445,8 @@ class Scraper():
                 # Get the article page
                 self._sa.get(article_link)
                 # Validate the link
-                if not self._is_valid_article(article_link):
+                is_valid, _ = self._is_valid_article(article_link)
+                if not is_valid:
                     continue
                 try:
                     article_details, article_id = article_scraper.scrape()
@@ -491,7 +503,7 @@ class Scraper():
         # stop the process.
         except Exception as e:
                 # If the exception is raised because the browser was
-                # forced to close (manualy), add an attricute to it
+                # forced to close (manualy), add an attribute to it
                 # so it can be identifed later.
                 if isinstance(e, BROWSER_CLOSED_EXCEPTIONS):
                     # FIXME : Why TimeoutException is catched here.
@@ -504,6 +516,12 @@ class Scraper():
                     self._sa.logger.error(traceback.format_exc(),
                                           show_details=False)
                     setattr(e, 'msg__browser_closed_forcibly', "")
+                elif (isinstance(e, WebDriverException) and
+                        "ERR_INTERNET_DISCONNECTED" in e.msg):
+                    self._sa.logger.error("Processing interrupted : No Internet "
+                                         "Connection", _lbr=True, _rbr=True)
+                    self._sa.logger.error(traceback.format_exc(), show_details=False)
+                    return
                 # Raise the error.
                 raise e
         finally:
@@ -511,5 +529,7 @@ class Scraper():
             end_time, end_time_str = current_datetime()
             self._add_metadata({'finished_at': end_time_str,
                                 'done_in': delta_datetime(start_time, end_time)})
+            self._sa.logger.warn("Saving processed articles' data ...",
+                                 _lbr=True, _rbr=True)
             self._save()
 
