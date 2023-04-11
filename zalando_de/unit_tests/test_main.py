@@ -21,7 +21,7 @@ def get_outputs(hw: str):
     log_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/logs", True)
     data_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/data", True)
 
-    return Logger(f"{log_dir}/logging.log", 20), data_dir
+    return Logger(f"{log_dir}/logging.log", 10), data_dir
 
 
 @pytest.mark.parametrize('how', [
@@ -45,6 +45,12 @@ def test_scrape_all(how):
             logger.info("Processing finished successfully.",
                         _lbr=True, _rbr=True)
             
+        except KeyboardInterrupt:
+                logger.error("Processing forcibly stopped using "
+                             "keyboard: Ctrl+C",
+                             _lbr=True, _rbr=True)
+                logger.error(traceback.format_exc(), show_details=False)
+
         except Exception as e:
             if not (hasattr(e, 'msg__browser_closed_forcibly')
                     or hasattr(e, 'msg__internet_disconnected')):
