@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 
-from zalando_de.utils.helpers import *
+from zalando_de.utils.helpers import timer
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 
 
@@ -23,9 +23,15 @@ class ArticleScraper():
         self._sa._click_to_new_tab(self._article_element)
         return self
 
-    def __exit__(self, *args, **kwargs):
+    def __exit__(self, exc_type, exc_value, tb):
+        if exc_type is not None:
+            raise
         # Close the opened tab and get back to the articles' page
-        self._sa._close_and_get_back()
+        try:
+            self._sa._close_and_get_back()
+        except Exception:
+            self._sa.logger.debug("Failed to get back the main tab.")
+            raise
 
     def _get_container(self):
         """
@@ -43,7 +49,7 @@ class ArticleScraper():
         # article element's html. 
         return self._sa.driver.current_url
             
-    def _extract_id_from_link(self, link: str):
+    def _extract_ID(self, link: str):
         """
         Extract an id for an article from its link.
 
@@ -201,10 +207,10 @@ class ArticleScraper():
         # Get the article link
         article_link = self._get_link()
         # Get the article's ID
-        article_id = self._extract_id_from_link(article_link)
+        article_id = self._extract_ID(article_link)
         # Inform the start of scrapping the article.
         self._sa.logger.info("Scrapping article {} started."
-                             "".format(article_link), _br=True)
+                             "".format(article_link), _lbr=True)
         # Get the article container.
         article_container = self._get_container()
         # Get the data in x-wrapper-re-1-4 container.
@@ -237,6 +243,7 @@ class ArticleScraper():
                            'price_label': price_label,
                            'available_sizes': available_sizes,
                            'available_colors': available_colors,
-                           'other_details': other_details}
+                           'other_details': other_details,
+                           'scraped_in': timer()}
         # Return the details
         return article_details, article_id
