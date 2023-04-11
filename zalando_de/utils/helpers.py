@@ -17,6 +17,32 @@ def _euc_div(dividend, divisor):
     return quotient, remainder
 
 
+def _truncate_directory(output_dir):
+    """
+    Truncate the directory.
+
+    """
+    # get all the file names in the directory
+    file_names = os.listdir(output_dir)
+    # loop through each file name and remove it
+    for file_name in file_names:
+        file_path = os.path.join(output_dir, file_name)
+        os.remove(file_path)
+
+def create_directory(path, trunc):
+    """
+    Create the directory if not exits.
+
+    If trunc is not None, remove all the file in it.
+    
+    """
+    try:
+        os.makedirs(path)
+    except FileExistsError:
+        if trunc:
+            _truncate_directory(path)
+    return path
+
 # Path helpers
 
 pkg_dir: str = os.path.dirname(zalando_de.__path__[0])
@@ -136,6 +162,7 @@ __all__ = [
     'rel_path',
     'norm_path',
     'is_a_directory',
+    'create_directory',
     'timer',
     'prefix_timer',
     'suffix_timer',
