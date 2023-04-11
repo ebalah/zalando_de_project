@@ -9,7 +9,7 @@ class Cleaner():
         self._mc_keys = set()
         self._sf_keys = set()
         self._d_keys = set()
-        self.sep = '\n'
+        self.sep = ' | '
 
     def _clean_price(self, price_label: str):
         return price_label.split('|')[0].strip()
