@@ -1,0 +1,64 @@
+
+============================================================ [ New Session ] ============================================================
+
+
+[Apr 11, 2023 13:50:03] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+
+[Apr 11, 2023 13:50:04] ~ $ [ERROR    ] zalando_de/scrape/main.py : Processing interrupted : No Internet Connection
+
+Traceback (most recent call last):
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 500, in scrape
+    process_func(*args)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 408, in _process
+    self._sa.get(self._main_link)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 480, in get
+    self.driver.get(link)
+  File "C:\Users\dsicped\Desktop\PS\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 449, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\dsicped\Desktop\PS\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\dsicped\Desktop\PS\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=111.0.5563.148)
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00D6DCE3]
+	(No symbol) [0x00D039D1]
+	(No symbol) [0x00C14DA8]
+	(No symbol) [0x00C112F7]
+	(No symbol) [0x00C08835]
+	(No symbol) [0x00C0980A]
+	(No symbol) [0x00C08B10]
+	(No symbol) [0x00C07F65]
+	(No symbol) [0x00C07EFC]
+	(No symbol) [0x00C06BF6]
+	(No symbol) [0x00C07358]
+	(No symbol) [0x00C16542]
+	(No symbol) [0x00C6DB91]
+	(No symbol) [0x00C5AECC]
+	(No symbol) [0x00C6D57C]
+	(No symbol) [0x00C5ACC6]
+	(No symbol) [0x00C36F68]
+	(No symbol) [0x00C380CD]
+	GetHandleVerifier [0x00FE3832+2506274]
+	GetHandleVerifier [0x01019794+2727300]
+	GetHandleVerifier [0x0101E36C+2746716]
+	GetHandleVerifier [0x00E16690+617600]
+	(No symbol) [0x00D0C712]
+	(No symbol) [0x00D11FF8]
+	(No symbol) [0x00D120DB]
+	(No symbol) [0x00D1C63B]
+	BaseThreadInitThunk [0x77386BD9+25]
+	RtlGetFullPathName_UEx [0x77DF8FD2+1218]
+	RtlGetFullPathName_UEx [0x77DF8F9D+1165]
+
+
+
+[Apr 11, 2023 13:50:04] ~ $ [WARNING  ] zalando_de/scrape/main.py : Saving processed articles' data ...
+
+[Apr 11, 2023 13:50:04] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into output_test_temp\data\metadata.json
+[Apr 11, 2023 13:50:04] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into output_test_temp\data\zalando_de_mens_shirts__20230411_135004.json
+[Apr 11, 2023 13:50:04] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into output_test_temp\data\zalando_de_mens_shirts.csv
+
+[Apr 11, 2023 13:50:06] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.
