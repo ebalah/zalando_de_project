@@ -1,4 +1,5 @@
 import argparse
+import traceback
 import os
 
 from zalando_de.scrape.main import Scraper
@@ -107,17 +108,12 @@ def run():
                         _lbr=True, _rbr=True)
             
         except Exception as e:
-            if (hasattr(e, 'reason_why') and
-                    e.reason_why == "BrowserClosedForcibly"):
-                logger.info("Processing finished ( Probably the "
-                            "Internet connection is lost, or the "
-                            "browser is closed forcibly closed ).",
-                            _lbr=True, _rbr=True)
-                
-            else:
-                logger.info("Processing Failed with an Error :",
-                            _lbr=True, _rbr=True)
-                raise e
+            if not hasattr(e, 'msg__browser_closed_forcibly'):
+                # This excepts the errors logging in case of one
+                # of BROWSER_CLOSED_EXCEPTIONS is catched.
+                logger.error("Processing Failed with an Error :",
+                             _lbr=True, _rbr=True)
+                logger.error(traceback.format_exc())
 
 
 if __name__ == '__main__':

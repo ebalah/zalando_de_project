@@ -208,8 +208,8 @@ class ArticleScraper():
         article_link = self._get_link()
         # Get the article's ID
         article_id = self._extract_ID(article_link)
-        # Inform the start of scrapping the article.
-        self._sa.logger.info("Scrapping article {} started."
+        # Inform the start of processing the article.
+        self._sa.logger.info("Processing article {} started."
                              "".format(article_link), _lbr=True)
         # Get the article container.
         article_container = self._get_container()
@@ -234,8 +234,8 @@ class ArticleScraper():
         # The other details : Fit & Size, Material & Care, and Details
         other_details = self._get_extra_details(_from=article_container)
         self._sa.logger.debug('Extra details found : {}'.format(other_details))
-        # Inform the end of scrapping the article.
-        self._sa.logger.info("Scrapping the article finished successfully.")
+        # Inform the end of processing the article.
+        self._sa.logger.info("Processing the article finished successfully.")
         # Concatenate the details into one dictionary
         article_details = {'link': article_link,
                            'brand_name': brand_name,

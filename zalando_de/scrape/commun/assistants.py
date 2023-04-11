@@ -62,15 +62,15 @@ class ScraperAssistant():
 
     def __exit__(self, exc_type, exc_value, tb):
         # Catch exceptions raised within th with block.
-        if exc_type is not None:
-            self.logger.error("The Scarper Assistant exited with an Error :")
-            self.logger.error("".join(traceback
-                                      .format_exception(exc_type,
-                                                        exc_value,
-                                                        tb)), _lbr=True)
+        # if exc_type is not None:
+        #     self.logger.error("The Scarper Assistant exited with an Error :")
+        #     self.logger.error("".join(traceback
+        #                               .format_exception(exc_type,
+        #                                                 exc_value,
+        #                                                 tb)), _lbr=True)
         # Tear down the driver
-        self.logger.info("The driver quited.")
         self.driver.quit()
+        self.logger.info("The browser closed.")
 
     def _init_driver(self):
         """

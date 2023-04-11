@@ -1,11 +1,12 @@
 import traceback
 
+from urllib3.exceptions import HTTPError
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import (TimeoutException,
-                                        NoSuchWindowException,
-                                        WebDriverException)
+                                        NoSuchWindowException)
 
 import json
 import pandas as pd
@@ -19,8 +20,8 @@ from zalando_de.scrape.units.article import ArticleScraper
 
 
 BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
-                             WebDriverException,
-                             ConnectionResetError)
+                             HTTPError,
+                             ConnectionError)
 
 
 ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
@@ -383,7 +384,7 @@ class Scraper():
         except Exception as e: raise e
         # Inform the number of scraped articles.
         finally:
-            self._sa.logger.info("{} out of {} articles were succefully "
+            self._sa.logger.info("{} out of {} articles were successfully "
                                  "processed.".format(len(self._newl_processed_articles),
                                                      len(articles_elements)),
                                 _lbr=True)
@@ -456,7 +457,7 @@ class Scraper():
             raise e
         finally:
             # Inform the number of scraped articles.
-            self._sa.logger.info("{} out of {} articles were succefully scraped."
+            self._sa.logger.info("{} out of {} articles were successfully scraped."
                                 "".format(len(self._newl_processed_articles),
                                           len(links)), _lbr=True)
 
@@ -493,15 +494,17 @@ class Scraper():
                 # forced to close (manualy), add an attricute to it
                 # so it can be identifed later.
                 if isinstance(e, BROWSER_CLOSED_EXCEPTIONS):
-                    self._sa.logger.error("Failed to continue. It "
-                                          "seems that the browser is "
-                                          "forcibly closed.",
-                                          _lbr=True, _rbr=True)
+                    # FIXME : Why TimeoutException is catched here.
+                    # @NOTE : FIXED, but not tested yet.
+                    self._sa.logger.info("Processing interrupted : It is "
+                                         "possible that the internet connection "
+                                         "has been lost or that the browser "
+                                         "has been closed forcibly",
+                                         _lbr=True, _rbr=True)
                     self._sa.logger.error(traceback.format_exc(),
                                           show_details=False)
-                    e.reason_why = "BrowserClosedForcibly"
-                else:
-                    e.reason_why = ""
+                    setattr(e, 'msg__browser_closed_forcibly', "")
+                # Raise the error.
                 raise e
         finally:
             # Save the finishing datetime
