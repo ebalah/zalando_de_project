@@ -100,7 +100,9 @@ class Scraper():
         """
         articles_path = f"{self._output_directory}/{self._output_filename}.csv"
         try:
-            prev_processed_articles = set(pd.read_csv(articles_path, sep=self._csv_sep)[ID_COLNAME])
+            prev_processed_articles = set(pd.read_csv(articles_path,
+                                                      sep=self._csv_sep,
+                                                      encoding='utf-8')[ID_COLNAME])
             self._sa.logger.info("Processed articles read : {} "
                                 "articles.".format(prev_processed_articles.__len__()))
         except FileNotFoundError:
@@ -323,14 +325,18 @@ class Scraper():
         newl_processed_articles = self._clean_processed_articles()
         # Read the previously processed articles CSV file.
         try:
-            prev_processed_articles = pd.read_csv(csv_fn, sep=self._csv_sep)
+            prev_processed_articles = pd.read_csv(csv_fn,
+                                                  sep=self._csv_sep,
+                                                  encoding='utf-8')
         except FileNotFoundError:
             prev_processed_articles = None
         # Save the dataframe into a CSV file.
-        pd.concat([prev_processed_articles,
-                   newl_processed_articles]).to_csv(csv_fn,
-                                                    index=False,
-                                                    sep=self._csv_sep)
+        (pd.concat([prev_processed_articles,
+                    newl_processed_articles])
+           .to_csv(path_or_buf=csv_fn,
+                   index=False,
+                   sep=self._csv_sep,
+                   encoding='utf-8'))
         # Return the path the data saved to
         return norm_path(csv_fn)
 
