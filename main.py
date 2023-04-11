@@ -1,5 +1,6 @@
 import argparse
 import traceback
+import time
 import os
 
 from zalando_de.scrape.main import Scraper
@@ -7,6 +8,13 @@ from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.utils.logging import Logger
 from zalando_de.utils.helpers import create_directory
 
+
+trunc_conformation_msg = ("\nYou specified to truncate the output "
+                          "directory.\nDo you confirm ? (y/n) : ")
+
+continuing_msg = ("\nThe browser was recently forcibly closed "
+                  "or the internet connection was instable.\n"
+                  "Do you want to re-try ? (y/n) : ")
 
 
 def parse_arguments():
@@ -58,7 +66,7 @@ def run():
 
     truncate_output = False
     if args.trunc:
-        if input("Are you sure to truncate the output ? (yes/no)") == 'yes':
+        if input(trunc_conformation_msg).lower().startswith('y'):
             truncate_output = True
 
     # Handle the data and logs folders.
@@ -104,11 +112,10 @@ def run():
                     logger.error("Processing Failed with an Error :",
                                 _lbr=True, _rbr=True)
                     logger.error(traceback.format_exc(), show_details=False)
-
-                    if input("Do you want to continue ? (yes/no)") == 'yes':
-                        continue
-
                     break
+                time.sleep(5)
+                if input(continuing_msg).lower().startswith('y'):
+                    continue
 
 
 if __name__ == '__main__':

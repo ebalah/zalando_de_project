@@ -1,0 +1,31 @@
+{
+   "20230411_222534": {
+      "started_at": "2023-04-11 22:25:24",
+      "finished_at": "2023-04-11 22:25:34",
+      "done_in": "0 days, 0 hours, 0 minutes, and 10.018 seconds"
+   },
+   "20230411_222431": {
+      "started_at": "2023-04-11 22:23:08",
+      "total_pages": 199,
+      "total_items": 16706,
+      "processed_articles": 5,
+      "finished_at": "2023-04-11 22:24:31",
+      "done_in": "0 days, 0 hours, 1 minutes, and 22.227 seconds"
+   },
+   "20230411_222230": {
+      "started_at": "2023-04-11 22:20:55",
+      "total_pages": 199,
+      "total_items": 16706,
+      "processed_articles": 7,
+      "finished_at": "2023-04-11 22:22:30",
+      "done_in": "0 days, 0 hours, 1 minutes, and 35.192 seconds"
+   },
+   "20230411_222035": {
+      "started_at": "2023-04-11 22:19:31",
+      "total_pages": 199,
+      "total_items": 16706,
+      "processed_articles": 5,
+      "finished_at": "2023-04-11 22:20:35",
+      "done_in": "0 days, 0 hours, 1 minutes, and 4.187 seconds"
+   }
+}
