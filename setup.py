@@ -26,11 +26,11 @@ setuptools.setup(
         'Intended Audience :: Upwork Client',
         'Programming Language :: Python :: 3.10'
     ],
-    entry_points={
-        'console_scripts': [
-            'sc_script=zalando_de.main:scrape'
-        ]
-    },
+    # entry_points={
+    #     'console_scripts': [
+    #         'sc_script=zalando_de.main:scrape'
+    #     ]
+    # },
     python_requires='>=3.6, <4',
     include_package_data=True,
 )
