@@ -1,0 +1,127 @@
+{
+   "metadata": {
+      "started_at": "2023-04-11 14:21:59",
+      "total_pages": 200,
+      "total_items": 16766,
+      "processed_articles": 2,
+      "finished_at": "2023-04-11 14:22:37",
+      "done_in": "0 days, 0 hours, 0 minutes, and 37.598 seconds"
+   },
+   "data": {
+      "jacey-quinn-shirt-light-green-j4k22d00k-m11": {
+         "link": "https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html",
+         "brand_name": "Jacey Quinn",
+         "article_name": "Shirt",
+         "price_label": "44,90 € |  | VAT included |  | Originally: |  | 89,90 € |  | -50%",
+         "available_sizes": {
+            "S": {
+               "count": "Only 1 left",
+               "price": ""
+            },
+            "M": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "L": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "XL": {
+               "count": "Notify Me",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            },
+            "3XL": {
+               "count": "Only 1 left",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "light green",
+            "black",
+            "blue",
+            "bordeaux",
+            "light navy"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Machine wash at 30°C"
+            },
+            "Details": {
+               "Collar": "Button down",
+               "Fastening": "Button",
+               "Pattern": "Plain",
+               "Article number": "J4K22D00K-M11"
+            },
+            "Size & fit": {
+               "Fit": "Regular Fit",
+               "Shape": "Straight",
+               "Length": "Normal",
+               "Sleeve length": "Long"
+            }
+         },
+         "scraped_in": "Apr 11, 2023 14:22:16"
+      },
+      "jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11": {
+         "link": "https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11.html",
+         "brand_name": "Jack & Jones",
+         "article_name": "JJEJACK SLIM FIT - Shirt",
+         "price_label": "15,99 € |  | VAT included |  | Originally: |  | 19,99 € |  | -20%",
+         "available_sizes": {
+            "XS": {
+               "count": "",
+               "price": ""
+            },
+            "S": {
+               "count": "",
+               "price": ""
+            },
+            "M": {
+               "count": "",
+               "price": ""
+            },
+            "L": {
+               "count": "",
+               "price": ""
+            },
+            "XL": {
+               "count": "",
+               "price": ""
+            },
+            "XXL": {
+               "count": "",
+               "price": ""
+            }
+         },
+         "available_colors": [
+            "black",
+            "total eclipse"
+         ],
+         "other_details": {
+            "Material & care": {
+               "Outer fabric material": "100% cotton",
+               "Care instructions": "Machine wash at 40°C"
+            },
+            "Details": {
+               "Collar": "Kent collar",
+               "Fastening": "Button",
+               "Pattern": "Floral",
+               "Article number": "JA222D1JW-Q11"
+            },
+            "Size & fit": {
+               "Our model's height": "Our model is 188 cm tall and is wearing size M",
+               "Fit": "Slim Fit",
+               "Length": "Normal",
+               "Sleeve length": "Short",
+               "Back width": "44 cm (Size M)",
+               "Total length": "75 cm (Size M)"
+            }
+         },
+         "scraped_in": "Apr 11, 2023 14:22:26"
+      }
+   }
+}

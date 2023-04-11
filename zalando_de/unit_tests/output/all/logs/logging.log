@@ -1,0 +1,136 @@
+
+============================================================ [ New Session ] ============================================================
+
+
+[Apr 11, 2023 14:21:59] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+
+[Apr 11, 2023 14:22:06] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing new page =================================================
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/556Mi0f-SxK/ ) is an alien link.
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/campaigns/tommy-jeans-x-smiley/ ) is an alien link.
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/7IUvB_ScTeS/ ) is an alien link.
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/ptS8v6SeSOS ) is an alien link.
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/outfits/8MhnPWs7R26/ ) is an alien link.
+[Apr 11, 2023 14:22:07] ~ $ [WARNING  ] zalando_de/scrape/main.py : The link ( https://en.zalando.de/collections/iVNQ6M-QSuq/ ) is an alien link.
+[Apr 11, 2023 14:22:08] ~ $ [INFO     ] zalando_de/scrape/main.py : Found 84 articles (out of 84) to process [0 were processed in previous pages].
+
+[Apr 11, 2023 14:22:12] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jacey-quinn-shirt-light-green-j4k22d00k-m11.html started.
+[Apr 11, 2023 14:22:16] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:22:21] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/jack-and-jones-jjejack-slim-fit-shirt-ja222d1jw-q11.html started.
+[Apr 11, 2023 14:22:26] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:22:32] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/tom-tailor-denim-shirt-original-to722d0eq-k11.html started.
+
+Traceback (most recent call last):
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 377, in _process_page
+    self._save_article(article_id, article_details)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 375, in _process_page
+    article_details, article_id = article_scraper.scrape()
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 215, in scrape
+    article_container = self._get_container()
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 41, in _get_container
+    return self._sa._get_element_by_class('DT5BTM VHXqc_ rceRmQ _4NtqZU mIlIve')
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 325, in _get_element_by_class
+    element = self._get_element(element_locator, parent_element)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 311, in _get_element
+    self.short_wait.until(ec.presence_of_element_located(element_locator))
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00D6DCE3]
+	(No symbol) [0x00D039D1]
+	(No symbol) [0x00C14DA8]
+	(No symbol) [0x00C4019F]
+	(No symbol) [0x00C403AB]
+	(No symbol) [0x00C6EE62]
+	(No symbol) [0x00C5AF14]
+	(No symbol) [0x00C6D57C]
+	(No symbol) [0x00C5ACC6]
+	(No symbol) [0x00C36F68]
+	(No symbol) [0x00C380CD]
+	GetHandleVerifier [0x00FE3832+2506274]
+	GetHandleVerifier [0x01019794+2727300]
+	GetHandleVerifier [0x0101E36C+2746716]
+	GetHandleVerifier [0x00E16690+617600]
+	(No symbol) [0x00D0C712]
+	(No symbol) [0x00D11FF8]
+	(No symbol) [0x00D120DB]
+	(No symbol) [0x00D1C63B]
+	BaseThreadInitThunk [0x77386BD9+25]
+	RtlGetFullPathName_UEx [0x77DF8FD2+1218]
+	RtlGetFullPathName_UEx [0x77DF8F9D+1165]
+
+
+
+[Apr 11, 2023 14:22:37] ~ $ [WARNING  ] zalando_de/scrape/main.py : Processing skipped : Failed due to TimeoutException
+
+[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : 2 out of 84 articles were successfully processed.
+
+[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processing interrupted : It is possible that the internet connection has been lost or that the browser has been closed forcibly
+
+Traceback (most recent call last):
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 500, in scrape
+    process_func(*args)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 420, in _process
+    self._process_page()
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 394, in _process_page
+    except Exception as e: raise e
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 373, in _process_page
+    with ArticleScraper(self._sa, article) as article_scraper:
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 23, in __enter__
+    self._sa._click_to_new_tab(self._article_element)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 205, in _click_to_new_tab
+    self._move_mouse_to(element)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 181, in _move_mouse_to
+    self.sleep_and_scroll(element)
+  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 153, in sleep_and_scroll
+    scroll_to = scroll_to.location['y']
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webelement.py", line 294, in location
+    old_loc = self._execute(Command.GET_ELEMENT_RECT)["value"]
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webelement.py", line 403, in _execute
+    return self._parent.execute(command, params)
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 440, in execute
+    self.error_handler.check_response(response)
+  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 245, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
+  (Session info: chrome=111.0.5563.148)
+Stacktrace:
+Backtrace:
+	(No symbol) [0x00D6DCE3]
+	(No symbol) [0x00D039D1]
+	(No symbol) [0x00C14DA8]
+	(No symbol) [0x00C176FB]
+	(No symbol) [0x00C175D0]
+	(No symbol) [0x00C17850]
+	(No symbol) [0x00C3D2AB]
+	(No symbol) [0x00C5AECC]
+	(No symbol) [0x00C38726]
+	(No symbol) [0x00C5B224]
+	(No symbol) [0x00C6D57C]
+	(No symbol) [0x00C5ACC6]
+	(No symbol) [0x00C36F68]
+	(No symbol) [0x00C380CD]
+	GetHandleVerifier [0x00FE3832+2506274]
+	GetHandleVerifier [0x01019794+2727300]
+	GetHandleVerifier [0x0101E36C+2746716]
+	GetHandleVerifier [0x00E16690+617600]
+	(No symbol) [0x00D0C712]
+	(No symbol) [0x00D11FF8]
+	(No symbol) [0x00D120DB]
+	(No symbol) [0x00D1C63B]
+	BaseThreadInitThunk [0x77386BD9+25]
+	RtlGetFullPathName_UEx [0x77DF8FD2+1218]
+	RtlGetFullPathName_UEx [0x77DF8F9D+1165]
+
+
+
+[Apr 11, 2023 14:22:37] ~ $ [WARNING  ] zalando_de/scrape/main.py : Saving processed articles' data ...
+
+[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\metadata.json
+[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts__20230411_142237.json
+[Apr 11, 2023 14:22:37] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\all\data\zalando_de_mens_shirts.csv
+
+[Apr 11, 2023 14:22:39] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.

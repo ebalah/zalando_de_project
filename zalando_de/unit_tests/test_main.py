@@ -1,12 +1,11 @@
 import pytest
+import traceback
 
 import zalando_de
 from zalando_de.scrape import Scraper, ScraperAssistant
 from zalando_de.utils.logging import Logger
+from zalando_de.utils.helpers import create_directory
 
-
-LOG =  f"{zalando_de.__path__[0]}/../output/logs/logging.log"
-DATA = f"{zalando_de.__path__[0]}/../output/data"
 
 
 LINKS = ['https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html',
@@ -17,35 +16,40 @@ LINKS = ['https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html',
         'https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html']
 
 
-@pytest.fixture(scope="session")
-def logger():
-    return Logger(LOG, 1)
+def get_outputs(hw: str):
+
+    log_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/logs", True)
+    data_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/data", True)
+
+    return Logger(f"{log_dir}/logging.log", 20), data_dir
 
 
 @pytest.mark.parametrize('how', [
     'single',
     'all'
 ])
-def test_scrape_all(logger: Logger, how):
+def test_scrape_all(how):
     """
     Test scrapping all articles.
     """
+
     links = LINKS.copy() if how == 'single' else []
+
+    logger, data_dir = get_outputs(how)
+
     # Define the assistant
     with ScraperAssistant(logger=logger) as assistant:
-        # The scraper
+
         try:
-            Scraper(assistant=assistant, out=DATA).scrape(how, links)
+            Scraper(assistant, data_dir).scrape(how, links)
             logger.info("Processing finished successfully.",
                         _lbr=True, _rbr=True)
+            
         except Exception as e:
-            if (hasattr(e, 'reason_why') and
-                    e.reason_why == "BrowserClosedForcibly"):
-                logger.info("Processing finished ( Probably the "
-                            "Internet connection is lost, or the "
-                            "browser is closed forcibly closed ).",
-                            _lbr=True, _rbr=True)
-            else:
-                logger.info("Processing Failed with an Error :",
-                            _lbr=True, _rbr=True)
-                raise e
+            if not (hasattr(e, 'msg__browser_closed_forcibly')
+                    or hasattr(e, 'msg__internet_disconnected')):
+                # This excepts the errors logging in case of one
+                # of BROWSER_CLOSED_EXCEPTIONS is catched.
+                logger.error("Processing Failed with an Error :",
+                             _lbr=True, _rbr=True)
+                logger.error(traceback.format_exc(), show_details=False)

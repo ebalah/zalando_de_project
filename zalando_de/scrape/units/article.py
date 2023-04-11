@@ -1,9 +1,18 @@
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
 from zalando_de.utils.helpers import timer
 from zalando_de.scrape.commun.assistants import ScraperAssistant
+
+
+
+class DeadScraperAssistantError(Exception):
+    """
+    An exception to handle browser closing errors,
+    and validate the assistant.
+    
+    """
 
 
 class ArticleScraper():
@@ -15,7 +24,7 @@ class ArticleScraper():
 
     def __init__(self, assistant, article_element = None) -> None:
         # ...
-        self._sa: ScraperAssistant = assistant
+        self._sa: ScraperAssistant = self._validate_assistant(assistant)
         self._article_element = article_element
 
     def __enter__(self):
@@ -33,6 +42,12 @@ class ArticleScraper():
             self._sa.logger.debug("Failed to get back the main tab.")
             raise
 
+    def _validate_assistant(self, assistant):
+        if not hasattr(assistant, 'driver'):
+            raise DeadScraperAssistantError("Assistant object must have"
+                                             "'driver' attrbute.")
+        return assistant
+
     def _get_container(self):
         """
         Get the article's details container.
@@ -45,9 +60,12 @@ class ArticleScraper():
         Get the link of an article page.
         
         """
-        # Get the href attribute of the first a tage found in the
-        # article element's html. 
-        return self._sa.driver.current_url
+        _link = self._sa.driver.current_url
+        if not _link:
+            self._sa.logger.warn("Unable to get the current url."
+                                 "Maybe the page's still loading.")
+            raise TimeoutException("Could not load the page.")
+        return _link
             
     def _extract_ID(self, link: str):
         """

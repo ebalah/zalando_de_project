@@ -1,0 +1,36 @@
+
+============================================================ [ New Session ] ============================================================
+
+
+[Apr 11, 2023 14:20:48] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+
+[Apr 11, 2023 14:21:03] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html started.
+[Apr 11, 2023 14:21:08] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:14] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html started.
+[Apr 11, 2023 14:21:18] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:22] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html started.
+[Apr 11, 2023 14:21:27] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:31] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html started.
+[Apr 11, 2023 14:21:35] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:39] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html started.
+[Apr 11, 2023 14:21:43] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:48] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html started.
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/scrape/main.py : 6 out of 6 articles were successfully scraped.
+
+[Apr 11, 2023 14:21:52] ~ $ [WARNING  ] zalando_de/scrape/main.py : Saving processed articles' data ...
+
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\metadata.json
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts__20230411_142152.json
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts.csv
+
+[Apr 11, 2023 14:21:52] ~ $ [INFO     ] zalando_de/unit_tests/test_main.py : Processing finished successfully.
+
+
+[Apr 11, 2023 14:21:54] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.

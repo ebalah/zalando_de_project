@@ -390,10 +390,11 @@ class Scraper():
                 # continue.
                 except Exception as e:
                     # Log the trace to show the skipping cause.
-                    self._sa.logger.error(traceback.format_exc(),
-                                        show_details=False, _lbr=True, _rbr=True)
                     self._sa.logger.warn("Processing skipped : Failed due to "
-                                         "{}".format(type(e).__name__))
+                                         "{}".format(type(e).__name__),
+                                         _rbr=True)
+                    self._sa.logger.error(traceback.format_exc(),
+                                        show_details=False)
                     continue
         # If processing the article failed, log the trace to identify
         # the reason why.
