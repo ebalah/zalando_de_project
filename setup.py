@@ -14,7 +14,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='zalando_de_scraper',
-    version='0.1.1',
+    version='0.1.2',
     description='A python package to scrape data from `zalando.de` website',
     long_description=long_description,
     author='Ilias Balah',
