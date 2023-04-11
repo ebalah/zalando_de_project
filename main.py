@@ -77,7 +77,7 @@ def run():
     if args.odir:
         output_dir = args.odir
     elif args.test :
-        output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output_test_single"
+        output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output_test"
     else :
         output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output"
 
