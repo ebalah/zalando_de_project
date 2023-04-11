@@ -102,7 +102,7 @@ class Logger():
         handler = init_handler(out)
         self.logger.addHandler(handler)
 
-    def log(self, message, level=10, show_details=True, _br=False):
+    def log(self, message, level=10, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity `level`.
 
@@ -121,7 +121,7 @@ class Logger():
         `show_details` : bool ( optional [ default = True ] )
             A boolean indicated whether to add datetime prefix or not.
 
-        `_br` : bool ( optional [ default = False ] )
+        `_lbr` : bool ( optional [ default = False ] )
             A boolean indicates whether to log the message in a new line or not.
         
         """
@@ -140,62 +140,65 @@ class Logger():
                                  handle_level(level),
                                  called_from,
                                  message))
-        # Add the new line if _br set to True
-        if _br:
+        # Add the new line to the left if _lbr set to True
+        if _lbr:
             message = "\n{}".format(message)
+        # Add the new line to the right if _rbr set to True
+        if _rbr:
+            message = "{}\n".format(message)
         # Log
         self.logger.log(level=level, msg=message)
 
-    def debu0(self, message, show_details=True, _br=False):
+    def debu0(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'NOTSET'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 10, show_details, _br)
+        self.log(message, 10, show_details, _lbr, _rbr)
 
-    def debug(self, message, show_details=True, _br=False):
+    def debug(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'DEBUG'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 10, show_details, _br)
+        self.log(message, 10, show_details, _lbr, _rbr)
 
-    def info(self, message, show_details=True, _br=False):
+    def info(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'INFO'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 20, show_details, _br)
+        self.log(message, 20, show_details, _lbr, _rbr)
 
-    def warn(self, message, show_details=True, _br=False):
+    def warn(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'WARNING'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 30, show_details, _br)
+        self.log(message, 30, show_details, _lbr, _rbr)
 
-    def error(self, message, show_details=True, _br=False):
+    def error(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'ERROR'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 40, show_details, _br)
+        self.log(message, 40, show_details, _lbr, _rbr)
 
-    def critical(self, message, show_details=True, _br=False):
+    def critical(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'CRITICAL'.
 
         For more details, see :meth:`Logger.log`
         
         """
-        self.log(message, 40, show_details, _br)
+        self.log(message, 40, show_details, _lbr, _rbr)
