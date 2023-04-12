@@ -149,15 +149,6 @@ class Logger():
         # Log
         self.logger.log(level=level, msg=message)
 
-    def debu0(self, message, show_details=True, _lbr=False, _rbr=False):
-        """
-        Log a message with severity 'NOTSET'.
-
-        For more details, see :meth:`Logger.log`
-        
-        """
-        self.log(message, 10, show_details, _lbr, _rbr)
-
     def debug(self, message, show_details=True, _lbr=False, _rbr=False):
         """
         Log a message with severity 'DEBUG'.
@@ -202,3 +193,7 @@ class Logger():
         
         """
         self.log(message, 40, show_details, _lbr, _rbr)
+
+    def debu0(self, *args, **kwargs): self.debug(*args, **kwargs)
+    def inf0(self, *args, **kwargs): self.debug(*args, **kwargs)
+    def erro0(self, *args, **kwargs): self.debug(*args, **kwargs)
