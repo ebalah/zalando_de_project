@@ -74,7 +74,7 @@ class Cleaner():
                 'Brand': article_details.get('brand_name'),
                 'Name': article_details.get('article_name'),
                 'Price': price,
-                'sold': sold,
+                'Sold (%)': sold,
                 'Available Sizes': sizes,
                 'Available Colors': colors,
                 **material_care,
