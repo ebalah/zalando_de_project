@@ -2,7 +2,9 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, WebDriverException
+from selenium.common.exceptions import (TimeoutException,
+                                        WebDriverException,
+                                        NoSuchWindowException)
 
 # from urllib3.exceptions import HTTPError
 
@@ -593,28 +595,48 @@ class Scraper():
 
         try:
             process_func(*args)
-        # If the the browser windows forced to close (i.e. a
-        # `NoSuchWindowException` or WebDriverException raised)
-        # stop the process.
-        except Exception as exc:
-                # If the reason the exception raised is the
-                # internet connection (Any issue identified as internet related.)
-                if (isinstance(exc, WebDriverException) and
-                        _is_internet_related(exc.msg)):
-                    exc_message = "Probably the Internet connection is unstable."
-                    raise UnableToConnectException(exc_message,
-                                                   exc, self._sa.logger).dbg()
-                # If the exception is raised because the browser was
-                # forced to close (manualy), add an attribute to it
-                # so it can be identifed later.
-                elif isinstance(exc, (UnableToOpenNewTabException,
-                                      ArticleProcessingException,
-                                      UnableToCloseNewTabException)):
-                    exc_message = "Probably the browser is been forcibly closed."
-                    raise BrowserAlreadyClosedException(exc_message, exc,
-                                                        self._sa.logger).dbg()
-                # Otherwise, raise the same raised error.
-                raise exc
+        # If the the exception is a KeyboardInterrupt, and it's already
+        # handled raise the `KeyboardInterruptException` raised then.
+        except KeyboardInterruptException as ki_e:
+            raise ki_e
+        # If the the exception is a KeyboardInterrupt raise
+        # `KeyboardInterruptException`.
+        except KeyboardInterrupt as ki_e:
+            exc_message = "Processing forcibly stopped using CTR + C."
+            raise KeyboardInterruptException(exc_message, ki_e,
+                                             self._sa.logger).dbg()
+        # If the exception is alredy handled, and it was related to an 
+        # internet connection issue, raise it.
+        except UnableToConnectException as uc_e:
+            raise uc_e
+        # If the exception is already handled, and it's raised in the
+        # article's page, raise `WindowAlreadyClosedException`.
+        except (UnableToOpenNewTabException,
+                ArticleProcessingException,
+                UnableToCloseNewTabException) as exc:
+            exc_message = "Probably the browser is been forcibly closed."
+            raise WindowAlreadyClosedException(exc_message, exc,
+                                                self._sa.logger).dbg()
+        # If it's a WebDriverException exception, handle all the cases
+        except WebDriverException as wd_e:
+            # It's exactly a NoSuchWindowException, the raise
+            # `WindowAlreadyClosedException`
+            if isinstance(wd_e, NoSuchWindowException):
+                exc_message = "Probably the browser is been forcibly closed."
+                raise WindowAlreadyClosedException(exc_message, wd_e,
+                                                   self._sa.logger).dbg()
+            # If the reason the exception raised is the
+            # internet connection (Any issue identified as internet related.)
+            elif  _is_internet_related(wd_e.msg) or isinstance(wd_e, TimeoutException):
+                exc_message = "Probably the Internet connection is unstable."
+                raise UnableToConnectException(exc_message,
+                                               exc, self._sa.logger).dbg()
+            # Otherwise, raise `ArticlesProcessingException`
+            exc_message = ("An unexpected Web Driver Exception "
+                           "raised. Probably due to forcibly close "
+                           "the browser.")
+            raise ArticlesProcessingException(exc_message, wd_e,
+                                              self._sa.logger)
         finally:
             # Save the finishing datetime
             end_time, end_time_str = current_datetime()

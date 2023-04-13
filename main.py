@@ -7,7 +7,7 @@ import os
 import zalando_de
 from zalando_de.scrape.main import Scraper
 from zalando_de.scrape.commun.assistants import ScraperAssistant
-from zalando_de.scrape.commun.exceptions import (BrowserAlreadyClosedException,
+from zalando_de.scrape.commun.exceptions import (WindowAlreadyClosedException,
                                                  UnableToConnectException)
 from zalando_de.utils.logging import Logger
 from zalando_de.utils.helpers import create_directory
@@ -101,7 +101,7 @@ def run():
                 logger.error(traceback.format_exc(), show_details=False)
                 break
                 
-            except (BrowserAlreadyClosedException,
+            except (WindowAlreadyClosedException,
                     UnableToConnectException) as exc:
                 logger.error("Processing Failed with the following Error :",
                             _lbr=True, _rbr=True)
