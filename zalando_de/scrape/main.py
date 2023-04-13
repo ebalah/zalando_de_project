@@ -1,26 +1,17 @@
-import traceback
-
-from urllib3.exceptions import HTTPError
-
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import (TimeoutException,
-                                        WebDriverException,
-                                        NoSuchWindowException,
-                                        StaleElementReferenceException)
+from selenium.common.exceptions import TimeoutException, WebDriverException
+
+# from urllib3.exceptions import HTTPError
 
 import json
 import pandas as pd
 
 from zalando_de.utils.helpers import *
+from zalando_de.scrape.commun.exceptions import *
 from zalando_de.scrape.commun.assistants import ScraperAssistant
-from zalando_de.scrape.commun.exceptions import (UnableToOpenNewTabException,
-                                                 UnableToCloseNewTabException,
-                                                 ArticleProcessingException,
-                                                 UnableToConnectException,
-                                                 BrowserAlreadyClosedException)
 from zalando_de.scrape.commun.cleaners import Cleaner
 from zalando_de.scrape.units.article import ArticleScraper
 
@@ -29,10 +20,10 @@ ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/', '/mens-clot
 
 ID_COLNAME = 'ID'
 
-BClosedExceptions = (NoSuchWindowException,
-                     StaleElementReferenceException,
-                     HTTPError,
-                     ConnectionError)
+# BClosedExceptions = (NoSuchWindowException,
+#                      StaleElementReferenceException,
+#                      HTTPError,
+#                      ConnectionError)
 
 
 class Scraper():
@@ -291,7 +282,7 @@ class Scraper():
             if is_valid:
                 valid_articles.append((article, link))
             else:
-                self._sa.logger.info("The link ( {} ) is {}."
+                self._sa.logger.info("The article ( {} ) is {}."
                                      "".format(link, valid_msg))
             if valid_msg == 'already processed':
                 duplicated += 1
@@ -423,9 +414,10 @@ class Scraper():
                              "[{} were processed in previous pages]."
                              "".format(n_valid_articles, n_articles, n_duplicated))
         # Initiate the page articles with an empty dictionary.
-        try:
+        try:        
+            successive_skips, internet_issue = 0, False
             # Extract the details of each found article
-            for (article, link) in articles_elements:
+            for (article, link) in articles_elements[-7:]:
                 # Extract the article ID
                 article_id = self._extract_ID(link)
                 # Open the article details in a new tab
@@ -444,28 +436,38 @@ class Scraper():
                     # In case processing the article failed, then an
                     # `ArticleProcessingException` must been raised.
                     except ArticleProcessingException as ap_e:
-                        # If the processing exception is a timeout's,
-                        # skip the article and continue.
+                    # If the processing exception is a timeout's,
+                    # skip the article and continue.
                         if isinstance(ap_e.exc_error, TimeoutException):
                             # Append the skipped article to the pages', in case
                             # a TimeoutException exception raised.
                             self._skip_article(article_id, 'TimeoutException')
+                            successive_skips += 1
+                            # If the TimeoutException is catched more than 3 time
+                            # successively, then probably there is an Internet
+                            # connection issue. Hence break the loop and raise
+                            # an UnableToConnectException exception after the
+                            # exiting the ArticleScraper context manager.
+                            if successive_skips > 2:
+                                internet_issue = True
+                                break
+                            # If not, continue.
                             continue
+                        successive_skips = 0
                         raise ap_e
-        # In case the new tab failed to open, then we have three senarios :
-        #   - UnableToOpenNewTabException from ArticleScraper.__enter__
-        #   - ArticleProcessingException from ArticleScraper.scrape
-        #   - Exception from ArticleScraper.__exit__
-        except (UnableToOpenNewTabException,
-                ArticleProcessingException,
-                UnableToCloseNewTabException) as e:
-            raise e
+            # If internet issue is True, the TimeoutException was catched more
+            # than 3 time successively.
+            if internet_issue:
+                exc_message = "Probably the Internet connection is unstable."
+                raise UnableToConnectException(exc_message,
+                                               TimeoutException(),
+                                               self._sa.logger).dbg()
         # Inform the number of scraped articles.
         finally:
             self._sa.logger.info("{} out of {} articles were successfully "
                                  "processed.".format(len(self._newl_processed_articles),
                                                      len(articles_elements)),
-                                _lbr=True, _rbr=True)
+                                 _lbr=True, _rbr=True)
 
     def _process(self):
         """
@@ -488,7 +490,8 @@ class Scraper():
                 self._process_page()
                 # If there is not more pages to scrape, stop.
                 if not self._is_next_page(): break
-            except Exception: raise
+            except BaseException as be:
+                raise be
     
     def _process_articles(self, links: str):
         """
@@ -507,16 +510,20 @@ class Scraper():
         self._handle_cookies(get_link=True)
         # Define the article scraper
         article_scraper = ArticleScraper(self._sa)
-        successive_skips = 0
+        successive_skips, internet_issue = 0, False
         try:
             for article_link in links:
-                # Get the article page
+                self._sa.logger.log("", show_details=False)
+                # Get the article ID
                 article_id = self._extract_ID(article_link)
-                self._sa.get(article_link)
                 # Validate the link
-                is_valid, _ = self._is_valid_article(article_link)
+                is_valid, valid_msg = self._is_valid_article(article_link)
                 if not is_valid:
+                    self._sa.logger.info("The article ( {} ) is {}."
+                                     "".format(article_link, valid_msg))
                     continue
+                # Get the article page
+                self._sa.get(article_link)
                 # Process the article to scrape the details.
                 try:
                     article_details = article_scraper.scrape(article_link)
@@ -531,23 +538,30 @@ class Scraper():
                 except ArticleProcessingException as ap_e:
                     # If the processing exception is a timeout's,
                     # skip the article and continue.
-                    if isinstance(ap_e.exc_error, TimeoutException):
-                        # Append the skipped article to the pages', in case
-                        # a TimeoutException exception raised.
-                        self._skip_article(article_id, 'TimeoutException')
-                        successive_skips += 1
-                        if successive_skips > 5:
-                            custom_message = "Probably the Internet connection is unstable."
-                            raise UnableToConnectException(custom_message,
-                                                           ap_e,
-                                                           self._sa.logger)
-                        continue
-                    successive_skips = 0
-                    raise ap_e
-        # If processing the article failed, log the trace to identify
-        # the reason why.
-        except ArticleProcessingException as e:
-            raise e
+                        if isinstance(ap_e.exc_error, TimeoutException):
+                            # Append the skipped article to the pages', in case
+                            # a TimeoutException exception raised.
+                            self._skip_article(article_id, 'TimeoutException')
+                            successive_skips += 1
+                            # If the TimeoutException is catched more than 3 time
+                            # successively, then probably there is an Internet
+                            # connection issue. Hence break the loop and raise
+                            # an UnableToConnectException exception after the
+                            # exiting the ArticleScraper context manager.
+                            if successive_skips > 2:
+                                internet_issue = True
+                                break
+                            # If not, continue.
+                            continue
+                        successive_skips = 0
+                        raise ap_e
+            # If internet issue is True, the TimeoutException was catched more
+            # than 3 time successively.
+            if internet_issue:
+                exc_message = "Probably the Internet connection is unstable."
+                raise UnableToConnectException(exc_message,
+                                               TimeoutException(),
+                                               self._sa.logger).dbg()
         finally:
             # Inform the number of scraped articles.
             self._sa.logger.info("{} out of {} articles were successfully scraped."
@@ -615,7 +629,8 @@ def _is_internet_related(msg):
     """
     """
     MSG_INET = ["err_internet_disconnected",
-                "err_connection_timed_out"]
+                "err_connection_timed_out",
+                "err_name_not_resolved"]
     
     for i_msg in MSG_INET:
         if i_msg in msg.lower():
