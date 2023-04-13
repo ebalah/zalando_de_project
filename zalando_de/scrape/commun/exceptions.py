@@ -50,6 +50,12 @@ class ArticleProcessingException(ZalandoException):
                          + msg, *args, **kwargs)
         
 
+class ArticlesProcessingException(ZalandoException):
+    
+    def __init__(self, msg, *args, **kwargs) -> None:
+        super().__init__("Failed to process the article : "
+                         + msg, *args, **kwargs)
+        
         
 class UnableToConnectException(ZalandoException):
     
@@ -58,7 +64,7 @@ class UnableToConnectException(ZalandoException):
                          + msg, *args, **kwargs)
         
         
-class BrowserAlreadyClosedException(ZalandoException):
+class WindowAlreadyClosedException(ZalandoException):
     
     def __init__(self, msg, *args, **kwargs) -> None:
         super().__init__("Failed to continue processing : "
