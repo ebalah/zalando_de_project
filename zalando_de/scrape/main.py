@@ -2,6 +2,7 @@ import traceback
 
 from urllib3.exceptions import HTTPError
 
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
@@ -13,23 +14,25 @@ from selenium.common.exceptions import (TimeoutException,
 import json
 import pandas as pd
 
-from zalando_de.utils.helpers import (total_items, total_pages, norm_path,
-                                      current_datetime, delta_datetime,
-                                      suffix_timer, is_a_directory)
+from zalando_de.utils.helpers import *
 from zalando_de.scrape.commun.assistants import ScraperAssistant
+from zalando_de.scrape.commun.exceptions import (UnableToOpenNewTabException,
+                                                 UnableToCloseNewTabException,
+                                                 ArticleProcessingException,
+                                                 UnableToConnectException,
+                                                 BrowserAlreadyClosedException)
 from zalando_de.scrape.commun.cleaners import Cleaner
 from zalando_de.scrape.units.article import ArticleScraper
 
 
-BROWSER_CLOSED_EXCEPTIONS = (NoSuchWindowException,
-                             StaleElementReferenceException,
-                             HTTPError,
-                             ConnectionError)
-
-
-ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/']
+ALIEN_LINKS = ['/outfits/', '/collections/', '/men/', '/campaigns/', '/mens-clothing/']
 
 ID_COLNAME = 'ID'
+
+BClosedExceptions = (NoSuchWindowException,
+                     StaleElementReferenceException,
+                     HTTPError,
+                     ConnectionError)
 
 
 class Scraper():
@@ -47,9 +50,10 @@ class Scraper():
         self._main_link = "https://en.zalando.de/mens-clothing-shirts/"
         # ...
         self._cleaner = Cleaner()
-        self._csv_sep = ";"
+        self._csv_sep = ","
         self._processed_articles = self._get_processed_articles()
         self._newl_processed_articles = {}
+        self._skipped_articles = {}
         self._metadata = {}
 
     def __validate_assistant(self, assistant):
@@ -157,10 +161,21 @@ class Scraper():
         article_id = (link.replace('https://en.zalando.de/', '')
                           .replace('.html', ''))
         return article_id
+    
+    def _skip_article(self, id, reason_to_skip_for):
+        """
+        Add the skipped article to self._skipped_articles.
+        
+        """
+        self._skipped_articles.update({id: reason_to_skip_for})
+        if 'skipped_articles' in self._metadata:
+            self._metadata['skipped_articles'] += 1
+        else: self._add_metadata({'skipped_articles': 1})
 
     def _save_article(self, id, details):
         """
-        Save the scraped article to csv file.
+        Add the processed article to self._newl_processed_articles
+        and self._processed_articles.
         
         """
         self._newl_processed_articles.update({id: details})
@@ -216,11 +231,24 @@ class Scraper():
         # Otherwise, return False, indicating there is no more pages.
         return False
     
+    def _get_article_link(self, article_element: WebElement):
+        """
+        Find the article's url.
+        
+        """
+        class_names = '_LM JT3_zV CKDt_l CKDt_l LyRfpJ'
+        link = self._sa._get_element_by_class(class_names,
+                                              article_element).get_attribute('href')
+        return link
+    
     def _is_alien_link(self, link: str):
         """
         Verify if a link is alien or not.
         
         """
+        # Ensure the link ends with .html
+        if not link.endswith(".html"):
+            return True
         # Search if there is any alien string in the link.
         for alien in ALIEN_LINKS:
             # If so, return True
@@ -234,12 +262,12 @@ class Scraper():
         Verify if the the actual opened page is for an article.
         
         """
+        _id = self._extract_ID(link)
         # Verify if the link is alien, and return the opposite
         # results : False if so, otherwise True
-        if self._is_alien_link(link):
+        if self._is_alien_link(link) or "/" in _id:
             return False, "an alien link"
         # Verify if the article is already scraped or not
-        _id = self._extract_ID(link)
         if _id in self._processed_articles:
             return False, "already processed"
         # Return the True (at this point the article is valid to scrape)
@@ -254,19 +282,18 @@ class Scraper():
         self._sa.logger.info("Searching page's articles ...",
                              _lbr=True, _rbr=True)
         # Article elements class names
-        a_class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
-        # Links elements class names
-        l_class_names = '_LM JT3_zV CKDt_l CKDt_l LyRfpJ'
+        class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
         # Articles
-        articles = self._sa._get_elements_by_class(a_class_names)
+        articles = self._sa._get_elements_by_class(class_names)
+        # Get the links
+        articles = [(a, self._get_article_link(a)) for a in articles]
         # Filter articles with alien links
         valid_articles, duplicated = [], 0
-        for article in articles:
-            link = self._sa._get_element_by_class(l_class_names,
-                                                  article).get_attribute('href')
+        for (article, link) in articles:
+            # Validate the article (using the link)
             is_valid, valid_msg = self._is_valid_article(link)
             if is_valid:
-                valid_articles.append(article)
+                valid_articles.append((article, link))
             else:
                 self._sa.logger.info("The link ( {} ) is {}."
                                      "".format(link, valid_msg))
@@ -381,32 +408,41 @@ class Scraper():
         # Initiate the page articles with an empty dictionary.
         try:
             # Extract the details of each found article
-            for article in articles_elements:
+            for (article, link) in articles_elements:
+                # Extract the article ID
+                article_id = self._extract_ID(link)
                 # Open the article details in a new tab
-                try:
-                    with ArticleScraper(self._sa, article) as article_scraper:
-                        # Process the article to scrape the details.
-                        article_details, article_id = article_scraper.scrape()
-                        # Append the processed article to the pages'.
+                # NOTE : The new tab must be closed by quiting this
+                # `with` statement.
+                with ArticleScraper(self._sa, article) as article_scraper:
+                    # Process the article to scrape the details.
+                    try:
+                        article_details = article_scraper.scrape(link)
+                        # Add the link to article's details.
+                        article_details.update({'url': link,
+                                                'scraped_in': timer()})
+                        # Append the processed article to the pages', in case
+                        # no error occured and no exception raised.
                         self._save_article(article_id, article_details)
-                        # Inform the sucess of processing the article.
-                # If the the browser windows forced to close (i.e. a
-                # `NoSuchWindowException` or WebDriverException raised)
-                # stop the process.
-                except BROWSER_CLOSED_EXCEPTIONS: raise
-                # If any other exception is raised, log the trace and
-                # continue.
-                except Exception as e:
-                    # Log the trace to show the skipping cause.
-                    self._sa.logger.warn("Processing skipped : Failed due to "
-                                         "{}".format(type(e).__name__),
-                                         _lbr=True, _rbr=True)
-                    self._sa.logger.error(traceback.format_exc(),
-                                        show_details=False)
-                    continue
-        # If processing the article failed, log the trace to identify
-        # the reason why.
-        except Exception as e: raise e
+                    # In case processing the article failed, then an
+                    # `ArticleProcessingException` must been raised.
+                    except ArticleProcessingException as ap_e:
+                        # If the processing exception is a timeout's,
+                        # skip the article and continue.
+                        if ap_e.exc_msg == "Skipped (Time out).":
+                            # Append the skipped article to the pages', in case
+                            # a TimeoutException exception raised.
+                            self._skip_article(article_id, 'TimeoutException')
+                            continue
+                        raise ap_e
+        # In case the new tab failed to open, then we have three senarios :
+        #   - UnableToOpenNewTabException from ArticleScraper.__enter__
+        #   - ArticleProcessingException from ArticleScraper.scrape
+        #   - Exception from ArticleScraper.__exit__
+        except (UnableToOpenNewTabException,
+                ArticleProcessingException,
+                UnableToCloseNewTabException) as e:
+            raise e
         # Inform the number of scraped articles.
         finally:
             self._sa.logger.info("{} out of {} articles were successfully "
@@ -427,16 +463,14 @@ class Scraper():
         self._high_level_details()
         # Start processing
         while True:
-            # Scrape page articles.
+            # Process the page's articles
             self._sa.logger.info("Processing new page "
                                  "{}".format('='*49),
                                  _lbr=True, _rbr=True)
-            # Scrape the page's articles
             try:
                 self._process_page()
                 # If there is not more pages to scrape, stop.
                 if not self._is_next_page(): break
-            # ...
             except Exception: raise
     
     def _process_articles(self, links: str):
@@ -459,29 +493,35 @@ class Scraper():
         try:
             for article_link in links:
                 # Get the article page
+                article_id = self._extract_ID(article_link)
                 self._sa.get(article_link)
                 # Validate the link
                 is_valid, _ = self._is_valid_article(article_link)
                 if not is_valid:
                     continue
+                # Process the article to scrape the details.
                 try:
-                    article_details, article_id = article_scraper.scrape()
+                    article_details = article_scraper.scrape(article_link)
+                    # Add the link to article's details.
+                    article_details.update({'url': article_link,
+                                            'scraped_in': timer()})
+                    # Append the processed article to the pages', in case
+                    # no error occured and no exception raised.
                     self._save_article(article_id, article_details)
-                # If the the browser windows forced to close (i.e. a
-                # `NoSuchWindowException` or WebDriverException raised)
-                # stop the process.
-                except BROWSER_CLOSED_EXCEPTIONS: raise
-                # If any other exception is raised, log the trace and
-                # continue.
-                except Exception as e:
-                    # Log the trace to show the skipping cause.
-                    self._sa.logger.error(traceback.format_exc(),
-                                        show_details=False, _lbr=True, _rbr=True)
-                    self._sa.logger.warn("Processing Failed. Skipped.")
-                    continue
+                # In case processing the article failed, then an
+                # `ArticleProcessingException` must been raised.
+                except ArticleProcessingException as ap_e:
+                    # If the processing exception is a timeout's,
+                    # skip the article and continue.
+                    if ap_e.exc_msg == "Skipped (Time out).":
+                        # Append the skipped article to the pages', in case
+                        # a TimeoutException exception raised.
+                        self._skip_article(article_id, 'TimeoutException')
+                        continue
+                    raise ap_e
         # If processing the article failed, log the trace to identify
         # the reason why.
-        except Exception as e:
+        except ArticleProcessingException as e:
             raise e
         finally:
             # Inform the number of scraped articles.
@@ -517,29 +557,26 @@ class Scraper():
         # If the the browser windows forced to close (i.e. a
         # `NoSuchWindowException` or WebDriverException raised)
         # stop the process.
-        except Exception as e:
+        except Exception as exc:
+                # If the reason the exception raised is the
+                # internet connection (Any issue identified as internet related.)
+                if (isinstance(exc, WebDriverException) and
+                        _is_internet_related(exc.msg)):
+                    raise UnableToConnectException("Processing interrupted.",
+                                                   exc, self._sa.logger).dbg()
                 # If the exception is raised because the browser was
                 # forced to close (manualy), add an attribute to it
                 # so it can be identifed later.
-                if isinstance(e, BROWSER_CLOSED_EXCEPTIONS):
-                    # FIXME : Why TimeoutException is catched here.
-                    # @NOTE : FIXED, but not tested yet.
-                    self._sa.logger.info("Processing interrupted : It is "
-                                         "possible that the internet connection "
-                                         "has been lost or that the browser "
-                                         "has been closed forcibly",
-                                         _lbr=True, _rbr=True)
-                    self._sa.logger.error(traceback.format_exc(),
-                                          show_details=False)
-                    setattr(e, 'msg__browser_closed_forcibly', "")
-                elif (isinstance(e, WebDriverException) and
-                        e.msg.__contains__("ERR_INTERNET_DISCONNECTED")):
-                    self._sa.logger.error("Processing interrupted : No Internet "
-                                         "Connection", _lbr=True, _rbr=True)
-                    self._sa.logger.error(traceback.format_exc(), show_details=False)
-                    setattr(e, 'msg__internet_disconnected', "")
-                # Raise the error.
-                raise e
+                elif isinstance(exc, (UnableToOpenNewTabException,
+                                      ArticleProcessingException,
+                                      UnableToCloseNewTabException)):
+                    exc_message = ("Processing interrupted ( Probably the browser "
+                                   "is been forcibly closed or the internet "
+                                   "connection is unstable ).")
+                    raise BrowserAlreadyClosedException(exc_message, exc,
+                                                        self._sa.logger).dbg()
+                # Otherwise, raise the same raised error.
+                raise exc
         finally:
             # Save the finishing datetime
             end_time, end_time_str = current_datetime()
@@ -549,3 +586,14 @@ class Scraper():
                                  _lbr=True, _rbr=True)
             self._save()
 
+
+def _is_internet_related(msg):
+    """
+    """
+    MSG_INET = ["err_internet_disconnected",
+                "err_connection_timed_out"]
+    
+    for i_msg in MSG_INET:
+        if i_msg in msg.lower():
+            return True
+    return False
