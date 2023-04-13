@@ -19,3 +19,11 @@ build/
 # Env tests results
 .tox/
 *tox.ini
+
+# Logs
+*.log
+
+# Output
+output*/
+*.json
+*.csv
