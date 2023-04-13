@@ -30,6 +30,17 @@ def handle_level(level):
     # left-justify in a string of a width 9
     return level.ljust(9)
 
+def get_called_from_filename():
+    not_to_mention = ("logging.py", "helpers.py", "exceptions.py")
+    go_back_by = 0
+    while True:
+        called_from = rel_path(inspect.stack()[go_back_by].filename)
+        if called_from.endswith(not_to_mention):
+            go_back_by += 1
+            continue
+        break
+    return called_from
+
 
 def init_handler(out: str = None):
     """
@@ -126,9 +137,7 @@ class Logger():
         
         """
         # Get the file name from which the log is called.
-        called_from = rel_path(inspect.stack()[1].filename)
-        if called_from.endswith("logging.py"):
-            called_from = rel_path(inspect.stack()[2].filename)
+        called_from = get_called_from_filename()
         # Handle the level
         if isinstance(level, str):
             level = logging.getLevelName(level)

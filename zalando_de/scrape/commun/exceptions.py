@@ -54,12 +54,12 @@ class ArticleProcessingException(ZalandoException):
 class UnableToConnectException(ZalandoException):
     
     def __init__(self, msg, *args, **kwargs) -> None:
-        super().__init__("Failed to conncet to Internet : "
+        super().__init__("Failed to continue processing : "
                          + msg, *args, **kwargs)
         
         
 class BrowserAlreadyClosedException(ZalandoException):
     
     def __init__(self, msg, *args, **kwargs) -> None:
-        super().__init__("Failed to continue : "
+        super().__init__("Failed to continue processing : "
                          + msg, *args, **kwargs)

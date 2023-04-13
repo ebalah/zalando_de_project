@@ -70,7 +70,7 @@ class Cleaner():
         size_fit = self._clean_size_fit(_size_fit)
         details = self._clean_details(_details)
 
-        return {'Link': article_details.get('link'),
+        return {'URL': article_details.get('url'),
                 'Brand': article_details.get('brand_name'),
                 'Name': article_details.get('article_name'),
                 'Price': price,
@@ -79,4 +79,5 @@ class Cleaner():
                 'Available Colors': colors,
                 **material_care,
                 **size_fit,
-                **details}
+                **details,
+                'Scrape Date': article_details.get('scraped_in')}
