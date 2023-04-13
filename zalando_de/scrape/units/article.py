@@ -11,7 +11,8 @@ from selenium.common.exceptions import (NoSuchElementException,
 from zalando_de.scrape.commun.assistants import ScraperAssistant
 from zalando_de.scrape.commun.exceptions import (UnableToOpenNewTabException,
                                                  UnableToCloseNewTabException,
-                                                 ArticleProcessingException)
+                                                 ArticleProcessingException,
+                                                 KeyboardInterruptException)
 
 
 
@@ -337,13 +338,16 @@ class ArticleScraper():
         except TimeoutException as e:
             # Log the trace to show the skipping cause.
             raise ArticleProcessingException("Skipped (Time out).",
-                                             e, self._sa.logger).log()
+                                             e, self._sa.logger).dbg()
         # Catch any other exceptions, and raise a
         # `ArticleProcessingException` exception.
         except BaseException as e:
-            if isinstance(e, NoSuchWindowException):
-                exc_message = ("NoSuchWindowException was "
-                               "raised. Probably due to forcibly close "
+            if isinstance(e, KeyboardInterrupt):
+                exc_message = "Processing forcibly stopped using CTR + C."
+                raise KeyboardInterruptException(exc_message, e,
+                                                self._sa.logger).dbg()
+            elif isinstance(e, NoSuchWindowException):
+                exc_message = ("Probably due to forcibly close "
                                "the Article's window.")
             elif isinstance(e, WebDriverException):
                 exc_message = ("An unexpected Web Driver Exception "
