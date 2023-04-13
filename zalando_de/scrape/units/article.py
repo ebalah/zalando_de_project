@@ -1,9 +1,17 @@
+import traceback
+
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException,
+                                        NoSuchWindowException,
+                                        WebDriverException,
+                                        TimeoutException)
 
 
-from zalando_de.utils.helpers import timer
 from zalando_de.scrape.commun.assistants import ScraperAssistant
+from zalando_de.scrape.commun.exceptions import (UnableToOpenNewTabException,
+                                                 UnableToCloseNewTabException,
+                                                 ArticleProcessingException)
 
 
 
@@ -22,25 +30,101 @@ class ArticleScraper():
     
     """
 
-    def __init__(self, assistant, article_element = None) -> None:
-        # ...
+    window_close_exc_msg = "no such window: target window already closed"
+    browser_close_exc_msg = "disconnected: not connected to DevTools"
+
+    def __init__(self, assistant,
+                 article_element = None) -> None:
         self._sa: ScraperAssistant = self._validate_assistant(assistant)
         self._article_element = article_element
 
     def __enter__(self):
         # Open a new tab to handle the article.
-        self._sa._click_to_new_tab(self._article_element)
+        self._open_new_tab()
         return self
 
     def __exit__(self, exc_type, exc_value, tb):
-        if exc_type is not None:
-            raise
-        # Close the opened tab and get back to the articles' page
+        # # In case of exiting with an error that was
+        # # occured within the `with` block, raise it after
+        # # making sure the new opened tab was closed.
+        # if exc_type is not None:
+        #     self._sa.logger.debug("The {} exited with an exception."
+        #                           "".format(type(self).__name__),
+        #                           _rbr=True)
+        #     self._sa.logger.error("".join(traceback
+        #                             .format_exception(exc_type,
+        #                                               exc_value,
+        #                                               tb)),
+        #                           show_details=False)
+        # # Close the opened tab and get back to the articles' page
+        self._close_new_tab()
+    
+    def _open_new_tab(self):
+        """
+        Open a new Tab to process the targeted article.
+
+        """
+        try:
+            self._sa._click_to_new_tab(self._article_element)
+            self._sa.logger.debug("New article's Tab opened.", _lbr=True)
+        except Exception as e:
+            # If opening the new tab failed, then probably either :
+            #
+            #   - A `StaleElementReferenceException` was raised because the
+            #     previous article's opened tab was not closed ( i.e. the
+            #     article element is not available in the dom [stale] ).
+            if isinstance(e, StaleElementReferenceException):
+                exc_message = ("The article element is stale. "
+                               "Probably the previous article's tab "
+                               "was not closed.")
+                exc_label = "prev_article_tab_not_closed_err"
+            #   - A `NoSuchWindowException` exception was raised because the 
+            #     the current window is already closed.
+            # elif isinstance(e, NoSuchWindowException):
+            #     exc_message = ("The current window was not found. "
+            #                    "Probably the window forcibly closed.")
+            #     exc_label = "current_window_already_closed_err"
+            #   - A `NoSuchWindowException` exception was raised because the 
+            #     the driver (browser) is forcibly closed.
+            elif isinstance(e, WebDriverException):
+                exc_message = ("An unexpected Web Driver Exception "
+                               "raised. Probably due to forcibly closing "
+                               "the browser.")
+                exc_label = "browser_already_closed_err"
+            #   - Or, an another exception.
+            else :
+                exc_message = "An unexpected Exception."
+                exc_label = ""
+            # Raise an UnableToOpenNewTabException exception
+            raise UnableToOpenNewTabException(exc_message, exc_label, e)
+
+    def _close_new_tab(self):
+        """
+        Close the new Tab opened to process the article.
+
+        """
         try:
             self._sa._close_and_get_back()
-        except Exception:
-            self._sa.logger.debug("Failed to get back the main tab.")
-            raise
+            self._sa.logger.debug("Tab closed.")
+        # If closing the new tabe failed, then it must be
+        # because the window, or the browser is already closed
+        # either forcibly by the user or after an unexpected
+        # error occured.
+        except BaseException as e:
+            # Handle web driver exceptions
+            if (isinstance(e, NoSuchWindowException) and
+                    self.window_close_exc_msg in e.msg):
+                exc_message = "Target window is already closed."
+                exc_label = "current_window_already_closed_err"
+            elif (isinstance(e, WebDriverException) and 
+                    self.browser_close_exc_msg in e.msg):
+                exc_message = "The browser is already closed."
+                exc_label = "browser_already_closed_err"
+            else:
+                exc_message = "An unexpected Exception."
+                exc_label = ""
+            # Raise UnableToCloseNewTabException exception
+            raise UnableToCloseNewTabException(exc_message, exc_label, e)
 
     def _validate_assistant(self, assistant):
         if not hasattr(assistant, 'driver'):
@@ -54,27 +138,6 @@ class ArticleScraper():
         
         """
         return self._sa._get_element_by_class('DT5BTM VHXqc_ rceRmQ _4NtqZU mIlIve')
-    
-    def _get_link(self):
-        """
-        Get the link of an article page.
-        
-        """
-        _link = self._sa.driver.current_url
-        if not _link:
-            self._sa.logger.warn("Unable to get the current url."
-                                 "Maybe the page's still loading.")
-            raise TimeoutException("Could not load the page.")
-        return _link
-            
-    def _extract_ID(self, link: str):
-        """
-        Extract an id for an article from its link.
-
-        """
-        article_id = (link.replace('https://en.zalando.de/', '')
-                          .replace('.html', ''))
-        return article_id
 
     def _get_brand_name(self, _from = None):
         """
@@ -113,7 +176,6 @@ class ArticleScraper():
         # Get displayed color.
         curr_displayed_color = self._sa._get_element_by_class('_0Qm8W1 u-6V88 dgII7d pVrzNP zN9KaA',
                                                               _from).text
-        # search for 'pl0w2g DT5BTM A-NCMf' class and get alt attribute of img tag.
         colors = []
         # get all colors items
         all_colors = self._sa._get_elements_by_class('pl0w2g DT5BTM A-NCMf', _from)
@@ -159,7 +221,7 @@ class ArticleScraper():
             # Try to get the price if it's present for the current size.
             try: 
                 price_label = self._sa._get_element_value_by_class('_0Qm8W1 u-6V88 FxZV-M pVrzNP ra-RRD',
-                                                               size_element)
+                                                                   size_element)
             except:
                 price_label = ""
             # get the size label
@@ -216,19 +278,18 @@ class ArticleScraper():
         # Finally, return the found deatils
         return details
 
-    def scrape(self):
+    def _scrape(self, url: str = None):
         """
         Get all details of the article displayed in the current
         browser.
         
+        `url` parameter is used only for logging.
+
         """
-        # Get the article link
-        article_link = self._get_link()
-        # Get the article's ID
-        article_id = self._extract_ID(article_link)
         # Inform the start of processing the article.
-        self._sa.logger.info("Processing article {} started."
-                             "".format(article_link), _lbr=True)
+        st_msg = ("Processing new article started{}"
+                  "".format(f" {url}" if url else "."))
+        self._sa.logger.info(st_msg)
         # Get the article container.
         article_container = self._get_container()
         # Get the data in x-wrapper-re-1-4 container.
@@ -252,16 +313,43 @@ class ArticleScraper():
         # The other details : Fit & Size, Material & Care, and Details
         other_details = self._get_extra_details(_from=article_container)
         self._sa.logger.debug('Extra details found : {}'.format(other_details))
-        # Inform the end of processing the article.
-        self._sa.logger.info("Processing finished successfully.")
         # Concatenate the details into one dictionary
-        article_details = {'link': article_link,
-                           'brand_name': brand_name,
+        article_details = {'brand_name': brand_name,
                            'article_name': article_name,
                            'price_label': price_label,
                            'available_sizes': available_sizes,
                            'available_colors': available_colors,
-                           'other_details': other_details,
-                           'scraped_in': timer()}
+                           'other_details': other_details}
+        # Inform the end of processing the article.
+        self._sa.logger.info("Finished successfully.")
         # Return the details
-        return article_details, article_id
+        return article_details
+    
+    def scrape(self, url: str = None):
+        """
+        Get all details of the article displayed in the current
+        browser.
+        
+        """
+        try: return self._scrape(url)
+        # Catch the timeout exception that may raised
+        # if the new tab took too much time to be loaded.
+        except TimeoutException as e:
+            # Log the trace to show the skipping cause.
+            raise ArticleProcessingException("Skipped (Time out).",
+                                             e, self._sa.logger).log()
+        # Catch any other exceptions, and raise a
+        # `ArticleProcessingException` exception.
+        except BaseException as e:
+            if isinstance(e, NoSuchWindowException):
+                exc_message = ("NoSuchWindowException was "
+                               "raised. Probably due to forcibly close "
+                               "the Article's window.")
+            elif isinstance(e, WebDriverException):
+                exc_message = ("An unexpected Web Driver Exception "
+                               "raised. Probably due to forcibly close "
+                               "the browser.")
+            else:
+                exc_message = "Unexpected error."
+            raise ArticleProcessingException(exc_message, e,
+                                             self._sa.logger).dbg()
