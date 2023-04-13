@@ -103,7 +103,7 @@ def run():
                 
             except (BrowserAlreadyClosedException,
                     UnableToConnectException) as exc:
-                logger.error("Processing Failed with an Error :",
+                logger.error("Processing Failed with the following Error :",
                             _lbr=True, _rbr=True)
                 exc.err()
                 # Re-try
@@ -112,7 +112,7 @@ def run():
                     break
 
             except BaseException as exc:
-                logger.error("Unknown exception : ",
+                logger.error("Processing Failed with the following Unknown Exception :",
                             _lbr=True, _rbr=True)
                 logger.error(traceback.format_exc(), show_details=False)
                 break

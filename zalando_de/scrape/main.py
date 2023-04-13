@@ -139,11 +139,7 @@ class Scraper():
             with open(metadata_path, 'r+', encoding='utf-8') as mf:
                 prev_metas = json.load(mf)
         except Exception as e:
-            if (isinstance(e, FileNotFoundError) or
-                (isinstance(e, json.JSONDecodeError) 
-                    and e.msg == "Expecting value")):
                 prev_metas = {}
-            else : raise
         meta_dict.update(prev_metas)
         # Update the metadata file's content.
         with open(metadata_path, 'w+', encoding='utf-8') as mf:
@@ -323,13 +319,31 @@ class Scraper():
                                       orient="index").reset_index(drop=False,
                                                                   names=['ID'])
     
+    def _save_to_json_skipped_articles(self):
+        """
+        Save skipped articles into a json file.
+        
+        """
+        # Prepare the destination json file name
+        # NOTE : As all the skipped articles in the previous runs will be
+        # re-processed again in next's, the previously saved skipped articles
+        # can be overwrited with no proble.
+        json_fn = f"{self._output_directory}/skipped_shirts.json"
+        # Save the articles
+        with open(json_fn, "w+", encoding='utf-8') as output_file:
+            json.dump(self._skipped_articles,
+                      output_file,
+                      indent=3,
+                      ensure_ascii=False)
+        return norm_path(json_fn)
+
     def _save_to_json(self):
         """
         Save processed articles into a json file.
         
         """
         # Prepare the destination json file name
-        json_fn = f"{self._output_directory}/{self._output_filename}(not_cleaned).json"
+        json_fn = f"{self._output_directory}/{self._output_filename}(uncleaned).json"
         # Prepare the dictionary to hold all the results.
         processed_articles = {suffix_timer():{'metadata': self._metadata,
                                               'data': self._newl_processed_articles}}
@@ -385,6 +399,9 @@ class Scraper():
         saved_to = self._save_metadata()
         self._sa.logger.info("Metadata saved into {}"
                              "".format(saved_to))
+        saved_to = self._save_to_json_skipped_articles()
+        self._sa.logger.info("Un-processed articles saved (JSON) into {}"
+                             "".format(saved_to))
         saved_to = self._save_to_json()
         self._sa.logger.info("Processed articles saved (JSON) into {}"
                              "".format(saved_to))
@@ -429,7 +446,7 @@ class Scraper():
                     except ArticleProcessingException as ap_e:
                         # If the processing exception is a timeout's,
                         # skip the article and continue.
-                        if ap_e.exc_msg == "Skipped (Time out).":
+                        if isinstance(ap_e.exc_error, TimeoutException):
                             # Append the skipped article to the pages', in case
                             # a TimeoutException exception raised.
                             self._skip_article(article_id, 'TimeoutException')
@@ -448,7 +465,7 @@ class Scraper():
             self._sa.logger.info("{} out of {} articles were successfully "
                                  "processed.".format(len(self._newl_processed_articles),
                                                      len(articles_elements)),
-                                _lbr=True)
+                                _lbr=True, _rbr=True)
 
     def _process(self):
         """
@@ -490,6 +507,7 @@ class Scraper():
         self._handle_cookies(get_link=True)
         # Define the article scraper
         article_scraper = ArticleScraper(self._sa)
+        successive_skips = 0
         try:
             for article_link in links:
                 # Get the article page
@@ -513,11 +531,18 @@ class Scraper():
                 except ArticleProcessingException as ap_e:
                     # If the processing exception is a timeout's,
                     # skip the article and continue.
-                    if ap_e.exc_msg == "Skipped (Time out).":
+                    if isinstance(ap_e.exc_error, TimeoutException):
                         # Append the skipped article to the pages', in case
                         # a TimeoutException exception raised.
                         self._skip_article(article_id, 'TimeoutException')
+                        successive_skips += 1
+                        if successive_skips > 5:
+                            custom_message = "Probably the Internet connection is unstable."
+                            raise UnableToConnectException(custom_message,
+                                                           ap_e,
+                                                           self._sa.logger)
                         continue
+                    successive_skips = 0
                     raise ap_e
         # If processing the article failed, log the trace to identify
         # the reason why.
@@ -562,7 +587,8 @@ class Scraper():
                 # internet connection (Any issue identified as internet related.)
                 if (isinstance(exc, WebDriverException) and
                         _is_internet_related(exc.msg)):
-                    raise UnableToConnectException("Processing interrupted.",
+                    exc_message = "Probably the Internet connection is unstable."
+                    raise UnableToConnectException(exc_message,
                                                    exc, self._sa.logger).dbg()
                 # If the exception is raised because the browser was
                 # forced to close (manualy), add an attribute to it
@@ -570,9 +596,7 @@ class Scraper():
                 elif isinstance(exc, (UnableToOpenNewTabException,
                                       ArticleProcessingException,
                                       UnableToCloseNewTabException)):
-                    exc_message = ("Processing interrupted ( Probably the browser "
-                                   "is been forcibly closed or the internet "
-                                   "connection is unstable ).")
+                    exc_message = "Probably the browser is been forcibly closed."
                     raise BrowserAlreadyClosedException(exc_message, exc,
                                                         self._sa.logger).dbg()
                 # Otherwise, raise the same raised error.
