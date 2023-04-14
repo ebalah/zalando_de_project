@@ -346,7 +346,7 @@ class Scraper():
                                               'data': self._newl_processed_articles}}
         
         try:
-            with open(json_fn, "w+", encoding='utf-8') as output_file:
+            with open(json_fn, "r+", encoding='utf-8') as output_file:
                 prev_processed_articles = json.load(output_file)
         except Exception:
             prev_processed_articles = {}
