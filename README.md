@@ -6,31 +6,33 @@ __NB__ : It is preferable to use either `Python 3.10.10` or `Python 3.8.10`.
 
 # Instructions
 
-### On Windows
+## Environement Preparation (`On Windows`)
 
-1 - Unzip the `zalando_de_project.zip` and Open a terminal.
+<br>
 
-2 - Change directory to the main folder `zalando_de_project/`.
+- Unzip the `zalando_de_project.zip` and Open a terminal.
 
-3 - Create a virtual environment ( e.g. `python -m venv ./py_venv` ).
+- Change directory to the main folder `zalando_de_project/`.
 
-4 - Activate the created environment ( e.g. `& ./py_venv/Scripts/Activate.ps1` ).
+- Create a virtual environment ( e.g. `python -m venv ./py_venv` ).
 
-5 - Install the package ( e.g. `pip install .` ). 
+- Activate the created environment ( e.g. `& ./py_venv/Scripts/Activate.ps1` ).
+
+- Install the package ( e.g. `pip install .` ). 
 
 4 - Test the environment ( e.g. `pytest zalando_de/unit_tests -rA` ).
 
-### On Ubuntu
+## Environement Preparation (`On Ubuntu/Linux`)
 
-1 - Unzip the `zalando_de_project.zip` and Open a terminal.
+- Unzip the `zalando_de_project.zip` and Open a terminal.
 
-2 - Change directory to the main folder `zalando_de_project/`.
+- Change directory to the main folder `zalando_de_project/`.
 
-3 - Create a virtual environment ( e.g. `python3 -m venv ./py_venv` ).
+- Create a virtual environment ( e.g. `python3 -m venv ./py_venv` ).
 
-4 - Activate the created environment ( e.g. `source ./py_venv/bin/activate` ).
+- Activate the created environment ( e.g. `source ./py_venv/bin/activate` ).
 
-5 - Install the package ( e.g. `pip3 install .` ).
+- Install the package ( e.g. `pip3 install .` ).
 
 6 - Test the environment ( e.g. `pytest zalando_de/unit_tests -rA` ). 
 

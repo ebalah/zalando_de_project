@@ -4,7 +4,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import (TimeoutException,
                                         WebDriverException,
-                                        NoSuchWindowException)
+                                        NoSuchWindowException,
+                                        StaleElementReferenceException)
 
 # from urllib3.exceptions import HTTPError
 
@@ -274,11 +275,14 @@ class Scraper():
         class_names = 'DT5BTM w8MdNG cYylcv _1FGXgy _75qWlu iOzucJ JT3_zV vut4p9'
         # Articles
         articles = self._sa._get_elements_by_class(class_names)
-        # Get the links
-        articles = [(a, self._get_article_link(a)) for a in articles]
         # Filter articles with alien links
         valid_articles, duplicated = [], 0
-        for (article, link) in articles:
+        for article in articles:
+            try:
+                link = self._get_article_link(article)
+            except StaleElementReferenceException as se_e:
+                self._sa.logger.debu0("Staled element skipped.")
+                continue
             # Validate the article (using the link)
             is_valid, valid_msg = self._is_valid_article(link)
             if is_valid:
@@ -418,8 +422,9 @@ class Scraper():
         # Initiate the page articles with an empty dictionary.
         try:        
             successive_skips, internet_issue = 0, False
+            processed_articles = 0
             # Extract the details of each found article
-            for (article, link) in articles_elements[-7:]:
+            for (article, link) in articles_elements:
                 # Extract the article ID
                 article_id = self._extract_ID(link)
                 # Open the article details in a new tab
@@ -435,6 +440,7 @@ class Scraper():
                         # Append the processed article to the pages', in case
                         # no error occured and no exception raised.
                         self._save_article(article_id, article_details)
+                        processed_articles += 1
                     # In case processing the article failed, then an
                     # `ArticleProcessingException` must been raised.
                     except ArticleProcessingException as ap_e:
@@ -467,7 +473,7 @@ class Scraper():
         # Inform the number of scraped articles.
         finally:
             self._sa.logger.info("{} out of {} articles were successfully "
-                                 "processed.".format(len(self._newl_processed_articles),
+                                 "processed.".format(processed_articles,
                                                      len(articles_elements)),
                                  _lbr=True, _rbr=True)
 

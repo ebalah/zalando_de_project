@@ -36,7 +36,7 @@ def parse_arguments():
     parser.add_argument('--odir', type=str, default=None,
                         help='Specifies the output directory.')
     # Specify logging level.
-    parser.add_argument('--log_level', type=int, default=20,
+    parser.add_argument('--log_level', type=int, default=10,
                         help=('Specifies the minimum logging level (must '
                               'be used reduce the logging memory.)'))
     # Parse the arguments.

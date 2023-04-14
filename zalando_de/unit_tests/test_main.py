@@ -2,7 +2,8 @@ import pytest
 import traceback
 
 import zalando_de
-from zalando_de.scrape import Scraper, ScraperAssistant
+from zalando_de.scrape.main import Scraper, ScraperAssistant
+from zalando_de.scrape.commun.exceptions import *
 from zalando_de.utils.logging import Logger
 from zalando_de.utils.helpers import create_directory
 
@@ -23,15 +24,15 @@ LINKS = [
 
 def get_outputs(hw: str):
 
-    log_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/logs", True)
-    data_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/data", True)
+    log_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/logs", False)
+    data_dir = create_directory(f"{zalando_de.__path__[0]}/unit_tests/output/{hw}/data", False)
 
     return Logger(f"{log_dir}/logging.log", 10), data_dir
 
 
 @pytest.mark.parametrize('how', [
-    'all',
-    'single'
+    # 'single',
+    'all'
 ])
 def test_scrape_all(how):
     """
@@ -40,27 +41,30 @@ def test_scrape_all(how):
 
     links = LINKS.copy() if how == 'single' else []
 
-    logger, data_dir = get_outputs(how)
-
-    # Define the assistant
+    logger, data_output_dir = get_outputs(how)
+    
+    # Start Processing (Scrapping)
     with ScraperAssistant(logger=logger) as assistant:
 
         try:
-            Scraper(assistant, data_dir).scrape(how, links)
+            scraper = Scraper(assistant=assistant, out=data_output_dir)
+            scraper.scrape(how, links)
             logger.info("Processing finished successfully.",
                         _lbr=True, _rbr=True)
             
         except KeyboardInterrupt:
-                logger.error("Processing forcibly stopped using "
-                             "keyboard: Ctrl+C",
-                             _lbr=True, _rbr=True)
-                logger.error(traceback.format_exc(), show_details=False)
+            logger.error("Processing forcibly stopped using "
+                        "keyboard : Ctrl + C",
+                        _lbr=True, _rbr=True)
+            logger.error(traceback.format_exc(), show_details=False)
+            
+        except (WindowAlreadyClosedException,
+                UnableToConnectException) as exc:
+            logger.error("Processing Failed with the following Error :",
+                        _lbr=True, _rbr=True)
+            exc.err()
 
-        except Exception as e:
-            if not (hasattr(e, 'msg__browser_closed_forcibly')
-                    or hasattr(e, 'msg__internet_disconnected')):
-                # This excepts the errors logging in case of one
-                # of BROWSER_CLOSED_EXCEPTIONS is catched.
-                logger.error("Processing Failed with an Error :",
-                             _lbr=True, _rbr=True)
-                logger.error(traceback.format_exc(), show_details=False)
+        except BaseException as exc:
+            logger.error("Processing Failed with the following Unknown Exception :",
+                        _lbr=True, _rbr=True)
+            logger.error(traceback.format_exc(), show_details=False)

@@ -2,111 +2,78 @@
 ============================================================ [ New Session ] ============================================================
 
 
-[Apr 11, 2023 21:57:29] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
+[Apr 13, 2023 22:19:13] ~ $ [INFO     ] zalando_de/scrape/main.py : Initiate the scraper object.
 
-[Apr 11, 2023 21:57:59] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html started.
-[Apr 11, 2023 21:58:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
-[Apr 11, 2023 21:58:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
-[Apr 11, 2023 21:58:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 34,99 € |  | VAT included
-[Apr 11, 2023 21:58:00] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['dark green', 'dark blue', 'light blue']
-[Apr 11, 2023 21:58:09] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
-[Apr 11, 2023 21:58:09] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Marl', 'Article number': 'PI922D09R-M11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Long', 'Sleeve length': '66 cm (Size M)', 'Back width': '44 cm (Size M)', 'Total length': '77 cm (Size M)'}}
-[Apr 11, 2023 21:58:09] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 13, 2023 22:19:22] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/pier-one-shirt-dark-green-pi922d09r-m11.html
+[Apr 13, 2023 22:19:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
+[Apr 13, 2023 22:19:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Shirt
+[Apr 13, 2023 22:19:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 34,99 € |  | VAT included
+[Apr 13, 2023 22:19:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['dark green', 'dark blue', 'light blue']
+[Apr 13, 2023 22:19:26] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 13, 2023 22:19:27] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton', 'Care instructions': 'Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Marl', 'Article number': 'PI922D09R-M11'}, 'Size & fit': {"Our model's height": 'Our model is 188 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Long', 'Sleeve length': '66 cm (Size M)', 'Back width': '44 cm (Size M)', 'Total length': '77 cm (Size M)'}}
+[Apr 13, 2023 22:19:27] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
 
-[Apr 11, 2023 21:58:13] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html started.
-[Apr 11, 2023 21:58:13] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : OLYMP No. Six
-[Apr 11, 2023 21:58:13] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Formal shirt
-[Apr 11, 2023 21:58:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : From 37,99 € |  | 58,15 € |  | VAT included
-[Apr 11, 2023 21:58:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['bleu']
-[Apr 11, 2023 21:58:22] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'36': {'count': '', 'price': ''}, '37': {'count': '', 'price': ''}, '38': {'count': '', 'price': ''}, '39': {'count': '', 'price': ''}, '40': {'count': '', 'price': ''}, '41': {'count': '', 'price': ''}, '42': {'count': '', 'price': ''}, '43': {'count': '', 'price': ''}, '44': {'count': '', 'price': ''}, '45': {'count': '', 'price': ''}, '46': {'count': '', 'price': ''}}
-[Apr 11, 2023 21:58:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '97% cotton, 3% elastane', 'Care instructions': 'Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle'}, 'Details': {'Collar': 'Shark collar', 'Fastening': 'Button', 'Pattern': 'Checked', 'Article number': 'OL022D04G-K11'}, 'Size & fit': {'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Long', 'Sleeve length': '67 cm (Size 41)', 'Back width': '45 cm (Size 41)', 'Total length': '80 cm (Size 41)'}}
-[Apr 11, 2023 21:58:23] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 13, 2023 22:19:31] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html
+[Apr 13, 2023 22:19:31] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : OLYMP No. Six
+[Apr 13, 2023 22:19:31] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : Formal shirt
+[Apr 13, 2023 22:19:31] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 67,85 € |  | VAT included
+[Apr 13, 2023 22:19:31] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['bleu']
+[Apr 13, 2023 22:19:34] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'36': {'count': 'Notify Me', 'price': ''}, '37': {'count': 'Only 1 left', 'price': ''}, '38': {'count': 'Notify Me', 'price': ''}, '39': {'count': 'Notify Me', 'price': ''}, '40': {'count': 'Notify Me', 'price': ''}, '41': {'count': 'Notify Me', 'price': ''}, '42': {'count': 'Notify Me', 'price': ''}, '43': {'count': 'Notify Me', 'price': ''}, '44': {'count': 'Notify Me', 'price': ''}, '45': {'count': 'Notify Me', 'price': ''}, '46': {'count': 'Notify Me', 'price': ''}}
+[Apr 13, 2023 22:19:35] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '97% cotton, 3% elastane', 'Care instructions': 'Machine wash at 40°C, do not tumble dry, machine wash on gentle cycle'}, 'Details': {'Collar': 'Shark collar', 'Fastening': 'Button', 'Pattern': 'Checked', 'Article number': 'OL022D04G-K11'}, 'Size & fit': {'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Long', 'Sleeve length': '67 cm (Size 41)', 'Back width': '45 cm (Size 41)', 'Total length': '80 cm (Size 41)'}}
+[Apr 13, 2023 22:19:35] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
 
-[Apr 11, 2023 21:58:28] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html started.
-[Apr 11, 2023 21:58:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Sir Raymond Tailor
-[Apr 11, 2023 21:58:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : MECHELEN - Shirt
-[Apr 11, 2023 21:58:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%
-[Apr 11, 2023 21:58:28] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['navy bordeaux', 'green', 'navy']
-[Apr 11, 2023 21:58:36] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': 'Only 1 left', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
-[Apr 11, 2023 21:58:37] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '85% cotton, 15% polyester', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Floral', 'Article number': 'SIC22D03T-K12'}, 'Size & fit': {'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': '65.5 cm (Size M)', 'Total length': '75 cm (Size M)'}}
-[Apr 11, 2023 21:58:37] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 13, 2023 22:19:39] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html
+[Apr 13, 2023 22:19:39] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Sir Raymond Tailor
+[Apr 13, 2023 22:19:39] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : MECHELEN - Shirt
+[Apr 13, 2023 22:19:39] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%
+[Apr 13, 2023 22:19:39] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['navy bordeaux', 'green', 'navy']
+[Apr 13, 2023 22:19:42] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': 'Only 1 left', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
+[Apr 13, 2023 22:19:43] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '85% cotton, 15% polyester', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Button down', 'Fastening': 'Button', 'Pattern': 'Floral', 'Article number': 'SIC22D03T-K12'}, 'Size & fit': {'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': '65.5 cm (Size M)', 'Total length': '75 cm (Size M)'}}
+[Apr 13, 2023 22:19:43] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
 
-[Apr 11, 2023 21:58:47] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html started.
-[Apr 11, 2023 21:58:47] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Sir Raymond Tailor
-[Apr 11, 2023 21:58:47] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : LANGARM - Shirt
-[Apr 11, 2023 21:58:47] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 39,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | -50%
-[Apr 11, 2023 21:58:47] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['khaki']
-[Apr 11, 2023 21:58:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': 'Only 1 left', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': 'Notify Me', 'price': ''}, 'XL': {'count': 'Notify Me', 'price': ''}, 'XXL': {'count': 'Notify Me', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
-[Apr 11, 2023 21:58:56] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {}, 'Details': {}, 'Size & fit': {}}
-[Apr 11, 2023 21:58:56] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 13, 2023 22:19:58] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html
+[Apr 13, 2023 22:19:58] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Sir Raymond Tailor
+[Apr 13, 2023 22:19:58] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : LANGARM - Shirt
+[Apr 13, 2023 22:19:58] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : From 34,95 € |  | VAT included |  | Originally: |  | 79,95 € |  | up to -56%
+[Apr 13, 2023 22:19:58] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['khaki']
+[Apr 13, 2023 22:20:01] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'S': {'count': 'Only 1 left', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': 'Notify Me', 'price': ''}, 'XXL': {'count': 'Only 1 left', 'price': ''}, '3XL': {'count': 'Notify Me', 'price': ''}}
+[Apr 13, 2023 22:20:02] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '97% cotton, 3% elastane', 'Care instructions': 'Machine wash at 30°C'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Pattern': 'Plain', 'Article number': 'SIC22D03I-N11'}, 'Size & fit': {"Our model's height": 'Our model is 180 cm tall and is wearing size M', 'Fit': 'Regular Fit', 'Shape': 'Straight', 'Length': 'Normal', 'Sleeve length': 'Long', 'Total length': '79 cm (Size M)'}}
+[Apr 13, 2023 22:20:02] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
 
-[Apr 11, 2023 21:59:22] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html started.
-[Apr 11, 2023 21:59:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
-[Apr 11, 2023 21:59:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : 2 PACK - Formal shirt
-[Apr 11, 2023 21:59:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 40,99 € |  | VAT included |  | Originally: |  | 45,99 € |  | -11%
-[Apr 11, 2023 21:59:23] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white/light blue', 'light blue/dark blue', 'white', 'white/black']
-[Apr 11, 2023 21:59:32] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
-[Apr 11, 2023 21:59:32] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {}, 'Details': {}, 'Size & fit': {}, 'Sustainability': {}}
-[Apr 11, 2023 21:59:32] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing finished successfully.
+[Apr 13, 2023 22:20:02] ~ $ [INFO     ] zalando_de/scrape/main.py : The article ( https://en.zalando.de/sir-raymond-tailor-shirt-navy-bordeaux-sic22d03t-k12.html ) is already processed.
 
-[Apr 11, 2023 21:59:37] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing article https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html started.
-[Apr 11, 2023 21:59:37] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Next
-[Apr 11, 2023 21:59:37] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : SLIM FIT COTTON SHIRTS 2 PACK - Formal shirt
-[Apr 11, 2023 21:59:37] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 96,00 € |  | VAT included
-[Apr 11, 2023 21:59:38] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['off-white']
+[Apr 13, 2023 22:20:02] ~ $ [INFO     ] zalando_de/scrape/main.py : The article ( https://en.zalando.de/olymp-no-six-formal-shirt-bleu-ol022d04g-k11.html ) is already processed.
 
-Traceback (most recent call last):
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\main.py", line 468, in _process_articles
-    article_details, article_id = article_scraper.scrape()
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 250, in scrape
-    available_sizes = self._get_sizes(_from=article_container)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\units\article.py", line 151, in _get_sizes
-    all_sizes = self._sa._get_elements_by_class('fOd40J _0xLoFW JT3_zV FCIprz LyRfpJ')
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 446, in _get_elements_by_class
-    elements = self._get_elements(elements_locator, parent_element)
-  File "C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\scrape\commun\assistants.py", line 431, in _get_elements
-    self.short_wait.until(ec.presence_of_element_located(elements_locator))
-  File "c:\users\dsicped\desktop\ps\upw_py_3_8_10\lib\site-packages\selenium\webdriver\support\wait.py", line 95, in until
-    raise TimeoutException(message, screen, stacktrace)
-selenium.common.exceptions.TimeoutException: Message: 
-Stacktrace:
-Backtrace:
-	(No symbol) [0x00D6DCE3]
-	(No symbol) [0x00D039D1]
-	(No symbol) [0x00C14DA8]
-	(No symbol) [0x00C4019F]
-	(No symbol) [0x00C403AB]
-	(No symbol) [0x00C6EE62]
-	(No symbol) [0x00C5AF14]
-	(No symbol) [0x00C6D57C]
-	(No symbol) [0x00C5ACC6]
-	(No symbol) [0x00C36F68]
-	(No symbol) [0x00C380CD]
-	GetHandleVerifier [0x00FE3832+2506274]
-	GetHandleVerifier [0x01019794+2727300]
-	GetHandleVerifier [0x0101E36C+2746716]
-	GetHandleVerifier [0x00E16690+617600]
-	(No symbol) [0x00D0C712]
-	(No symbol) [0x00D11FF8]
-	(No symbol) [0x00D120DB]
-	(No symbol) [0x00D1C63B]
-	BaseThreadInitThunk [0x77386BD9+25]
-	RtlGetFullPathName_UEx [0x77DF8FD2+1218]
-	RtlGetFullPathName_UEx [0x77DF8F9D+1165]
+[Apr 13, 2023 22:20:06] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/pier-one-2pack-formal-shirt-whitelight-blue-pi922d05k-a11.html
+[Apr 13, 2023 22:20:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Pier One
+[Apr 13, 2023 22:20:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : 2 PACK - Formal shirt
+[Apr 13, 2023 22:20:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 40,99 € |  | VAT included |  | Originally: |  | 45,99 € |  | -11%
+[Apr 13, 2023 22:20:06] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['white/light blue', 'light blue/dark blue', 'white', 'white/black']
+[Apr 13, 2023 22:20:09] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'XS': {'count': '', 'price': ''}, 'S': {'count': '', 'price': ''}, 'M': {'count': '', 'price': ''}, 'L': {'count': '', 'price': ''}, 'XL': {'count': '', 'price': ''}, 'XXL': {'count': '', 'price': ''}, '3XL': {'count': '', 'price': ''}, '4XL': {'count': '', 'price': ''}, '5XL': {'count': '', 'price': ''}, '6XL': {'count': '', 'price': ''}}
+[Apr 13, 2023 22:20:10] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '65% polyester, 35% cotton', 'Care instructions': 'Do not tumble dry, machine wash at 30°C, machine wash on gentle cycle'}, 'Details': {'Collar': 'Kent collar', 'Fastening': 'Button', 'Sheer': 'Semi-sheer', 'Pattern': 'Plain', 'Article number': 'PI922D05K-A11'}, 'Size & fit': {"Our model's height": 'Our model is 189 cm tall and is wearing size M', 'Fit': 'Slim Fit', 'Shape': 'Fitted', 'Length': 'Normal', 'Sleeve length': '66 cm (Size M)', 'Back width': '47 cm (Size M)', 'Total length': '79 cm (Size M)'}, 'Sustainability': {}}
+[Apr 13, 2023 22:20:10] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
+
+[Apr 13, 2023 22:20:14] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Processing new article started https://en.zalando.de/next-2-pack-formal-shirt-off-white-nx322d0zp-a11.html
+[Apr 13, 2023 22:20:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Brand name found : Next
+[Apr 13, 2023 22:20:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Article name found : SLIM FIT COTTON SHIRTS 2 PACK - Formal shirt
+[Apr 13, 2023 22:20:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Price found : 96,00 € |  | VAT included
+[Apr 13, 2023 22:20:14] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Colors found : ['off-white']
+[Apr 13, 2023 22:20:17] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Sizes found : {'39.5x33': {'count': 'Only 2 left', 'price': ''}, '40.5x33': {'count': 'Notify Me', 'price': ''}, '42x33': {'count': '', 'price': ''}, '43x33': {'count': 'Only 2 left', 'price': ''}, '44.5x33': {'count': 'Notify Me', 'price': ''}, '45.5x33': {'count': 'Notify Me', 'price': ''}}
+[Apr 13, 2023 22:20:17] ~ $ [DEBUG    ] zalando_de/scrape/units/article.py : Extra details found : {'Material & care': {'Outer fabric material': '100% cotton'}, 'Details': {'Pattern': 'Plain', 'Article number': 'NX322D0ZP-A11'}, 'Size & fit': {'Length': 'Normal', 'Sleeve length': 'Long'}}
+[Apr 13, 2023 22:20:17] ~ $ [INFO     ] zalando_de/scrape/units/article.py : Finished successfully.
+
+[Apr 13, 2023 22:20:17] ~ $ [INFO     ] zalando_de/scrape/main.py : The article ( https://en.zalando.de/sir-raymond-tailor-shirt-khaki-sic22d03i-n11.html ) is already processed.
+
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : 6 out of 9 articles were successfully scraped.
+
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : Saving processed articles' data ...
+
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\metadata.json
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : Un-processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\skipped_shirts.json
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts(uncleaned).json
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts.csv
+
+[Apr 13, 2023 22:20:18] ~ $ [INFO     ] zalando_de/unit_tests/test_main.py : Processing finished successfully.
 
 
-
-[Apr 11, 2023 21:59:50] ~ $ [WARNING  ] zalando_de/scrape/main.py : Processing Failed. Skipped.
-
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/scrape/main.py : 5 out of 9 articles were successfully scraped.
-
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/scrape/main.py : Saving processed articles' data ...
-
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/scrape/main.py : Metadata saved into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\metadata.json
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (JSON) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts(not_cleaned).json
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/scrape/main.py : Processed articles saved (CSV) into C:\Users\dsicped\Desktop\PS\zalando_de_project\zalando_de\unit_tests\output\single\data\zalando_de_mens_shirts.csv
-
-[Apr 11, 2023 22:00:01] ~ $ [INFO     ] zalando_de/unit_tests/test_main.py : Processing finished successfully.
-
-
-[Apr 11, 2023 22:00:04] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.
+[Apr 13, 2023 22:20:20] ~ $ [INFO     ] zalando_de/scrape/commun/assistants.py : The browser closed.

@@ -345,7 +345,7 @@ class ArticleScraper():
             if isinstance(e, KeyboardInterrupt):
                 exc_message = "Processing forcibly stopped using CTR + C."
                 raise KeyboardInterruptException(exc_message, e,
-                                                self._sa.logger).dbg()
+                                                 self._sa.logger).dbg()
             elif isinstance(e, NoSuchWindowException):
                 exc_message = ("Probably due to forcibly close "
                                "the Article's window.")
