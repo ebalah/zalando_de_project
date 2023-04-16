@@ -40,6 +40,9 @@ class Cleaner():
         return self.sep.join(available_sizes)
     
     def _clean_colors(self, colors: dict):
+        # Clean colors before joining them.
+        # This update is added to avoid such colors label : "lachs\n\n"
+        colors = [color.strip('\n') for color in colors]
         return self.sep.join(colors)
 
     def _clean_material_care(self, mc: dict):
@@ -58,10 +61,10 @@ class Cleaner():
 
         _price_label = article_details.get('price_label')
         _colors = article_details.get('available_colors')
-        _sizes = article_details.get('available_sizes')
-        _material_care = article_details.get('other_details', {}).get('Material & care')
-        _size_fit = article_details.get('other_details', {}).get('Size & fit')
-        _details = article_details.get('other_details', {}).get('Details')
+        _sizes = article_details.get('available_sizes', {})
+        _material_care = article_details.get('other_details', {}).get('Material & care', {})
+        _size_fit = article_details.get('other_details', {}).get('Size & fit', {})
+        _details = article_details.get('other_details', {}).get('Details', {})
         
         price, sold = self._clean_price(_price_label)
         sizes = self._clean_sizes(_sizes)
